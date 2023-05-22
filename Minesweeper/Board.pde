@@ -20,25 +20,29 @@ class Board{
   }
   
   public boolean done(){
-    return spacesCleared == gameBoard.length * gameBoard.length[0] - mineCount;
+    return spacesCleared <= gameBoard.length * gameBoard.length[0] - mineCount;
   }
   
   public boolean clearSpace(int x, int y){
     if(gameBoard[x][y].getType() == false){
-      // flaw in logic
-      gameBoard[x][y].cleared();
-      return true;
+      if(gameBoard[x][y].getCleared() == false){
+        gameBoard[x][y].cleared();
+        spacesCleared++;
+        return true;
+      }
     }
     return false;
   }
   
   public void placeFlag(int x, int y){
     if(gameBoard[x][y].getCleared() == false){
-      if(gameBoard[x][y].getFlagged()){
+      if(gameBoard[x][y].getFlagged() == false){
         gameBoard[x][y].setFlagged(true);
+        flagsPlaced++;
       }
       else{
         gameBoard[x][y].setFlagged(false);
+        flagsPlaced--;
       }
     }
   }
