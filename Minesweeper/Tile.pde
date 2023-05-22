@@ -1,4 +1,4 @@
-class Tile{
+public class Tile{
   private boolean mine, cleared, flagged;
   private int surrounding;
   
