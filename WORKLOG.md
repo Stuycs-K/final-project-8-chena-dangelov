@@ -1,6 +1,6 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Alberto Chen
 
 ### date x
 
