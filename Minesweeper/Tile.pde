@@ -13,15 +13,15 @@ class Tile{
     return mine;
   }
   
-  public void setType(boolean type){
-    mine = type;
+  public void setType(){
+    mine = true;
   }
   
   public boolean getCleared(){
     return cleared;
   }
   
-  public void clear(){
+  public void cleared(){
     cleared = true;
   }
   
