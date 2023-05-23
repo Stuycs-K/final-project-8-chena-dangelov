@@ -15,4 +15,9 @@ class Minesweeper{
   }
   
   public void endScreen(boolean outcome){
+    if(outcome){
+    }
+    else{
+    }
   }
+}
