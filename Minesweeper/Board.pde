@@ -7,7 +7,7 @@ class Board{
     flagsPlaced = 0;
     spacesCleared = 0;
     mineCount = 0;
-    
+    placeMines(gameBoard);
   }
   
   public void placeMines(Tile[][] board){
