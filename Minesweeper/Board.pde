@@ -10,6 +10,7 @@ class Board{
     
     for(int x = 0; x < gameBoard.length; x++){
       for(int y = 0; y < gameBoard[x].length; y++){
+        gameBoard[x][y] = new Tile();
         if(Math.random() < 0.16){
           gameBoard[x][y].setType();
           mineCount++;
@@ -20,7 +21,7 @@ class Board{
   }
   
   public boolean done(){
-    return spacesCleared <= gameBoard.length * gameBoard.length[0] - mineCount;
+    return spacesCleared >= gameBoard.length * gameBoard[0].length - mineCount;
   }
   
   public boolean clearSpace(int x, int y){
