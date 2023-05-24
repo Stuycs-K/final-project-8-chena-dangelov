@@ -6,9 +6,13 @@
 
 Today, we introduced a Tile class. The Tile class would be utilized by the Board class (as our Board will be made up of Tiles) and would hold data regarding individual squares. This data includes whether or not the tile has been flagged, whether it is a mine, whether it has been cleared, and the numner of squares surround it (along with corresponding accessor and mutator methods). Moreover, I completed the entirety of Tile class and Board class (this includes the creation of instance variables, constructors, and methods of the classes). Though there may be still some error regarding the logic of how these two classes will function, I made sufficient progress in the completion of these classes. 
 
-### date y
+### 5/23/23
 
-info
+Today, I worked on Board class. My work composed of the working on method placeMines() and correcting a mistake I made previously regarding done() method. In addition, I completed the endScreen() method of Minesweeper class. Moreover, though Board and Tile class are fundamentally finished, I expect to add many more edits to these classes as problems arise. In short, beautiful progress has been made recently.
+
+### 5/24/23
+
+
 
 
 ## Vincent D'Angelo
