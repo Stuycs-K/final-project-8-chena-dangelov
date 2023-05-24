@@ -18,7 +18,9 @@ public class Board {
     }
 
     while (mineCount < 40) {
-      if (gameBoard[(int)(Math.random() * gameBoard.length][(int)(Math.random() * gameBoard[0].length].setType()) {
+      int x = (int)(Math.random() * gameBoard.length);
+      int y = (int)(Math.random() * gameBoard[0].length);
+      if (gameBoard[x][y].setType()) {
         if (x - 1 >= 0 && y - 1 >= 0) {
           gameBoard[x-1][y-1].addSurrounding();
         }

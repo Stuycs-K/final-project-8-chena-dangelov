@@ -8,7 +8,8 @@ void draw() {
     int x = row*SQUARE_SIZE;
     int y = col*SQUARE_SIZE;
     boolean gameOutcome = gameBoard.clearSpace(row, col);
-    if (!(!gameBoard.done() && gameOutcome)  ) {
+    //if (!(!gameBoard.done() && gameOutcome)  ) {
+    if (gameBoard.done() || !gameOutcome) {
       //gameBoard.endScreen(gameOutcome);
     }
     if (gameOutcome) {
@@ -16,15 +17,13 @@ void draw() {
     }
   }
 
-
-
   if (mousePressed && (mouseButton == RIGHT)) {
     int row = mouseX / SQUARE_SIZE;
     int col = mouseY / SQUARE_SIZE;
     int x = row*SQUARE_SIZE;
     int y = col*SQUARE_SIZE;
     gameBoard.placeFlag(row, col);
-    drawTile(x, y );
+    drawTile(x, y);
   }
   //background(#BCBABA);
   //drawBoard();
