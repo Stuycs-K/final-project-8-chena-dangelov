@@ -1,43 +1,48 @@
-public class Tile{
+public class Tile {
   private boolean mine, cleared, flagged;
   private int surrounding;
-  
-  public Tile(){
+
+  public Tile() {
     mine = false;
     cleared = false;
     flagged = false;
     surrounding = 0;
   }
-  
-  boolean getType(){
+
+  boolean getType() {
     return mine;
   }
-  
-  void setType(){
-    mine = true;
+
+  boolean setType() {
+    if (mine == true) {
+      return false;
+    } else {
+      mine = true;
+      return true;
+    }
   }
-  
-  boolean getCleared(){
+
+  boolean getCleared() {
     return cleared;
   }
-  
-  void cleared(){
+
+  void cleared() {
     cleared = true;
   }
-  
-  boolean getFlagged(){
+
+  boolean getFlagged() {
     return flagged;
   }
-  
-  void setFlagged(boolean flag){
+
+  void setFlagged(boolean flag) {
     flagged = flag;
   }
-  
-  int getSurrounding(){
+
+  int getSurrounding() {
     return surrounding;
   }
-  
-  void addSurrounding(){
+
+  void addSurrounding() {
     surrounding++;
   }
 }

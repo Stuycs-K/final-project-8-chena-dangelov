@@ -1,4 +1,3 @@
-
 private Board gameBoard;
 private int SQUARE_SIZE;
 
@@ -12,11 +11,11 @@ void draw() {
     if (!(!gameBoard.done() && gameOutcome)  ) {
       //gameBoard.endScreen(gameOutcome);
     }
-    if(gameOutcome){
-      drawTile(x,y);
+    if (gameOutcome) {
+      drawTile(x, y);
     }
   }
-  
+
 
 
   if (mousePressed && (mouseButton == RIGHT)) {
@@ -71,35 +70,34 @@ void drawBoard() {
   }
 }
 
-void drawTile(int row, int col){
+void drawTile(int row, int col) {
   Tile place = gameBoard.gameBoard[row / SQUARE_SIZE][col / SQUARE_SIZE];
-        if (place.getFlagged()) {
-          fill(#EA6050);
-          square(row, col, SQUARE_SIZE);
-        } else {
-          if (place.getCleared() == false) {
-            fill(#26C627);
-            square(row, col, SQUARE_SIZE);
-          } else {
-            fill(#CAD1CA);
-            square(row, col, SQUARE_SIZE);
-            textSize(SQUARE_SIZE / (6/5));
-            if (place.getSurrounding() != 0) {
-              fill(0);
-              text(place.getSurrounding(), row-1 + SQUARE_SIZE * (1/5), col-1);
-            }
-          }
-        }
-}
-
-  void endScreen(boolean outcome){
-    textSize(120);
-    background(0);
-    textAlign(CENTER);
-    if(outcome){
-      text("winner !", width/2, height/2); 
-    }
-    else{
-      text("winner !", width/2, height/2); 
+  if (place.getFlagged()) {
+    fill(#EA6050);
+    square(row, col, SQUARE_SIZE);
+  } else {
+    if (place.getCleared() == false) {
+      fill(#26C627);
+      square(row, col, SQUARE_SIZE);
+    } else {
+      fill(#CAD1CA);
+      square(row, col, SQUARE_SIZE);
+      textSize(SQUARE_SIZE / (6/5));
+      if (place.getSurrounding() != 0) {
+        fill(0);
+        text(place.getSurrounding(), row-1 + SQUARE_SIZE * (1/5), col-1);
+      }
     }
   }
+}
+
+void endScreen(boolean outcome) {
+  textSize(120);
+  background(0);
+  textAlign(CENTER);
+  if (outcome) {
+    text("winner !", width/2, height/2);
+  } else {
+    text("winner !", width/2, height/2);
+  }
+}
