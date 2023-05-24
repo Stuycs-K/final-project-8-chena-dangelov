@@ -13,6 +13,7 @@ public class Board{
   void placeMines(Tile[][] board){
     for(int x = 0; x < gameBoard.length; x++){
       for(int y = 0; y < gameBoard[x].length; y++){
+        gameBoard[x][y] = new Tile();
         if(Math.random() < 0.16){
           gameBoard[x][y].setType();
           if(x - 1 >= 0 && y - 1 >= 0){
@@ -37,7 +38,7 @@ public class Board{
             gameBoard[x+1][y].addSurrounding();
           }
           if(x + 1 < gameBoard.length && y + 1 < gameBoard[x].length){
-            gameBoard[x+1][y+1].addSurrouding();
+            gameBoard[x+1][y+1].addSurrounding();
           }
           mineCount++;
         }
@@ -46,7 +47,7 @@ public class Board{
   }
   
   boolean done(){
-    return spacesCleared >= gameBoard.length * gameBoard.length[0] - mineCount;
+    return spacesCleared >= gameBoard.length * gameBoard[0].length - mineCount;
   }
   
   boolean clearSpace(int x, int y){
@@ -59,7 +60,6 @@ public class Board{
     }
     return false;
   }
-  
   void placeFlag(int x, int y){
     if(gameBoard[x][y].getCleared() == false){
       if(gameBoard[x][y].getFlagged() == false){
