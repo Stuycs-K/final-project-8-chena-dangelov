@@ -4,16 +4,28 @@ private int SQUARE_SIZE;
 
 void draw() {
   if (mousePressed && (mouseButton == LEFT)) {
-    boolean gameOutcome = gameBoard.clearSpace(mouseX / SQUARE_SIZE, mouseY / SQUARE_SIZE);
+    int row = mouseX / SQUARE_SIZE;
+    int col = mouseY / SQUARE_SIZE;
+    int x = row*SQUARE_SIZE;
+    int y = col*SQUARE_SIZE;
+    boolean gameOutcome = gameBoard.clearSpace(row, col);
     if (!(!gameBoard.done() && gameOutcome)  ) {
       //gameBoard.endScreen(gameOutcome);
     }
+    if(gameOutcome){
+      drawTile(x,y);
+    }
   }
   if (mousePressed && (mouseButton == RIGHT)) {
-    gameBoard.placeFlag(mouseX / SQUARE_SIZE, mouseY / SQUARE_SIZE);
+    int row = mouseX / SQUARE_SIZE;
+    int col = mouseY / SQUARE_SIZE;
+    int x = row*SQUARE_SIZE;
+    int y = col*SQUARE_SIZE;
+    gameBoard.placeFlag(row, col);
+    drawTile(x, y );
   }
-  background(#BCBABA);
-  drawBoard();
+  //background(#BCBABA);
+  //drawBoard();
 }
 
 void setup() {
@@ -54,6 +66,27 @@ void drawBoard() {
       i++;
     }
   }
+}
+
+void drawTile(int row, int col){
+  Tile place = gameBoard.gameBoard[row / SQUARE_SIZE][col / SQUARE_SIZE];
+        if (place.isFlagged()) {
+          fill(#EA6050);
+          square(row, col, SQUARE_SIZE);
+        } else {
+          if (place.isCleared() == false) {
+            fill(#26C627);
+            square(row, col, SQUARE_SIZE);
+          } else {
+            fill(#CAD1CA);
+            square(row, col, SQUARE_SIZE);
+            textSize(SQUARE_SIZE / (6/5));
+            if (place.getSurrounding() != 0) {
+              fill(0);
+              text(place.getSurrounding(), row-1 + SQUARE_SIZE * (1/5), col-1);
+            }
+          }
+        }
 }
 
 
