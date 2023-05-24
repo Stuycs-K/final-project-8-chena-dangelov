@@ -8,7 +8,7 @@ Today, we introduced a Tile class. The Tile class would be utilized by the Board
 
 ### 5/23/23
 
-Today, I worked on Board class. My work composed of the working on method placeMines() and correcting a mistake I made previously regarding done() method.
+Today, I worked on Board class. My work composed of the working on method placeMines() and correcting a mistake I made previously regarding done() method. In addition, I completed the endScreen() method of Minesweeper class. Moreover, though Board and Tile class are fundamentally finished, I expect to add many more edits to these classes as problems arise. In short, beautiful progress has been made recently.
 
 ### 5/24/23
 
