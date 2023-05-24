@@ -9,23 +9,23 @@ class Tile{
     surrounding = 0;
   }
   
-  public boolean getType(){
+  public boolean isMine(){
     return mine;
   }
   
-  public void setType(){
+  public void setMine(){
     mine = true;
   }
   
-  public boolean getCleared(){
+  public boolean isCleared(){
     return cleared;
   }
   
-  public void cleared(){
+  public void clear(){
     cleared = true;
   }
   
-  public boolean getFlagged(){
+  public boolean isFlagged(){
     return flagged;
   }
   

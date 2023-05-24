@@ -12,7 +12,7 @@ class Board{
       for(int y = 0; y < gameBoard[x].length; y++){
         gameBoard[x][y] = new Tile();
         if(Math.random() < 0.16){
-          gameBoard[x][y].setType();
+          gameBoard[x][y].setMine();
           mineCount++;
         }
       }
@@ -25,9 +25,9 @@ class Board{
   }
   
   public boolean clearSpace(int x, int y){
-    if(gameBoard[x][y].getType() == false){
-      if(gameBoard[x][y].getCleared() == false){
-        gameBoard[x][y].cleared();
+    if(gameBoard[x][y].isMine() == false){
+      if(gameBoard[x][y].isCleared() == false){
+        gameBoard[x][y].clear();
         spacesCleared++;
         return true;
       }
@@ -36,8 +36,8 @@ class Board{
   }
   
   public void placeFlag(int x, int y){
-    if(gameBoard[x][y].getCleared() == false){
-      if(gameBoard[x][y].getFlagged() == false){
+    if(gameBoard[x][y].isCleared() == false){
+      if(gameBoard[x][y].isFlagged() == false){
         gameBoard[x][y].setFlagged(true);
         flagsPlaced++;
       }
