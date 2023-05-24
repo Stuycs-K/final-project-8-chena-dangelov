@@ -1,5 +1,5 @@
-class Board{
-  public Tile[][] gameBoard;
+public class Board{
+  Tile[][] gameBoard;
   private int flagsPlaced, spacesCleared, mineCount;
   
   public Board(){
@@ -10,7 +10,7 @@ class Board{
     placeMines(gameBoard);
   }
   
-  public void placeMines(Tile[][] board){
+  void placeMines(Tile[][] board){
     for(int x = 0; x < gameBoard.length; x++){
       for(int y = 0; y < gameBoard[x].length; y++){
         if(Math.random() < 0.16){
@@ -45,11 +45,11 @@ class Board{
     }
   }
   
-  public boolean done(){
+  boolean done(){
     return spacesCleared >= gameBoard.length * gameBoard.length[0] - mineCount;
   }
   
-  public boolean clearSpace(int x, int y){
+  boolean clearSpace(int x, int y){
     if(gameBoard[x][y].getType() == false){
       if(gameBoard[x][y].getCleared() == false){
         gameBoard[x][y].cleared();
@@ -60,7 +60,7 @@ class Board{
     return false;
   }
   
-  public void placeFlag(int x, int y){
+  void placeFlag(int x, int y){
     if(gameBoard[x][y].getCleared() == false){
       if(gameBoard[x][y].getFlagged() == false){
         gameBoard[x][y].setFlagged(true);

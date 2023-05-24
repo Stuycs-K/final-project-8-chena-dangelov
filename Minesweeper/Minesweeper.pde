@@ -5,16 +5,16 @@ class Minesweeper{
     gameBoard = new Board();
   }
   
-  public void draw(){
+  void draw(){
   }
   
-  public void setup(){
+  void setup(){
   }
   
-  public void drawBoard(){
+  void drawBoard(){
   }
   
-  public void endScreen(boolean outcome){
+  void endScreen(boolean outcome){
     textSize(120);
     background(0);
     textAlign(CENTER);

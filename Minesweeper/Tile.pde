@@ -1,4 +1,4 @@
-class Tile{
+public class Tile{
   private boolean mine, cleared, flagged;
   private int surrounding;
   
@@ -9,35 +9,35 @@ class Tile{
     surrounding = 0;
   }
   
-  public boolean getType(){
+  boolean getType(){
     return mine;
   }
   
-  public void setType(){
+  void setType(){
     mine = true;
   }
   
-  public boolean getCleared(){
+  boolean getCleared(){
     return cleared;
   }
   
-  public void cleared(){
+  void cleared(){
     cleared = true;
   }
   
-  public boolean getFlagged(){
+  boolean getFlagged(){
     return flagged;
   }
   
-  public void setFlagged(boolean flag){
+  void setFlagged(boolean flag){
     flagged = flag;
   }
   
-  public int getSurrounding(){
+  int getSurrounding(){
     return surrounding;
   }
   
-  public void addSurrounding(){
+  void addSurrounding(){
     surrounding++;
   }
 }
