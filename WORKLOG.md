@@ -17,6 +17,6 @@ info
 
 Today I altered the UML, method outline, and development phases of the prototype to reflect a new approach we have to the Minesweeper game, namely the introduction of a Tile class. These Tiles are each of the individual squares in the game board, and hold information like if they are mines are not, if they have been flagged by the viewer or not, etc.
 
-### date y
+### 5/23/23
 
-info
+Today I wrote much of the Minesweeper tab of the project. This is the tab that displays the board and everything else. I wrote the draw(), setup(), and drawBoard() methods. As we make further additions to the project, these methods will undoubtedly change, but they will fundamentally remain similar to what I have written today. There is still much debugging to be done with this branch, specifically involving responding to user input appropriately, but I have gotten it to a point where it can display the board and allows the user to place flags with no issues.
