@@ -57,13 +57,14 @@ public class Board {
   boolean clearSpace(int x, int y) {
     if (gameBoard[x][y].isMine() == false) {
       if (gameBoard[x][y].cleared() == false) {
-        gameBoard[x][y].cleared();
+        gameBoard[x][y].toClear();
         spacesCleared++;
         return true;
       }
     }
     return false;
   }
+  
   void placeFlag(int x, int y) {
     if (gameBoard[x][y].cleared() == false) {
       if (gameBoard[x][y].flagged() == false) {

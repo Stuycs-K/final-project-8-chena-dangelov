@@ -26,7 +26,7 @@ public class Tile {
     return cleared;
   }
 
-  void clear() {
+  void toClear() {
     cleared = true;
   }
 
