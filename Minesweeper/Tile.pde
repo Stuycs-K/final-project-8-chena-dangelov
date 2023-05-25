@@ -9,7 +9,7 @@ public class Tile {
     surrounding = 0;
   }
 
-  boolean getType() {
+  boolean isMine() {
     return mine;
   }
 
@@ -22,15 +22,15 @@ public class Tile {
     }
   }
 
-  boolean getCleared() {
+  boolean cleared() {
     return cleared;
   }
 
-  void cleared() {
+  void clear() {
     cleared = true;
   }
 
-  boolean getFlagged() {
+  boolean flagged() {
     return flagged;
   }
 

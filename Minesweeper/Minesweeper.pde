@@ -45,11 +45,11 @@ void drawBoard() {
     if (ii < gameBoard.gameBoard.length) {
       for (int col = 0; col < height; col += SQUARE_SIZE) {
         Tile place = gameBoard.gameBoard[i][ii];
-        if (place.getFlagged()) {
+        if (place.flagged()) {
           fill(#EA6050);
           square(row, col, SQUARE_SIZE);
         } else {
-          if (place.getCleared() == false) {
+          if (place.cleared() == false) {
             fill(#26C627);
             square(row, col, SQUARE_SIZE);
           } else {
@@ -71,24 +71,46 @@ void drawBoard() {
 
 void drawTile(int row, int col) {
   Tile place = gameBoard.gameBoard[row / SQUARE_SIZE][col / SQUARE_SIZE];
-  if (place.getFlagged()) {
-    fill(#EA6050);
+  
+  if(place.cleared()){
+    fill(#CAD1CA);
     square(row, col, SQUARE_SIZE);
-  } else {
-    if (place.getCleared() == false) {
+    textSize(SQUARE_SIZE / (6/5));
+    if (place.getSurrounding() != 0) {
+      fill(0);
+      text(place.getSurrounding(), row-1 + SQUARE_SIZE * (1/5), col-1);
+    }
+  }
+  else{
+    if(place.flagged()){
+      fill(#EA6050);
+      square(row, col, SQUARE_SIZE);
+    }
+    else{
       fill(#26C627);
       square(row, col, SQUARE_SIZE);
-    } else {
-      fill(#CAD1CA);
-      square(row, col, SQUARE_SIZE);
-      textSize(SQUARE_SIZE / (6/5));
-      if (place.getSurrounding() != 0) {
-        fill(0);
-        text(place.getSurrounding(), row-1 + SQUARE_SIZE * (1/5), col-1);
-      }
     }
   }
 }
+
+//  if (place.flagged()) {
+//    fill(#EA6050);
+//    square(row, col, SQUARE_SIZE);
+//  } else {
+//    if (place.cleared() == false) {
+//      fill(#26C627);
+//      square(row, col, SQUARE_SIZE);
+//    } else {
+//      fill(#CAD1CA);
+//      square(row, col, SQUARE_SIZE);
+//      textSize(SQUARE_SIZE / (6/5));
+//      if (place.getSurrounding() != 0) {
+//        fill(0);
+//        text(place.getSurrounding(), row-1 + SQUARE_SIZE * (1/5), col-1);
+//      }
+//    }
+//  }
+//}
 
 void endScreen(boolean outcome) {
   textSize(120);
@@ -97,6 +119,6 @@ void endScreen(boolean outcome) {
   if (outcome) {
     text("winner !", width/2, height/2);
   } else {
-    text("winner !", width/2, height/2);
+    text("loser !", width/2, height/2);
   }
 }
