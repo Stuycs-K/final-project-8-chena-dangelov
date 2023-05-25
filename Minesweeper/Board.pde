@@ -7,10 +7,10 @@ public class Board {
     flagsPlaced = 0;
     spacesCleared = 0;
     mineCount = 0;
-    placeMines(gameBoard);
+    placeMines();
   }
 
-  void placeMines(Tile[][] board) {
+  void placeMines() {
     for (int x = 0; x < gameBoard.length; x++) {
       for (int y = 0; y < gameBoard[x].length; y++) {
         gameBoard[x][y] = new Tile();
@@ -55,19 +55,19 @@ public class Board {
   }
 
   boolean clearSpace(int x, int y) {
-    if (gameBoard[x][y].isMine() == false) {
-      if (gameBoard[x][y].cleared() == false) {
+    if (!gameBoard[x][y].isMine()) {
+      if (!gameBoard[x][y].cleared()) {
         gameBoard[x][y].toClear();
         spacesCleared++;
-        return true;
       }
+      return true;
     }
     return false;
   }
-  
+
   void placeFlag(int x, int y) {
-    if (gameBoard[x][y].cleared() == false) {
-      if (gameBoard[x][y].flagged() == false) {
+    if (!gameBoard[x][y].cleared()) {
+      if (!gameBoard[x][y].flagged()) {
         gameBoard[x][y].setFlagged(true);
         flagsPlaced++;
       } else {
