@@ -76,9 +76,11 @@ void drawTile(int row, int col) {
     fill(#CAD1CA);
     square(row, col, SQUARE_SIZE);
     textSize(SQUARE_SIZE / (6/5));
+    textAlign(CENTER);
     if (place.getSurrounding() != 0) {
       fill(0);
-      text(place.getSurrounding(), row-1 + SQUARE_SIZE * (1/5), col-1);
+      //text(place.getSurrounding(), row-1 + SQUARE_SIZE * (1/5), col-1);
+      text(place.getSurrounding(), row + SQUARE_SIZE * 0.5, col + SQUARE_SIZE * 0.8);
     }
   } else {
     if (place.flagged()) {
