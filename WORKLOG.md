@@ -26,3 +26,7 @@ Today I altered the UML, method outline, and development phases of the prototype
 ### 5/23/23
 
 Today I wrote much of the Minesweeper tab of the project. This is the tab that displays the board and everything else. I wrote the draw(), setup(), and drawBoard() methods. As we make further additions to the project, these methods will undoubtedly change, but they will fundamentally remain similar to what I have written today. There is still much debugging to be done with this branch, specifically involving responding to user input appropriately, but I have gotten it to a point where it can display the board and allows the user to place flags with no issues.
+
+### 5/24/23
+
+Today I worked further on the Minesweeper class. I created the drawTile() method, separating the work so that the entire board does not have to be drawn every time draw() is called. After my edits, the project was able to run a simplified version of Minesweeper, where tiles could be cleared and flagged but there was no immediate loss after clicking a mine. Alberto edited the code further after these edits and made significant progress to the methods in the Minesweeper tab.
