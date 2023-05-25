@@ -24,6 +24,7 @@ void draw() {
     int col = mouseY / SQUARE_SIZE;
     int x = row*SQUARE_SIZE;
     int y = col*SQUARE_SIZE;
+    if(mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0){
     boolean gameOutcome = gameBoard.clearSpace(row, col);
     if (gameBoard.done() || !gameOutcome) {
       //endScreen(gameOutcome);
@@ -31,15 +32,17 @@ void draw() {
     if (gameOutcome) {
       drawTile(x, y);
     }
-  }
+  }}
 
   if (mousePressed && (mouseButton == RIGHT)) {
     int row = mouseX / SQUARE_SIZE;
     int col = mouseY / SQUARE_SIZE;
     int x = row*SQUARE_SIZE;
     int y = col*SQUARE_SIZE;
+    if(mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0){
     gameBoard.placeFlag(row, col);
     drawTile(x, y);
+    }
   }
   //background(#BCBABA);
   //drawBoard();
