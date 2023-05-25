@@ -30,6 +30,31 @@ void draw() {
     }
     if (gameOutcome) {
       drawTile(x, y);
+      
+      
+      
+      //
+      if(gameBoard.gameBoard[row,col].getSurrounding() == 0){
+        if(row - 1 >= 0 && !gameBoard.gameBoard[row-1][col].isMine() && gameBoard.gameBoard[row-1][col].getSurrounding() == 0){
+          gameBoard.clearSpace(row-1,col);
+        }
+        if (col - 1 >= 0 && !gameBoard.gameBoard[row][col-1].isMine() && gameBoard.gameBoard[row][col-1].getSurrounding() == 0) {
+          gameBoard.clearSpace(x,y-1);
+        }
+        if (row + 1 < gameBoard.gameBoard.length && !gameBoard[row+1][col].isMine() && gameBoard[row+1][col].getSurrounding() == 0) {
+          gameBoard.clearSpace(x+1,y);
+        }
+        if (col + 1 < gameBoard.gameBoard[0].length && !gameBoard[x][y+1].isMine() && gameBoard[x][y+1].getSurrounding() == 0) {
+          gameBoard.clearSpace(x,y+1);
+        }  
+      }
+      //
+      
+      
+      
+      
+      
+      
     }
   }
 
