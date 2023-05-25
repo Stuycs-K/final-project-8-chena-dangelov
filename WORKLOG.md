@@ -12,6 +12,8 @@ Today, I worked on Board class. My work composed of the working on method placeM
 
 ### 5/24/23
 
+Today, my focus was to improve the methods that were made previously. In Board class, I changed the way placeMines() method functioned as there was an issue regarding initialization and declaration of certain tiles. In that class, I also changed the way clearSpace() method functioned as I began to consider edge case situations. In Minesweeper class, I made significant progress in cutting down code / concision. I cut down non-useful code in drawBoard() method, draw() method, and drawTile() method. I also made slight changes to drawTile() method in which text is printed in the middle of each square / tile rather than above. I also changed endScreen() method as there was an error where it would print out text displaying "winner !" regardless of game outcome. In addition, I added comments to tile class. Overall everything seems to be going ahead of schedule and as of now, there only seems to be one thing that 
+
 
 
 
