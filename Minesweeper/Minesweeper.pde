@@ -57,6 +57,24 @@ void drawTile(int row, int col) {
       fill(0);
       text(place.getSurrounding(), row + SQUARE_SIZE * 0.5, col + SQUARE_SIZE * 0.8);
     }
+    //
+    else {
+      int x = row / SQUARE_SIZE;
+      int y = col / SQUARE_SIZE;
+      if (x - 1 >= 0 && gameBoard.gameBoard[x-1][y].cleared()) {
+        drawTile(row - SQUARE_SIZE, col);
+      }
+      if (y - 1 >= 0 && gameBoard.gameBoard[x][y-1].cleared()) {
+        drawTile(row, col - SQUARE_SIZE);
+      }
+      if (x + 1 < gameBoard.gameBoard.length && gameBoard.gameBoard[x+1][y].cleared()) {
+        drawTile(row + SQUARE_SIZE, col);
+      }
+      if (y + 1 < gameBoard.gameBoard[x].length && gameBoard.gameBoard[x][y+1].cleared()) {
+        drawTile(row, col + SQUARE_SIZE);
+      }
+      //
+    }
   } else {
     if (place.flagged()) {
       fill(#EA6050);
