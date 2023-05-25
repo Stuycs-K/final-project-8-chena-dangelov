@@ -9,35 +9,12 @@ void setup() {
 }
 
 void drawBoard() {
-  //int i = 0;
-  //int ii = 0;
   stroke(0);
   for (int row = 0; row < width; row+= SQUARE_SIZE) {
-    //ii=0;
-    //if (ii < gameBoard.gameBoard.length) {
     for (int col = 0; col < height; col += SQUARE_SIZE) {
-      //Tile place = gameBoard.gameBoard[i][ii];
-      //if (place.flagged()) {
-      //  fill(#EA6050);
-      //  square(row, col, SQUARE_SIZE);
-      //} else {
-      //if (place.cleared() == false) {
       fill(#26C627);
       square(row, col, SQUARE_SIZE);
-      //} else {
-      //fill(#CAD1CA);
-      //square(row, col, SQUARE_SIZE);
-      //textSize(SQUARE_SIZE / (6/5));
-      //if (place.getSurrounding() != 0) {
-      //  fill(0);
-      //  text(place.getSurrounding(), row-1 + SQUARE_SIZE * (1/5), col-1);
-      //}
-      //}
-      //}
-      //ii++;
     }
-    //i++;
-    //}
   }
 }
 
@@ -48,9 +25,8 @@ void draw() {
     int x = row*SQUARE_SIZE;
     int y = col*SQUARE_SIZE;
     boolean gameOutcome = gameBoard.clearSpace(row, col);
-    //if (!(!gameBoard.done() && gameOutcome)  ) {
     if (gameBoard.done() || !gameOutcome) {
-      //gameBoard.endScreen(gameOutcome);
+      //endScreen(gameOutcome);
     }
     if (gameOutcome) {
       drawTile(x, y);
@@ -79,7 +55,6 @@ void drawTile(int row, int col) {
     textAlign(CENTER);
     if (place.getSurrounding() != 0) {
       fill(0);
-      //text(place.getSurrounding(), row-1 + SQUARE_SIZE * (1/5), col-1);
       text(place.getSurrounding(), row + SQUARE_SIZE * 0.5, col + SQUARE_SIZE * 0.8);
     }
   } else {
@@ -92,25 +67,6 @@ void drawTile(int row, int col) {
     }
   }
 }
-
-//  if (place.flagged()) {
-//    fill(#EA6050);
-//    square(row, col, SQUARE_SIZE);
-//  } else {
-//    if (place.cleared() == false) {
-//      fill(#26C627);
-//      square(row, col, SQUARE_SIZE);
-//    } else {
-//      fill(#CAD1CA);
-//      square(row, col, SQUARE_SIZE);
-//      textSize(SQUARE_SIZE / (6/5));
-//      if (place.getSurrounding() != 0) {
-//        fill(0);
-//        text(place.getSurrounding(), row-1 + SQUARE_SIZE * (1/5), col-1);
-//      }
-//    }
-//  }
-//}
 
 void endScreen(boolean outcome) {
   textSize(120);
