@@ -59,18 +59,18 @@ public class Board {
       if (!gameBoard[x][y].cleared()) {
         gameBoard[x][y].toClear();
         spacesCleared++;
-        if (x - 1 >= 0 && !gameBoard[x-1][y].isMine() && gameBoard[x-1][y].getSurrounding() == 0) {
-          clearSpace(x-1,y);
-        }
-        if (y - 1 >= 0 && !gameBoard[x][y-1].isMine() && gameBoard[x][y-1].getSurrounding() == 0) {
-          clearSpace(x,y-1);
-        }
-        if (x + 1 < gameBoard.length && !gameBoard[x+1][y].isMine() && gameBoard[x+1][y].getSurrounding() == 0) {
-          clearSpace(x+1,y);
-        }
-        if (y + 1 < gameBoard[x].length && !gameBoard[x][y+1].isMine() && gameBoard[x][y+1].getSurrounding() == 0) {
-          clearSpace(x,y+1);
-        }  
+        //if (x - 1 >= 0 && !gameBoard[x-1][y].isMine() && gameBoard[x-1][y].getSurrounding() == 0) {
+        //  clearSpace(x-1,y);
+        //}
+        //if (y - 1 >= 0 && !gameBoard[x][y-1].isMine() && gameBoard[x][y-1].getSurrounding() == 0) {
+        //  clearSpace(x,y-1);
+        //}
+        //if (x + 1 < gameBoard.length && !gameBoard[x+1][y].isMine() && gameBoard[x+1][y].getSurrounding() == 0) {
+        //  clearSpace(x+1,y);
+        //}
+        //if (y + 1 < gameBoard[x].length && !gameBoard[x][y+1].isMine() && gameBoard[x][y+1].getSurrounding() == 0) {
+        //  clearSpace(x,y+1);
+        //}  
       }
       return true;
     }
