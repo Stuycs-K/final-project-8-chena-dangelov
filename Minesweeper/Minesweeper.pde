@@ -1,10 +1,12 @@
 private Board gameBoard;
 private int SQUARE_SIZE;
+private boolean isGameOver;
 
 void setup() {
   gameBoard = new Board();
   size(800, 800);
   SQUARE_SIZE = width/16;
+  isGameOver = false;
   drawBoard();
 }
 
@@ -19,14 +21,16 @@ void drawBoard() {
 }
 
 void draw() {
+  if(!isGameOver){
   if (mousePressed && (mouseButton == LEFT)) {
     int row = mouseX / SQUARE_SIZE;
     int col = mouseY / SQUARE_SIZE;
     int x = row*SQUARE_SIZE;
     int y = col*SQUARE_SIZE;
+    if(mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0){
     boolean gameOutcome = gameBoard.clearSpace(row, col);
     if (gameBoard.done() || !gameOutcome) {
-      //endScreen(gameOutcome);
+      endScreen(gameOutcome);
     }
     if (gameOutcome) {
       drawTile(x, y);
@@ -50,21 +54,24 @@ void draw() {
       //}
       //
     }
-  }
+  }}
 
   if (mousePressed && (mouseButton == RIGHT)) {
     int row = mouseX / SQUARE_SIZE;
     int col = mouseY / SQUARE_SIZE;
     int x = row*SQUARE_SIZE;
     int y = col*SQUARE_SIZE;
+    if(mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0){
     gameBoard.placeFlag(row, col);
     drawTile(x, y);
+    }
   }
   //background(#BCBABA);
   //drawBoard();
-}
+}}
 
 void drawTile(int row, int col) {
+  //if(!isGameOver){
   Tile place = gameBoard.gameBoard[row / SQUARE_SIZE][col / SQUARE_SIZE];
 
   if (place.cleared()) {
@@ -120,12 +127,15 @@ void drawTile(int row, int col) {
       square(row, col, SQUARE_SIZE);
     }
   }
+//}
 }
 
 void endScreen(boolean outcome) {
+  isGameOver = true;
   textSize(120);
   background(0);
   textAlign(CENTER);
+  fill(#FFFFFF);
   if (outcome) {
     text("winner !", width/2, height/2);
   } else {

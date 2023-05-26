@@ -56,7 +56,7 @@ public class Board {
 
   boolean clearSpace(int x, int y) {
     if (!gameBoard[x][y].isMine()) {
-      if (!gameBoard[x][y].cleared()) {
+      if (!gameBoard[x][y].cleared() && !gameBoard[x][y].flagged()) {
         gameBoard[x][y].toClear();
         spacesCleared++;
         //if (x - 1 >= 0 && !gameBoard[x-1][y].isMine() && gameBoard[x-1][y].getSurrounding() == 0) {

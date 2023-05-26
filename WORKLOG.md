@@ -30,3 +30,7 @@ Today I wrote much of the Minesweeper tab of the project. This is the tab that d
 ### 5/24/23
 
 Today I worked further on the Minesweeper class. I created the drawTile() method, separating the work so that the entire board does not have to be drawn every time draw() is called. After my edits, the project was able to run a simplified version of Minesweeper, where tiles could be cleared and flagged but there was no immediate loss after clicking a mine. Alberto edited the code further after these edits and made significant progress to the methods in the Minesweeper tab.
+
+### 5/25/23
+
+Today I made some minor adjustments to the code. Firstly, I fixed an error that arose when the player clicked and dragged out of the playing board. This action led to an out of bounds exception, and now, after some changes I made in draw that checks the validity of mouseX/Y, it does not. Also, I added a boolean called isGameOver in Minesweeper. This boolean ensures that draw() has no funcionality after the game ends (the player clicks on a mine or successfully clears the screen). I also made some adjustments to the UML and method outline to better reflect our current lab.
