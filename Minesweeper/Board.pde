@@ -7,48 +7,39 @@ public class Board {
     flagsPlaced = 0;
     spacesCleared = 0;
     mineCount = 0;
-    placeMines();
     randomlyClearArea(x,y);
+    placeMines();
+    
     
   }
   
   void randomlyClearArea(int x, int y){
-    
-    gameBoard[x][y].unMine();
-    mineCount--;
-    clearSpace(x,y);
-    spacesCleared++;
-    //randomlyClearArea(x,y,.7);
-  }
-  
-  void randomlyClearArea(int x,int y, double recursion){
-    if(x < 16 && y < 16 && x >=0 && y >=0){
-    gameBoard[x][y].unMine();
-    if(Math.random() < recursion){
-      this.randomlyClearArea(x+1,y, recursion-0.2);
-    }
-    if(Math.random() < recursion){
-      this.randomlyClearArea(x,y+1, recursion-0.2);
-    }
-    if(Math.random() < recursion){
-      this.randomlyClearArea(x-1,y, recursion-0.2);
-    }
-    if(Math.random() < recursion){
-      this.randomlyClearArea(x,y+1, recursion-0.2);
-    }
-  }}
-
-  void placeMines() {
-    
-    for (int x = 0; x < gameBoard.length; x++) {
-      for (int y = 0; y < gameBoard[x].length; y++) {
-        gameBoard[x][y] = new Tile();
+    for (int i = 0; i < gameBoard.length; i++) {
+      for (int j = 0; j < gameBoard[i].length; j++) {
+        gameBoard[i][j] = new Tile();
       }
     }
+    
+    
+    gameBoard[x-1][y-1].makeDefaultCleared();
+    gameBoard[x-1][y].makeDefaultCleared();
+    gameBoard[x-1][y+1].makeDefaultCleared();
+    gameBoard[x][y-1].makeDefaultCleared();
+    gameBoard[x][y].makeDefaultCleared();
+    gameBoard[x][y+1].makeDefaultCleared();
+    gameBoard[x+1][y-1].makeDefaultCleared();
+    gameBoard[x+1][y].makeDefaultCleared();
+    gameBoard[x+1][y+1].makeDefaultCleared();
+    
+  }
+  
+  
 
+  void placeMines() {
     while (mineCount < 40) {
       int x = (int)(Math.random() * gameBoard.length);
       int y = (int)(Math.random() * gameBoard[0].length);
+      if(!gameBoard[x][y].getDefaultCleared()){
       if (gameBoard[x][y].setType()) {
         if (x - 1 >= 0 && y - 1 >= 0) {
           gameBoard[x-1][y-1].addSurrounding();
@@ -76,7 +67,7 @@ public class Board {
         }
         mineCount++;
       }
-    }
+    }}
   }
 
   boolean done() {
