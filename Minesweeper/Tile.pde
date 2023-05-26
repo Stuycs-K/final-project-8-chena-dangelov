@@ -3,18 +3,31 @@ public class Tile {
   // cleared - true if tile has been cleared by user, false otherwise
   // flagged - true if tile is flagged, false otherwise
   // surrounding - the number of mines surrounding tile
-  boolean mine, cleared, flagged;
+  boolean mine, cleared, flagged, defaultCleared;
   int surrounding;
 
   public Tile() {
     mine = false;
     cleared = false;
     flagged = false;
+    defaultCleared = false;
     surrounding = 0;
+  }
+  
+  boolean getDefaultCleared(){
+    return defaultCleared;
+  }
+  
+  void makeDefaultCleared(){
+    defaultCleared = true;
   }
   
   boolean isMine() {
     return mine;
+  }
+  
+  void unMine() {
+    mine = false;
   }
   
   // returns false if tile has already been declared to contain a mine

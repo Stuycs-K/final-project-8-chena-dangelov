@@ -1,9 +1,11 @@
 private Board gameBoard;
 private int SQUARE_SIZE;
 private boolean isGameOver;
+public boolean boardGeneratedYet;
 
 void setup() {
-  gameBoard = new Board();
+  //gameBoard = new Board();
+  boardGeneratedYet = false;
   size(800, 800);
   SQUARE_SIZE = width/16;
   isGameOver = false;
@@ -21,7 +23,13 @@ void drawBoard() {
 }
 
 void draw() {
-  if (!isGameOver) {
+  if(boardGeneratedYet == false){
+    if (mousePressed && (mouseButton == LEFT)) {
+      gameBoard = new Board(mouseX / SQUARE_SIZE, mouseY / SQUARE_SIZE);
+      boardGeneratedYet = true;
+    }
+  }
+  else if (!isGameOver) {
     if (mousePressed && (mouseButton == LEFT)) {
       int row = mouseX / SQUARE_SIZE;
       int col = mouseY / SQUARE_SIZE;
