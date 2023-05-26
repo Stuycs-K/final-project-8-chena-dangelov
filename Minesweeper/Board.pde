@@ -7,24 +7,23 @@ public class Board {
     flagsPlaced = 0;
     spacesCleared = 0;
     mineCount = 0;
+    placeMines();
     randomlyClearArea(x,y);
-    //placeMines();
     
   }
   
-  void randomlyClearArea(int x_, int y_){
-    for (int x = 0; x < gameBoard.length; x++) {
-      for (int y = 0; y < gameBoard[x].length; y++) {
-        gameBoard[x][y] = new Tile();
-      }
-    }
-    //this.clearSpace(x_,y_);
-    randomlyClearArea(x_,y_,1);
+  void randomlyClearArea(int x, int y){
+    
+    gameBoard[x][y].unMine();
+    mineCount--;
+    clearSpace(x,y);
+    spacesCleared++;
+    //randomlyClearArea(x,y,.7);
   }
   
   void randomlyClearArea(int x,int y, double recursion){
     if(x < 16 && y < 16 && x >=0 && y >=0){
-    gameBoard[x][y].makeDefaultCleared();
+    gameBoard[x][y].unMine();
     if(Math.random() < recursion){
       this.randomlyClearArea(x+1,y, recursion-0.2);
     }
@@ -40,6 +39,12 @@ public class Board {
   }}
 
   void placeMines() {
+    
+    for (int x = 0; x < gameBoard.length; x++) {
+      for (int y = 0; y < gameBoard[x].length; y++) {
+        gameBoard[x][y] = new Tile();
+      }
+    }
 
     while (mineCount < 40) {
       int x = (int)(Math.random() * gameBoard.length);

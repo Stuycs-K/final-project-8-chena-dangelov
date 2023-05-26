@@ -26,6 +26,10 @@ public class Tile {
     return mine;
   }
   
+  void unMine() {
+    mine = false;
+  }
+  
   // returns false if tile has already been declared to contain a mine
   // otherwise, mine is set to true and method returns true
   boolean setType() {
