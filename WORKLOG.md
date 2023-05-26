@@ -14,6 +14,10 @@ Today, I worked on Board class. My work composed of the working on method placeM
 
 Today, my focus was to improve the methods that were made previously. In Board class, I changed the way placeMines() method functioned as there was an issue regarding initialization and declaration of certain tiles. In that class, I also changed the way clearSpace() method functioned as I began to consider edge case situations. In Minesweeper class, I made significant progress in cutting down code / concision. I cut down non-useful code in drawBoard() method, draw() method, and drawTile() method. I also made slight changes to drawTile() method in which text is printed in the middle of each square / tile rather than above. I also changed endScreen() method as there was an error where it would print out text displaying "winner !" regardless of game outcome. In addition, I added comments to tile class. Overall everything seems to be going ahead of schedule and as of now, there only seems to be one last EXTREMELEY important thing that needs to be completed (how the game / program responds when the winner either wins or loses / clears a mine).
 
+### 5/25/23
+
+Today, I made it my mission to get clearSpace() method to be recursive. I ran into some errors along the way, including stackoverflow errors, however I managed to do it ! But instead of having clearSpace() method be recursive, I had drawTile() be recursive so I can have the drawing of the cleared Tile + the clearing of the tile in one method. I managed to complete my mission and the project overall looks good. Most of the code is done and only a few more additions are needed. It'll only be a matter of time till we have a satisfactory completed product (mood == hopeful) !!
+
 
 
 
