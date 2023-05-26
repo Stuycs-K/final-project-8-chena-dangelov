@@ -92,19 +92,19 @@ void drawTile(int row, int col) {
     //  if (y + 1 < gameBoard.gameBoard[x].length && gameBoard.gameBoard[x][y+1].cleared()) {
     //    drawTile(row, col + SQUARE_SIZE);
     //  } else {
-      if (x - 1 >= 0 && !gameBoard.gameBoard[x-1][y].isMine() && gameBoard.gameBoard[x-1][y].getSurrounding() == 0) {
+      if (x - 1 >= 0 && !gameBoard.gameBoard[x-1][y].isMine() && gameBoard.gameBoard[x-1][y].getSurrounding() == 0 && !gameBoard.gameBoard[x-1][y].cleared()) {
         gameBoard.clearSpace(x-1, y);
         drawTile(row - SQUARE_SIZE, col);
       }
-      if (y - 1 >= 0 && !gameBoard.gameBoard[x][y-1].isMine() && gameBoard.gameBoard[x][y-1].getSurrounding() == 0) {
+      if (y - 1 >= 0 && !gameBoard.gameBoard[x][y-1].isMine() && gameBoard.gameBoard[x][y-1].getSurrounding() == 0 && !gameBoard.gameBoard[x][y-1].cleared()) {
         gameBoard.clearSpace(x, y-1);
         drawTile(row, col - SQUARE_SIZE);
       }
-      if (x + 1 < gameBoard.gameBoard.length && !gameBoard.gameBoard[x+1][y].isMine() && gameBoard.gameBoard[x+1][y].getSurrounding() == 0) {
+      if (x + 1 < gameBoard.gameBoard.length && !gameBoard.gameBoard[x+1][y].isMine() && gameBoard.gameBoard[x+1][y].getSurrounding() == 0 && !gameBoard.gameBoard[x+1][y].cleared()) {
         gameBoard.clearSpace(x+1, y);
         drawTile(row + SQUARE_SIZE, col);
       }
-      if (y + 1 < gameBoard.gameBoard[0].length && !gameBoard.gameBoard[x][y+1].isMine() && gameBoard.gameBoard[x][y+1].getSurrounding() == 0) {
+      if (y + 1 < gameBoard.gameBoard[0].length && !gameBoard.gameBoard[x][y+1].isMine() && gameBoard.gameBoard[x][y+1].getSurrounding() == 0 && !gameBoard.gameBoard[x][y+1].cleared()) {
         gameBoard.clearSpace(x, y+1);
         drawTile(row, col + SQUARE_SIZE);
       }
