@@ -74,13 +74,13 @@ void drawTile(int row, int col) {
         gameBoard.clearSpace(x-1, y);
         drawTile(row - SQUARE_SIZE, col);
       }
-      if (y - 1 >= 0 && !gameBoard.gameBoard[x][y-1].cleared()) {
-        gameBoard.clearSpace(x, y-1);
-        drawTile(row, col - SQUARE_SIZE);
-      }
       if (x + 1 < gameBoard.gameBoard.length && !gameBoard.gameBoard[x+1][y].cleared()) {
         gameBoard.clearSpace(x+1, y);
         drawTile(row + SQUARE_SIZE, col);
+      }
+      if (y - 1 >= 0 && !gameBoard.gameBoard[x][y-1].cleared()) {
+        gameBoard.clearSpace(x, y-1);
+        drawTile(row, col - SQUARE_SIZE);
       }
       if (y + 1 < gameBoard.gameBoard[0].length && !gameBoard.gameBoard[x][y+1].cleared()) {
         gameBoard.clearSpace(x, y+1);
