@@ -94,6 +94,22 @@ void drawTile(int row, int col) {
         gameBoard.clearSpace(x, y+1);
         drawTile(row, col + SQUARE_SIZE);
       }
+      if (x - 1 >= 0 && y - 1 >= 0 && !gameBoard.gameBoard[x-1][y-1].cleared()) {
+        gameBoard.clearSpace(x, y+1);
+        drawTile(row, col + SQUARE_SIZE);
+      }
+      if (x - 1 >= 0 && y + 1 < gameBoard.gameBoard[0].length && !gameBoard.gameBoard[x-1][y+1].cleared()) {
+        gameBoard.clearSpace(x-1, y+1);
+        drawTile(row, col + SQUARE_SIZE);
+      }
+      if (x + 1 < gameBoard.gameBoard.length && y - 1 >= 0 && !gameBoard.gameBoard[x+1][y-1].cleared()) {
+        gameBoard.clearSpace(x+1, y-1);
+        drawTile(row, col + SQUARE_SIZE);
+      }
+      if (x + 1 < gameBoard.gameBoard.length && y + 1 < gameBoard.gameBoard[0].length && !gameBoard.gameBoard[x+1][y+1].cleared()) {
+        gameBoard.clearSpace(x+1, y+1);
+        drawTile(row, col + SQUARE_SIZE);
+      }
     }
   } else {
     if (place.flagged()) {

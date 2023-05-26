@@ -26,7 +26,7 @@ public class Board {
     while(k < 2){
       int l = -1;
       while(l < 2){
-        if(x+k >= 0 && y+l >= 0 && x+k < 16 && y+l < 16)gameBoard[x+k][y+l].makeDefaultCleared();
+        if(x+k >= 0 && y+l >= 0 && x+k < gameBoard.length && y+l < gameBoard.length)gameBoard[x+k][y+l].makeDefaultCleared();
         l++;
       }
       k++;
