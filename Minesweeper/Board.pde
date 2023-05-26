@@ -20,7 +20,19 @@ public class Board {
       }
     }
     
+    int k = -1;
     
+    
+    while(k < 2){
+      int l = -1;
+      while(l < 2){
+        if(x+k >= 0 && y+l >= 0 && x+k < 16 && y+l < 16)gameBoard[x+k][y+l].makeDefaultCleared();
+        l++;
+      }
+      k++;
+    }
+    
+    /*
     gameBoard[x-1][y-1].makeDefaultCleared();
     gameBoard[x-1][y].makeDefaultCleared();
     gameBoard[x-1][y+1].makeDefaultCleared();
@@ -30,7 +42,7 @@ public class Board {
     gameBoard[x+1][y-1].makeDefaultCleared();
     gameBoard[x+1][y].makeDefaultCleared();
     gameBoard[x+1][y+1].makeDefaultCleared();
-    
+    */
   }
   
   
