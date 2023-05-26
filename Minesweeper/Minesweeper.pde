@@ -21,54 +21,37 @@ void drawBoard() {
 }
 
 void draw() {
-  if(!isGameOver){
-  if (mousePressed && (mouseButton == LEFT)) {
-    int row = mouseX / SQUARE_SIZE;
-    int col = mouseY / SQUARE_SIZE;
-    int x = row*SQUARE_SIZE;
-    int y = col*SQUARE_SIZE;
-    if(mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0){
-    boolean gameOutcome = gameBoard.clearSpace(row, col);
-    if (gameBoard.done() || !gameOutcome) {
-      endScreen(gameOutcome);
+  if (!isGameOver) {
+    if (mousePressed && (mouseButton == LEFT)) {
+      int row = mouseX / SQUARE_SIZE;
+      int col = mouseY / SQUARE_SIZE;
+      int x = row*SQUARE_SIZE;
+      int y = col*SQUARE_SIZE;
+      if (mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0) {
+        boolean gameOutcome = gameBoard.clearSpace(row, col);
+        if (gameBoard.done() || !gameOutcome) {
+          endScreen(gameOutcome);
+        }
+        if (gameOutcome) {
+          drawTile(x, y);
+        }
+      }
     }
-    if (gameOutcome) {
-      drawTile(x, y);
 
-
-
-      //
-      //if (gameBoard.gameBoard[row, col].getSurrounding() == 0) {
-      //  if (row - 1 >= 0 && !gameBoard.gameBoard[row-1][col].isMine() && gameBoard.gameBoard[row-1][col].getSurrounding() == 0) {
-      //    gameBoard.clearSpace(row-1, col);
-      //  }
-      //  if (col - 1 >= 0 && !gameBoard.gameBoard[row][col-1].isMine() && gameBoard.gameBoard[row][col-1].getSurrounding() == 0) {
-      //    gameBoard.clearSpace(x, y-1);
-      //  }
-      //  if (row + 1 < gameBoard.gameBoard.length && !gameBoard[row+1][col].isMine() && gameBoard[row+1][col].getSurrounding() == 0) {
-      //    gameBoard.clearSpace(x+1, y);
-      //  }
-      //  if (col + 1 < gameBoard.gameBoard[0].length && !gameBoard[x][y+1].isMine() && gameBoard[x][y+1].getSurrounding() == 0) {
-      //    gameBoard.clearSpace(x, y+1);
-      //  }
-      //}
-      //
+    if (mousePressed && (mouseButton == RIGHT)) {
+      int row = mouseX / SQUARE_SIZE;
+      int col = mouseY / SQUARE_SIZE;
+      int x = row*SQUARE_SIZE;
+      int y = col*SQUARE_SIZE;
+      if (mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0) {
+        gameBoard.placeFlag(row, col);
+        drawTile(x, y);
+      }
     }
-  }}
-
-  if (mousePressed && (mouseButton == RIGHT)) {
-    int row = mouseX / SQUARE_SIZE;
-    int col = mouseY / SQUARE_SIZE;
-    int x = row*SQUARE_SIZE;
-    int y = col*SQUARE_SIZE;
-    if(mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0){
-    gameBoard.placeFlag(row, col);
-    drawTile(x, y);
-    }
+    //background(#BCBABA);
+    //drawBoard();
   }
-  //background(#BCBABA);
-  //drawBoard();
-}}
+}
 
 void drawTile(int row, int col) {
   //if(!isGameOver){
@@ -87,18 +70,6 @@ void drawTile(int row, int col) {
     else {
       int x = row / SQUARE_SIZE;
       int y = col / SQUARE_SIZE;
-    //  if (x - 1 >= 0 && gameBoard.gameBoard[x-1][y].cleared()) {
-    //    drawTile(row - SQUARE_SIZE, col);
-    //  }
-    //  if (y - 1 >= 0 && gameBoard.gameBoard[x][y-1].cleared()) {
-    //    drawTile(row, col - SQUARE_SIZE);
-    //  }
-    //  if (x + 1 < gameBoard.gameBoard.length && gameBoard.gameBoard[x+1][y].cleared()) {
-    //    drawTile(row + SQUARE_SIZE, col);
-    //  }
-    //  if (y + 1 < gameBoard.gameBoard[x].length && gameBoard.gameBoard[x][y+1].cleared()) {
-    //    drawTile(row, col + SQUARE_SIZE);
-    //  } else {
       if (x - 1 >= 0 && !gameBoard.gameBoard[x-1][y].isMine() && gameBoard.gameBoard[x-1][y].getSurrounding() == 0 && !gameBoard.gameBoard[x-1][y].cleared()) {
         gameBoard.clearSpace(x-1, y);
         drawTile(row - SQUARE_SIZE, col);
@@ -115,8 +86,6 @@ void drawTile(int row, int col) {
         gameBoard.clearSpace(x, y+1);
         drawTile(row, col + SQUARE_SIZE);
       }
-      //}
-      //
     }
   } else {
     if (place.flagged()) {
@@ -127,7 +96,6 @@ void drawTile(int row, int col) {
       square(row, col, SQUARE_SIZE);
     }
   }
-//}
 }
 
 void endScreen(boolean outcome) {
