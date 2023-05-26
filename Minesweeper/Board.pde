@@ -2,12 +2,30 @@ public class Board {
   Tile[][] gameBoard;
   int flagsPlaced, spacesCleared, mineCount;
 
-  public Board() {
+  public Board(int x, int y) {
     gameBoard = new Tile[16][16];
     flagsPlaced = 0;
     spacesCleared = 0;
     mineCount = 0;
+    randomlyClearArea(x,y,1.0);
     placeMines();
+    
+  }
+  
+  void randomlyClearArea(int x,int y, double recursion){
+    this.clearSpace(x,y);
+    if(Math.random() < recursion){
+      this.randomlyClearArea(x+1,y, recursion-0.2);
+    }
+    if(Math.random() < recursion){
+      this.randomlyClearArea(x,y+1, recursion-0.2);
+    }
+    if(Math.random() < recursion){
+      this.randomlyClearArea(x-1,y, recursion-0.2);
+    }
+    if(Math.random() < recursion){
+      this.randomlyClearArea(x,y+1, recursion-0.2);
+    }
   }
 
   void placeMines() {
