@@ -1,5 +1,5 @@
 private Board gameBoard;
-private int SQUARE_SIZE;
+private int SQUARE_SIZE, countdown;
 private boolean isGameOver;
 public boolean boardGeneratedYet;
 
@@ -8,6 +8,7 @@ void setup() {
   boardGeneratedYet = false;
   size(800, 800);
   SQUARE_SIZE = width/16;
+  countdown = 0;
   isGameOver = false;
   drawBoard();
 }
@@ -23,41 +24,37 @@ void drawBoard() {
 }
 
 void draw() {
-  if(boardGeneratedYet == false){
+  if (boardGeneratedYet == false) {
     if (mousePressed && (mouseButton == LEFT)) {
       gameBoard = new Board(mouseX / SQUARE_SIZE, mouseY / SQUARE_SIZE);
       boardGeneratedYet = true;
     }
-  }
-  else if (!isGameOver) {
-    if (mousePressed && (mouseButton == LEFT)) {
+  } else if (!isGameOver) {
+    if (countdown > 0)countdown--;
+    if (mousePressed) {
       int row = mouseX / SQUARE_SIZE;
       int col = mouseY / SQUARE_SIZE;
       int x = row*SQUARE_SIZE;
       int y = col*SQUARE_SIZE;
-      if (mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0) {
-        boolean gameOutcome = gameBoard.clearSpace(row, col);
-        if (gameBoard.done() || !gameOutcome) {
-          endScreen(gameOutcome);
+      if (mouseButton == LEFT) {
+        if (mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0) {
+          boolean gameOutcome = gameBoard.clearSpace(row, col);
+          if (gameOutcome) {
+            drawTile(x, y);
+          }
+          if (gameBoard.done() || !gameOutcome) {
+            endScreen(gameOutcome);
+          }
         }
-        if (gameOutcome) {
+      }
+      else if (mouseButton == RIGHT) {
+        if (mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0 && countdown == 0) {
+          gameBoard.placeFlag(row, col);
           drawTile(x, y);
+          countdown+=20;
         }
       }
     }
-
-    if (mousePressed && (mouseButton == RIGHT)) {
-      int row = mouseX / SQUARE_SIZE;
-      int col = mouseY / SQUARE_SIZE;
-      int x = row*SQUARE_SIZE;
-      int y = col*SQUARE_SIZE;
-      if (mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0) {
-        gameBoard.placeFlag(row, col);
-        drawTile(x, y);
-      }
-    }
-    //background(#BCBABA);
-    //drawBoard();
   }
 }
 
