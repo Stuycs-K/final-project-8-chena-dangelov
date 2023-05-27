@@ -98,12 +98,11 @@ void drawTile(int row, int col) {
   } else {
     if (place.flagged()) {
       fill(#000000);
-      //square(row, col, SQUARE_SIZE);
-      rect(row + 8, col + 45, SQUARE_SIZE - 16, SQUARE_SIZE - 45);
-      rect(row + 11, col + 40, SQUARE_SIZE - 22, SQUARE_SIZE - 45);
-      rect(row + 22, col + 10, SQUARE_SIZE - 45, SQUARE_SIZE - 20);
+      rect(row + (SQUARE_SIZE / 6), col + (SQUARE_SIZE - SQUARE_SIZE / 10), SQUARE_SIZE - 2 * (SQUARE_SIZE / 6), SQUARE_SIZE / 10);
+      rect(row + (SQUARE_SIZE / 4), col + (SQUARE_SIZE - SQUARE_SIZE / 5), SQUARE_SIZE - 2 * (SQUARE_SIZE / 4), SQUARE_SIZE / 10);
+      rect(row + (SQUARE_SIZE / 2) - (SQUARE_SIZE / 20), col + SQUARE_SIZE / 5, SQUARE_SIZE / 10, SQUARE_SIZE - 2 * (SQUARE_SIZE / 5));
       fill(#CE3636);
-      triangle(row + 22, col + 10, row + 22, col + 24, row + 45, col + 17);
+      triangle(row + (SQUARE_SIZE / 2) - (SQUARE_SIZE / 20), col + SQUARE_SIZE / 5, row + (SQUARE_SIZE / 2) - (SQUARE_SIZE / 20), col + 22, row + (SQUARE_SIZE - SQUARE_SIZE / 10), col + 17);
     } else {
       fill(#26C627);
       square(row, col, SQUARE_SIZE);
