@@ -51,7 +51,7 @@ void draw() {
         if (mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0 && countdown == 0) {
           gameBoard.placeFlag(row, col);
           drawTile(x, y);
-          countdown+=20;
+          countdown+=10;
         }
       }
     }
