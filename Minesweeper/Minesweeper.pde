@@ -1,5 +1,5 @@
 private Board gameBoard;
-private int SQUARE_SIZE;
+private int SQUARE_SIZE, countdown;
 private boolean isGameOver;
 public boolean boardGeneratedYet;
 
@@ -8,6 +8,7 @@ void setup() {
   boardGeneratedYet = false;
   size(800, 800);
   SQUARE_SIZE = width/16;
+  countdown = 0;
   isGameOver = false;
   drawBoard();
 }
@@ -30,6 +31,7 @@ void draw() {
     }
   }
   else if (!isGameOver) {
+    if(countdown > 0)countdown--;
     if (mousePressed && (mouseButton == LEFT)) {
       int row = mouseX / SQUARE_SIZE;
       int col = mouseY / SQUARE_SIZE;
@@ -51,9 +53,10 @@ void draw() {
       int col = mouseY / SQUARE_SIZE;
       int x = row*SQUARE_SIZE;
       int y = col*SQUARE_SIZE;
-      if (mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0) {
+      if (mouseX < 800 && mouseX >= 0 && mouseY < 800 && mouseY >= 0 && countdown == 0) {
         gameBoard.placeFlag(row, col);
         drawTile(x, y);
+        countdown+=20;
       }
     }
     //background(#BCBABA);
