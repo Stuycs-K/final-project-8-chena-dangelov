@@ -97,8 +97,13 @@ void drawTile(int row, int col) {
     }
   } else {
     if (place.flagged()) {
-      fill(#EA6050);
-      square(row, col, SQUARE_SIZE);
+      fill(#000000);
+      //square(row, col, SQUARE_SIZE);
+      rect(row + 8, col + 45, SQUARE_SIZE - 16, SQUARE_SIZE - 45);
+      rect(row + 11, col + 40, SQUARE_SIZE - 22, SQUARE_SIZE - 45);
+      rect(row + 22, col + 10, SQUARE_SIZE - 45, SQUARE_SIZE - 20);
+      fill(#CE3636);
+      triangle(row + 22, col + 10, row + 22, col + 24, row + 45, col + 17);
     } else {
       fill(#26C627);
       square(row, col, SQUARE_SIZE);
