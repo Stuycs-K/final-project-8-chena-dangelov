@@ -18,6 +18,12 @@ Today, my focus was to improve the methods that were made previously. In Board c
 
 Today, I made it my mission to get clearSpace() method to be recursive. I ran into some errors along the way, including stackoverflow errors, however I managed to do it ! But instead of having clearSpace() method be recursive, I had drawTile() be recursive so I can have the drawing of the cleared Tile + the clearing of the tile in one method. I managed to complete my mission and the project overall looks good. Most of the code is done and only a few more additions are needed. It'll only be a matter of time till we have a satisfactory completed product (mood == hopeful) !!
 
+### 5/26/23
+
+Today, my focus was to examine and improve previous methods. I first tested the game a few times and it seemed to be working great, as in playable. However, I did realize that the work I did yesterday was not the best. In short, when a player clears a empty space, all the nearby empty spaces should also be cleared and the bordering spaces that contain numbers. However, my code yesterday did not clear the bordering spaces that contain numbers. And so today I spent my time working to make that happen. The game is more than playable now and at the rate that we are going, we can get plenty much done (I hope) !
+
+### 5/27/23
+
 
 
 
