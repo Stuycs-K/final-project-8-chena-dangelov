@@ -1,5 +1,5 @@
 private Board gameBoard;
-private int SQUARE_SIZE, countdown;
+private int SQUARE_SIZE, countdown, timer;
 private boolean isGameOver;
 public boolean boardGeneratedYet;
 
@@ -9,6 +9,7 @@ void setup() {
   size(800, 900);
   SQUARE_SIZE = width/16;
   countdown = 0;
+  timer = 0;
   isGameOver = false;
   drawBoard();
 }
@@ -31,6 +32,16 @@ void draw() {
     }
   } else if (!isGameOver) {
     if (countdown > 0)countdown--;
+    if (frameCount % 60 == 0){
+      fill(#D3D3D3);
+      noStroke();
+      square(10,height-90,SQUARE_SIZE*4/5);
+      textSize(20);
+      fill(0);
+      text(""+timer,SQUARE_SIZE/2,height-75);
+      timer++;
+      stroke(0);
+    }
     if (mousePressed) {
       int row = mouseX / SQUARE_SIZE;
       int col = mouseY / SQUARE_SIZE;
@@ -114,7 +125,7 @@ void endScreen(boolean outcome) {
   textAlign(CENTER);
   fill(#FFFFFF);
   if (outcome) {
-    text("winner !", width/2, height/2);
+    text("winner !\ntime: "+timer, width/2, height/2);
   } else {
     text("loser !", width/2, height/2);
   }
