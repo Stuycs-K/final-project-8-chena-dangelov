@@ -6,7 +6,7 @@ public boolean boardGeneratedYet;
 void setup() {
   //gameBoard = new Board();
   boardGeneratedYet = false;
-  size(800, 800);
+  size(800, 900);
   SQUARE_SIZE = width/16;
   countdown = 0;
   isGameOver = false;
@@ -15,8 +15,8 @@ void setup() {
 
 void drawBoard() {
   stroke(0);
-  for (int row = 0; row < width; row+= SQUARE_SIZE) {
-    for (int col = 0; col < height; col += SQUARE_SIZE) {
+  for (int row = 0; row < width; row += SQUARE_SIZE) {
+    for (int col = 0; col < width; col += SQUARE_SIZE) {
       fill(#26C627);
       square(row, col, SQUARE_SIZE);
     }
