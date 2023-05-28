@@ -8,8 +8,6 @@ void setup() {
   boardGeneratedYet = false;
   size(800, 850);
   SQUARE_SIZE = width/16;
-  countdown = 0;
-  timer = 0;
   isGameOver = false;
   drawBoard();
 }
@@ -35,10 +33,10 @@ void draw() {
     if (frameCount % 60 == 0){
       fill(#cccccc);
       noStroke();
-      square(10,height-90,SQUARE_SIZE*4/5);
-      textSize(20);
+      rect(width/2-SQUARE_SIZE,5,SQUARE_SIZE*2,SQUARE_SIZE*4/5);
+      textSize(40);
       fill(0);
-      text(""+timer,SQUARE_SIZE/2,height-75);
+      text(""+timer,width/2,40);
       timer++;
       stroke(0);
     }
