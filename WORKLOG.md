@@ -52,3 +52,8 @@ Today I implemented the part of Minesweeper where the player clicks on the empty
 ### 5/27/23
 
 Today I fixed the issue that prevented flags from being reliably placed by adding a countdown/timer, which ensured that the program would only register the user's right clicks as single clicks. However, a strange, lingering issue with the flags is that sometimes a flag is placed when the player left clicks. I believe this is because mouseButton, a built-in feature in Processing, is sometimes RIGHT when it should be LEFT, but I am still unsure. I also added the timer at the bottom of the screen, which updates every second and is displayed when the viewer wins the game. There are some more aesthetic changes I'd like to make to the timer so I have not merged those changes yet.
+
+### 5/28/23
+
+Today I made some changes to the timer. Firstly, I moved the whole board down, leaving a narrow empty strip at the top that will eventually display other things like the high score. Then, I moved the timer to the center of this strip, where it currently lies. Also, I created a play again button that displays when the player loses a game. This button, when clicked, completely resets the simulation (i.e. setting the gameBoard variable to null, resetting the timer to 0). Right now, clicking this button is equivalent to simply quitting the simulation and restarting it, but eventually this will change when we create a high score variable. 
+
