@@ -25,8 +25,13 @@ void drawBoard() {
 void draw() {
   if (boardGeneratedYet == false) {
     if (mousePressed && (mouseButton == LEFT)) {
+      if(gameBoard == null){
       gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE); // adjustment
       boardGeneratedYet = true;
+      }
+      else{
+        
+      }
     }
   } else if (!isGameOver) {
     if (countdown > 0)countdown--;
@@ -127,4 +132,9 @@ void endScreen(boolean outcome) {
   } else {
     text("loser !", width/2, height/2);
   }
+  fill(#B9BCF7);
+  rect(width/2-SQUARE_SIZE,10,SQUARE_SIZE*2,SQUARE_SIZE);
+  textSize(23);
+  fill(0);
+  text("play again",width/2,40);
 }
