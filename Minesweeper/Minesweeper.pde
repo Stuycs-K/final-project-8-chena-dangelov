@@ -1,14 +1,12 @@
 private Board gameBoard;
 private int SQUARE_SIZE, countdown, timer;
 private boolean isGameOver;
-public boolean boardGeneratedYet;
 
 void setup() {
-  //gameBoard = new Board();
-  boardGeneratedYet = false;
+  isGameOver = true;
+  gameBoard = null;
   size(800, 850);
   SQUARE_SIZE = width/16;
-  isGameOver = false;
   drawBoard();
 }
 
@@ -23,25 +21,29 @@ void drawBoard() {
 }
 
 void draw() {
-  if (boardGeneratedYet == false) {
+  if (isGameOver) {
     if (mousePressed && (mouseButton == LEFT)) {
-      if(gameBoard == null){
-      gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE); // adjustment
-      boardGeneratedYet = true;
-      }
-      else{
-        
+      if (gameBoard == null && mouseY > 50) {
+        gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE); // adjustment
+        isGameOver = false;
+      } else {
+        if (mouseX >= width/2 - SQUARE_SIZE && mouseX <= width/2 + SQUARE_SIZE && mouseY >= 10 && mouseY < 10+SQUARE_SIZE) {
+          background(#cccccc);
+          drawBoard();
+          gameBoard = null;
+          timer = 0;
+        }
       }
     }
-  } else if (!isGameOver) {
+  } else {
     if (countdown > 0)countdown--;
-    if (frameCount % 60 == 0){
+    if (frameCount % 60 == 0 ) {
       fill(#cccccc);
       noStroke();
-      rect(width/2-SQUARE_SIZE,5,SQUARE_SIZE*2,SQUARE_SIZE*4/5);
+      rect(width/2-SQUARE_SIZE, 5, SQUARE_SIZE*2, SQUARE_SIZE*4/5);
       textSize(40);
       fill(0);
-      text(""+timer,width/2,40);
+      text(""+timer, width/2, 40);
       timer++;
       stroke(0);
     }
@@ -60,8 +62,7 @@ void draw() {
             endScreen(gameOutcome);
           }
         }
-      }
-      else if (mouseButton == RIGHT) {
+      } else if (mouseButton == RIGHT) {
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdown == 0) { // adjustment
           gameBoard.placeFlag(row, col);
           drawTile(x, y);
@@ -133,8 +134,8 @@ void endScreen(boolean outcome) {
     text("loser !", width/2, height/2);
   }
   fill(#B9BCF7);
-  rect(width/2-SQUARE_SIZE,10,SQUARE_SIZE*2,SQUARE_SIZE);
+  rect(width/2-SQUARE_SIZE, 10, SQUARE_SIZE*2, SQUARE_SIZE);
   textSize(23);
   fill(0);
-  text("play again",width/2,40);
+  text("play again", width/2, 40);
 }
