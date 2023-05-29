@@ -1,5 +1,5 @@
 private Board gameBoard;
-private int SQUARE_SIZE, countdown, timer;
+private int SQUARE_SIZE, countdown, timer, highscore;
 private boolean isGameOver;
 
 void setup() {
@@ -7,10 +7,16 @@ void setup() {
   gameBoard = null;
   size(800, 850);
   SQUARE_SIZE = width/16;
+  highscore = 0;
   drawBoard();
 }
 
 void drawBoard() {
+  noStroke();
+      rect(width/2-SQUARE_SIZE, 5, SQUARE_SIZE*2, SQUARE_SIZE*4/5);
+      textSize(40);
+      fill(0);
+      text("High score : "+highscore, width/2, 40);
   stroke(0);
   for (int row = 0; row < width; row += SQUARE_SIZE) {
     for (int col = 50; col < height; col += SQUARE_SIZE) { // adjustment
