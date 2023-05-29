@@ -1,5 +1,5 @@
 private Board gameBoard;
-private int SQUARE_SIZE, countdown, timer, highscore;
+private int SQUARE_SIZE, countdown, timer, bestTime;
 private boolean isGameOver;
 
 void setup() {
@@ -7,17 +7,21 @@ void setup() {
   gameBoard = null;
   size(800, 850);
   SQUARE_SIZE = width/16;
-  highscore = 0;
+  bestTime = -1;
   drawBoard();
 }
 
 void drawBoard() {
   noStroke();
   textAlign(LEFT);
-  //rect(SQUARE_SIZE, 5, SQUARE_SIZE*2, SQUARE_SIZE*4/5);
   textSize(40);
   fill(0);
-  text("High score : "+highscore, SQUARE_SIZE, 40);
+  if(bestTime == -1){
+    text("Best Time : --", SQUARE_SIZE, 40);
+  }
+  else{
+    text("Best Time : "+bestTime, SQUARE_SIZE, 40);
+  }
   stroke(0);
   for (int row = 0; row < width; row += SQUARE_SIZE) {
     for (int col = 50; col < height; col += SQUARE_SIZE) { // adjustment
@@ -66,6 +70,12 @@ void draw() {
             drawTile(x, y);
           }
           if (gameBoard.done() || !gameOutcome) {
+            if(bestTime == -1){
+              bestTime = timer;
+            }
+            else if (timer < bestTime){
+              bestTime = timer;
+            }
             endScreen(gameOutcome);
           }
         }
