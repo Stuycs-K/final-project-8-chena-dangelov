@@ -24,6 +24,12 @@ Today, my focus was to examine and improve previous methods. I first tested the 
 
 ### 5/27/23
 
+Today I did not do as much as I had hoped. I created a new design for flags for the game and had it implemented. Other than that, there was not much progress being made today for me.
+
+### 5/28/23
+
+Today I took more of a perspective role. In terms of code, I had nothing written today but rather I looked over what was already written and made sure everything was running as it should. A few of the changes I'd like to make are a bigger play again button and a high score setting (all of which I will do tomorrow). On top of this, I hope I can implement multiple diffculties soon.
+
 
 
 
