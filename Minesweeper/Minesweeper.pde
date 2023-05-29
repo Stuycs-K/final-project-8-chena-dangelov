@@ -16,10 +16,9 @@ void drawBoard() {
   textAlign(LEFT);
   textSize(40);
   fill(0);
-  if(bestTime == -1){
+  if (bestTime == -1) {
     text("Best Time : --", SQUARE_SIZE, 40);
-  }
-  else{
+  } else {
     text("Best Time : "+bestTime, SQUARE_SIZE, 40);
   }
   stroke(0);
@@ -70,11 +69,13 @@ void draw() {
             drawTile(x, y);
           }
           if (gameBoard.done() || !gameOutcome) {
-            if(bestTime == -1){
-              bestTime = timer;
-            }
-            else if (timer < bestTime){
-              bestTime = timer;
+            if (gameOutcome) {
+
+              if (bestTime == -1) {
+                bestTime = timer;
+              } else if (timer < bestTime) {
+                bestTime = timer;
+              }
             }
             endScreen(gameOutcome);
           }
