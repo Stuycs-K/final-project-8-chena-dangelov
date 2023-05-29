@@ -144,7 +144,7 @@ void endScreen(boolean outcome) {
   isGameOver = true;
   textSize(127);
   background(0);
-  textAlign(CENTER);
+  textAlign(CENTER, CENTER);
   fill(#FFFFFF);
   if (outcome) {
     text("winner !\ntime: "+timer, width/2, height/2);
@@ -155,5 +155,5 @@ void endScreen(boolean outcome) {
   rect(width/2-3*SQUARE_SIZE/2, 10, SQUARE_SIZE*3, SQUARE_SIZE);
   textSize(23);
   fill(0);
-  text("play again", width/2, 40);
+  text("play again", width/2, 30);
 }
