@@ -27,7 +27,7 @@ void draw() {
         gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE); // adjustment
         isGameOver = false;
       } else {
-        if (mouseX >= width/2 - SQUARE_SIZE && mouseX <= width/2 + SQUARE_SIZE && mouseY >= 10 && mouseY < 10+SQUARE_SIZE) {
+        if (mouseX >= width/2 - 3*SQUARE_SIZE/2 && mouseX <= width/2 + 3*SQUARE_SIZE/2 && mouseY >= 10 && mouseY < 10+SQUARE_SIZE) {
           background(#cccccc);
           drawBoard();
           gameBoard = null;
@@ -134,7 +134,7 @@ void endScreen(boolean outcome) {
     text("loser !", width/2, height/2);
   }
   fill(#B9BCF7);
-  rect(width/2-SQUARE_SIZE, 10, SQUARE_SIZE*2, SQUARE_SIZE);
+  rect(width/2-3*SQUARE_SIZE/2, 10, SQUARE_SIZE*3, SQUARE_SIZE);
   textSize(23);
   fill(0);
   text("play again", width/2, 40);
