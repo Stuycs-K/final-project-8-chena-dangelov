@@ -24,7 +24,7 @@ Today, my focus was to examine and improve previous methods. I first tested the 
 
 ### 5/27/23
 
-Today I did not do as much as I had hoped. I created a new design for flags for the game and had it implemented. Other than that, there was not much progress being made today for me.
+Today, my work involved entirely of flags. Something that had always bothered me was the flag design and today, I gave myself the opportunity to give flags in our game a makeover. I examined the design of the flag in other minesweeper games, and settled on one that in my opinion is rather classic. The new flag design looks really cool and in my opinion, it drastically boosts user experience. 
 
 ### 5/28/23
 
