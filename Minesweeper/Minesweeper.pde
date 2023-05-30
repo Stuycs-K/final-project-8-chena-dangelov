@@ -184,6 +184,7 @@ void drawTile(int row, int col) {
 void endScreen(boolean outcome) {
   isGameOver = true;
   textSize(30);
+  fill(0);
   rect(0,0,width,50);
   textAlign(CENTER, CENTER);
   fill(#FFFFFF);
@@ -211,7 +212,16 @@ void endScreen(boolean outcome) {
 void keyPressed(){
   if(!isGameOver){
     if(key == 'w'){
-      println("yes");
+      for(int i = 0; i < gameBoard.gameBoard.length; i++){
+        for(int j = 0; j < gameBoard.gameBoard[0].length; j++){
+          Tile t = gameBoard.gameBoard[i][j];
+          if(!t.isMine() && !t.cleared()){
+            if(t.flagged())t.setFlagged(false);
+            t.toClear();
+          }
+        }
+      }
+      endScreen(true);
     }
   }
 }
