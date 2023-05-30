@@ -190,6 +190,15 @@ void endScreen(boolean outcome) {
     text("winner !\ntime: "+timer, width/4, 20);
   } else {
     text("loser !", width/4, 20);
+    textSize(15);
+    //for(int i = 0; i < gameBoard.gameBoard.length; i++){
+    //  for(int j = 0; j < gameBoard.gameBoard[0].length; j++){
+    //    Tile t = gameBoard.gameBoard[i][j];
+    //    if(t.isMine() && !t.flagged()){
+    //      text("mine",(i*SQUARE_SIZE)+SQUARE_SIZE/2,(j*SQUARE_SIZE)+SQUARE_SIZE*0.8+50); // adjustment
+    //    }
+    //  }
+    //}
   }
   fill(#B9BCF7);
   rect(width/2-3*SQUARE_SIZE/2, 0, SQUARE_SIZE*3, SQUARE_SIZE);
