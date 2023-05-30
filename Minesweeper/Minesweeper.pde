@@ -195,11 +195,12 @@ void endScreen(boolean outcome) {
   } else {
     text("loser !", width/4, 20);
     textSize(15);
+    fill(0);
     for (int i = 0; i < gameBoard.gameBoard.length; i++) {
       for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {
         Tile t = gameBoard.gameBoard[i][j];
         if (t.isMine() && !t.flagged()) {
-          text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE*0.8+50); // adjustment
+          circle((i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+50+SQUARE_SIZE/2, SQUARE_SIZE*.6); // adjustment
         }
       }
     }
