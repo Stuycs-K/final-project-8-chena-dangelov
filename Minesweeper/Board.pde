@@ -30,7 +30,6 @@ public class Board {
   }
 
 
-
   void placeMines() {
     while (mineCount < 40) {
       int x = (int)(Math.random() * gameBoard.length);
