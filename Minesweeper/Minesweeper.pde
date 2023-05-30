@@ -185,7 +185,7 @@ void endScreen(boolean outcome) {
   isGameOver = true;
   textSize(30);
   fill(0);
-  rect(0,0,width,50);
+  rect(0, 0, width, 50);
   textAlign(CENTER, CENTER);
   fill(#FFFFFF);
   if (outcome) {
@@ -193,11 +193,11 @@ void endScreen(boolean outcome) {
   } else {
     text("loser !", width/4, 20);
     textSize(15);
-    for(int i = 0; i < gameBoard.gameBoard.length; i++){
-      for(int j = 0; j < gameBoard.gameBoard[0].length; j++){
+    for (int i = 0; i < gameBoard.gameBoard.length; i++) {
+      for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {
         Tile t = gameBoard.gameBoard[i][j];
-        if(t.isMine() && !t.flagged()){
-          text("mine",(i*SQUARE_SIZE)+SQUARE_SIZE/2,(j*SQUARE_SIZE)+SQUARE_SIZE*0.8+50); // adjustment
+        if (t.isMine() && !t.flagged()) {
+          text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE*0.8+50); // adjustment
         }
       }
     }
@@ -209,17 +209,23 @@ void endScreen(boolean outcome) {
   text("play again", width/2, SQUARE_SIZE/2-SQUARE_SIZE/8);
 }
 
-void keyPressed(){
-  if(!isGameOver){
-    if(key == 'w'){
-      for(int i = 0; i < gameBoard.gameBoard.length; i++){
-        for(int j = 0; j < gameBoard.gameBoard[0].length; j++){
+void keyPressed() {
+  if (!isGameOver) {
+    if (key == 'w') {
+      for (int i = 0; i < gameBoard.gameBoard.length; i++) {
+        for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {
           Tile t = gameBoard.gameBoard[i][j];
-          if(!t.isMine() && !t.cleared()){
-            if(t.flagged())t.setFlagged(false);
+          if (!t.isMine() && !t.cleared()) {
+            if (t.flagged())t.setFlagged(false);
             t.toClear();
+            drawTile(i*SQUARE_SIZE, j*SQUARE_SIZE+50);
           }
         }
+      }
+      if (bestTime == -1) {
+        bestTime = timer;
+      } else if (timer < bestTime) {
+        bestTime = timer;
       }
       endScreen(true);
     }
