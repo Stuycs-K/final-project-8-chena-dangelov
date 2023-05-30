@@ -6,13 +6,16 @@ void setup() {
   isGameOver = true;
   gameBoard = null;
   size(800, 850);
+  // SQUARE_SIZE changes depending on difficulty (implemented later)
   SQUARE_SIZE = width/16;
   bestTime = -1;
   drawBoard();
 }
 
 void drawBoard() {
-  noStroke();
+  //noStroke();
+  
+  // best time settings
   textAlign(LEFT);
   textSize(40);
   fill(0);
@@ -21,7 +24,8 @@ void drawBoard() {
   } else {
     text("Best Time : "+bestTime, SQUARE_SIZE, 40);
   }
-  stroke(0);
+  
+  //stroke(0);
   for (int row = 0; row < width; row += SQUARE_SIZE) {
     for (int col = 50; col < height; col += SQUARE_SIZE) { // adjustment
       fill(#26C627);
@@ -33,10 +37,15 @@ void drawBoard() {
 void draw() {
   if (isGameOver) {
     if (mousePressed && (mouseButton == LEFT)) {
+      
+      // game one
       if (gameBoard == null && mouseY > 50) {
         gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE); // adjustment
         isGameOver = false;
-      } else {
+      } 
+      
+      // game n, n is an integer other than one
+      else {
         if (mouseX >= width/2 - 3*SQUARE_SIZE/2 && mouseX <= width/2 + 3*SQUARE_SIZE/2 && mouseY >= 10 && mouseY < 10+SQUARE_SIZE) {
           background(#cccccc);
           drawBoard();
@@ -44,39 +53,52 @@ void draw() {
           timer = 0;
         }
       }
+      
     }
   } else {
+    
+    // countdown used as a timer for clicks (placing flags, clearing spaces, etc.)
     if (countdown > 0)countdown--;
+    
+    // timer
     if (frameCount % 60 == 0 ) {
       fill(#cccccc);
       noStroke();
       rect(width/2-SQUARE_SIZE, 5, SQUARE_SIZE*2, SQUARE_SIZE*4/5);
       textSize(40);
       fill(0);
-      text(""+timer, width/2, 40);
+      text(timer, width/2, 40);
       timer++;
-      stroke(0);
+      //stroke(0);
     }
+    
     if (mousePressed) {
       int row = mouseX / SQUARE_SIZE;
       int col = (mouseY-50) / SQUARE_SIZE; // adjustment
       int x = row*SQUARE_SIZE;
       int y = col*SQUARE_SIZE+50; // adjustment
       if (mouseButton == LEFT) {
+        
+        // this condition prevents index out of bounds errors
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50) { // adjustment
           boolean gameOutcome = gameBoard.clearSpace(row, col);
           if (gameOutcome) {
             drawTile(x, y);
           }
+          
+          // the game ends when either the game is complete or a player clears a mine (gameOutcome == false)
           if (gameBoard.done() || !gameOutcome) {
+            
+            // if the player wins the game, a bestTime is calculated
             if (gameOutcome) {
-
               if (bestTime == -1) {
                 bestTime = timer;
               } else if (timer < bestTime) {
                 bestTime = timer;
               }
             }
+            
+            // this part of the code will be changed to have the gameOutcome appear on the top heading instead
             endScreen(gameOutcome);
           }
         }
