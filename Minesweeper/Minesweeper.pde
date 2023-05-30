@@ -1,6 +1,7 @@
 private Board gameBoard;
 private int SQUARE_SIZE, countdown, timer, bestTime;
 private boolean isGameOver;
+private final color[] colors = {#363AE8,#107109,#E0194E,#C640C0,#363AE8,#67F9FF,#B7BEBF,#FA9223};
 
 void setup() {
   isGameOver = true;
@@ -10,6 +11,7 @@ void setup() {
   SQUARE_SIZE = width/16;
   bestTime = -1;
   drawBoard();
+  print(colors[0]);
 }
 
 void drawBoard() {
@@ -131,7 +133,7 @@ void drawTile(int row, int col) {
     textSize(SQUARE_SIZE / (6/5));
     textAlign(CENTER);
     if (t.getSurrounding() != 0) {
-      fill(0);
+      fill(colors[t.getSurrounding() - 1]);
       text(t.getSurrounding(), row + SQUARE_SIZE * 0.5, col + SQUARE_SIZE * 0.8);
     }
 
