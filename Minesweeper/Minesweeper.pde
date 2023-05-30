@@ -1,5 +1,6 @@
 private Board gameBoard;
 private int SQUARE_SIZE, countdown, timer, bestTime;
+private String difficulty;
 private boolean isGameOver;
 
 void setup() {
@@ -32,6 +33,10 @@ void drawBoard() {
       square(row, col, SQUARE_SIZE);
     }
   }
+}
+
+void changeDifficulty(String d){
+  difficulty = d;
 }
 
 void draw() {
