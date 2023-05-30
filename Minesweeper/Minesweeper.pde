@@ -182,14 +182,15 @@ void drawTile(int row, int col) {
 // endScreen method is temporarily. a loser / winner display on the heading will be implemented in the future
 void endScreen(boolean outcome) {
   isGameOver = true;
-  textSize(127);
-  background(0);
+  textSize(30);
+  //background(0);
+  rect(0,0,width,50);
   textAlign(CENTER, CENTER);
   fill(#FFFFFF);
   if (outcome) {
-    text("winner !\ntime: "+timer, width/2, height/2);
+    text("winner !\ntime: "+timer, width/4, 20);
   } else {
-    text("loser !", width/2, height/2);
+    text("loser !", width/4, 20);
   }
   fill(#B9BCF7);
   rect(width/2-3*SQUARE_SIZE/2, 10, SQUARE_SIZE*3, SQUARE_SIZE);
