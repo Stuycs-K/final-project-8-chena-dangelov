@@ -39,14 +39,14 @@ void draw() {
     if (mousePressed && (mouseButton == LEFT)) {
 
       // game one
-      if (gameBoard == null && mouseY > 50) {
+      if (gameBoard == null) {
         gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE); // adjustment
         isGameOver = false;
       }
 
       // game n, n is an integer other than one
       else {
-        if (mouseX >= width/2 - 3*SQUARE_SIZE/2 && mouseX <= width/2 + 3*SQUARE_SIZE/2 && mouseY >= 10 && mouseY < 10+SQUARE_SIZE) {
+        if (mouseX >= width/2 - 3*SQUARE_SIZE/2 && mouseX <= width/2 + 3*SQUARE_SIZE/2 && mouseY >= 0 && mouseY < SQUARE_SIZE) {
           background(#cccccc);
           drawBoard();
           gameBoard = null;
@@ -183,7 +183,6 @@ void drawTile(int row, int col) {
 void endScreen(boolean outcome) {
   isGameOver = true;
   textSize(30);
-  //background(0);
   rect(0,0,width,50);
   textAlign(CENTER, CENTER);
   fill(#FFFFFF);
@@ -193,8 +192,8 @@ void endScreen(boolean outcome) {
     text("loser !", width/4, 20);
   }
   fill(#B9BCF7);
-  rect(width/2-3*SQUARE_SIZE/2, 10, SQUARE_SIZE*3, SQUARE_SIZE);
+  rect(width/2-3*SQUARE_SIZE/2, 0, SQUARE_SIZE*3, SQUARE_SIZE);
   textSize(23);
   fill(0);
-  text("play again", width/2, 30);
+  text("play again", width/2, SQUARE_SIZE/2-SQUARE_SIZE/8);
 }
