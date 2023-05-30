@@ -30,6 +30,10 @@ Today I did not do as much as I had hoped. I created a new design for flags for 
 
 Today I took more of a perspective role. In terms of code, I had nothing written today but rather I looked over what was already written and made sure everything was running as it should. A few of the changes I'd like to make are a bigger play again button and a high score setting (all of which I will do tomorrow). On top of this, I hope I can implement multiple diffculties soon.
 
+### 5/29/23
+
+Today I met the goals that I had set for myself yesterday. These goals included creating a bigger play again button and a high score setting. Moreover, I hoped to implement multiple difficulties soon. And in light of that, I added comments to every single class to help make the process easier. On top of that, in some of my comments, I talked about ways the program can be improved and possible alternatives to certain things that we have done. In addition, I also talked about errors that we have been seeing in our program. I hope that these comments can make the problems that we have much clearer and allow us to better make improvements. And last but not least, while looking through the code, I cleaned up some of the existing code. 
+
 
 
 
