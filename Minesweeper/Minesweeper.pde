@@ -65,7 +65,7 @@ void draw() {
 
       // game one
       if (gameBoard == null && mouseY > 50) {
-        gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE); // adjustment
+        gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE); // adjustment
         isGameOver = false;
       }
 

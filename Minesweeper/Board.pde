@@ -2,8 +2,8 @@ public class Board {
   Tile[][] gameBoard;
   int flagsPlaced, spacesCleared, mineCount;
 
-  public Board(int x, int y) {
-    gameBoard = new Tile[16][16];
+  public Board(int x, int y, int size) {
+    gameBoard = new Tile[size][size];
     flagsPlaced = 0;
     spacesCleared = 0;
     mineCount = 0;
