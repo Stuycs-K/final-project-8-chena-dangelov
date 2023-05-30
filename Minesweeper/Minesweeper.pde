@@ -24,6 +24,7 @@ void drawBoard() {
   } else {
     text("Best Time : "+bestTime, SQUARE_SIZE, 40);
   }
+  fill(#B9BCF7);
 
   stroke(0);
   for (int row = 0; row < width; row += SQUARE_SIZE) {
@@ -205,4 +206,12 @@ void endScreen(boolean outcome) {
   textSize(23);
   fill(0);
   text("play again", width/2, SQUARE_SIZE/2-SQUARE_SIZE/8);
+}
+
+void keyPressed(){
+  if(!isGameOver){
+    if(key == 'w'){
+      println("yes");
+    }
+  }
 }
