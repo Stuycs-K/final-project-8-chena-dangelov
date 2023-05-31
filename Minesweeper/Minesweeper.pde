@@ -261,18 +261,18 @@ void drawTile(int row, int col) {
   }
 }
 
-// endScreen method is temporarily. a loser / winner display on the heading will be implemented in the future
 void endScreen(boolean outcome) {
   isGameOver = true;
-  textSize(30);
+  textSize(40);
   fill(0);
   rect(0, 0, width, 50);
-  textAlign(CENTER, CENTER);
+  textAlign(CENTER);
   fill(#FFFFFF);
   if (outcome) {
-    text("winner ! time: "+timer, width/4, 20);
+    text("time : "+timer, 50, 40);
+    text("winner !", 200, 20);
   } else {
-    text("loser !", width/4, 20);
+    text("loser !", 200, 40);
     textSize(15);
     for (int i = 0; i < gameBoard.gameBoard.length; i++) {
       for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {
@@ -286,11 +286,13 @@ void endScreen(boolean outcome) {
       }
     }
   }
+  
+  textAlign(CENTER);
   fill(#B9BCF7);
   rect(width/2-75, 0, 150, 50);
-  textSize(25);
+  textSize(30);
   fill(0);
-  text("play again", width/2, 20);
+  text("play again", width/2, 35);
 }
 
 void keyPressed() {
