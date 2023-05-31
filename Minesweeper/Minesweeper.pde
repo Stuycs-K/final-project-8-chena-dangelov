@@ -46,23 +46,29 @@ void changeDifficulty(String d) {
 void draw() {
   if (isGameOver) {
 
-    if (keyPressed) {
-      if (key == 'e') {
-        changeDifficulty("easy");
-        SQUARE_SIZE = width/8;
-        drawBoard();
+    
+
+      if (keyPressed) {
+        if (key == 'e') {
+          changeDifficulty("easy");
+          SQUARE_SIZE = width/8;
+          drawBoard();
+          gameBoard = null;
+        }
+        if (key == 'm') {
+          changeDifficulty("medium");
+          SQUARE_SIZE = width/16;
+          drawBoard();
+          gameBoard = null;
+        }
+        if (key == 'h') {
+          changeDifficulty("hard");
+          SQUARE_SIZE = width/20;
+          drawBoard();
+          gameBoard = null;
+        }
       }
-      if (key == 'm') {
-        changeDifficulty("medium");
-        SQUARE_SIZE = width/16;
-        drawBoard();
-      }
-      if (key == 'h') {
-        changeDifficulty("hard");
-        SQUARE_SIZE = width/20;
-        drawBoard();
-      }
-    }
+    
 
     if (mousePressed && (mouseButton == LEFT)) {
 
