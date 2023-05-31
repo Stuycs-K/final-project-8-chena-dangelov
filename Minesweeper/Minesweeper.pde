@@ -30,6 +30,13 @@ void drawBoard() {
   }
   fill(#B9BCF7);
 
+  fill(#76D85C);
+  rect(640, 5, 40, 40);
+  fill(#EFF063);
+  rect(680, 5, 40, 40);
+  fill(#F75339);
+  rect(720, 5, 40, 40);
+
   stroke(0);
   for (int row = 0; row < width; row += SQUARE_SIZE) {
     for (int col = 50; col < height; col += SQUARE_SIZE) { // adjustment
@@ -44,31 +51,58 @@ void changeDifficulty(String d) {
 }
 
 void draw() {
+
+  if (mousePressed && mouseButton == LEFT && mouseY >= 5 && mouseY <= 45) {
+    if (mouseX >= 640 && mouseX <= 680) {
+      changeDifficulty("easy");
+      SQUARE_SIZE = width/8;
+      drawBoard();
+      gameBoard = null;
+    }
+    if (mouseX >= 680 && mouseX <= 720) {
+      changeDifficulty("medium");
+      SQUARE_SIZE = width/16;
+      drawBoard();
+      gameBoard = null;
+    }
+    if (mouseX >= 720 && mouseX <= 760) {
+      changeDifficulty("hard");
+      SQUARE_SIZE = width/20;
+      drawBoard();
+      gameBoard = null;
+    }
+  }
+
+
+
+
+
+
   if (isGameOver) {
 
-    
 
-      if (keyPressed) {
-        if (key == 'e') {
-          changeDifficulty("easy");
-          SQUARE_SIZE = width/8;
-          drawBoard();
-          gameBoard = null;
-        }
-        if (key == 'm') {
-          changeDifficulty("medium");
-          SQUARE_SIZE = width/16;
-          drawBoard();
-          gameBoard = null;
-        }
-        if (key == 'h') {
-          changeDifficulty("hard");
-          SQUARE_SIZE = width/20;
-          drawBoard();
-          gameBoard = null;
-        }
+
+    if (keyPressed) {
+      if (key == 'e') {
+        changeDifficulty("easy");
+        SQUARE_SIZE = width/8;
+        drawBoard();
+        gameBoard = null;
       }
-    
+      if (key == 'm') {
+        changeDifficulty("medium");
+        SQUARE_SIZE = width/16;
+        drawBoard();
+        gameBoard = null;
+      }
+      if (key == 'h') {
+        changeDifficulty("hard");
+        SQUARE_SIZE = width/20;
+        drawBoard();
+        gameBoard = null;
+      }
+    }
+
 
     if (mousePressed && (mouseButton == LEFT)) {
 
