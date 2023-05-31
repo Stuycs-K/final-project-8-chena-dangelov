@@ -88,7 +88,8 @@ void draw() {
     if (frameCount % 60 == 0 ) {
       fill(#cccccc);
       noStroke();
-      rect(width/2-SQUARE_SIZE, 5, SQUARE_SIZE*2, SQUARE_SIZE*4/5);
+      //rect(width/2-SQUARE_SIZE, 5, SQUARE_SIZE*2, SQUARE_SIZE*4/5);
+      rect(width/2-50, 5, 100, 40);
       textSize(40);
       fill(0);
       text(timer, width/2, 40);
