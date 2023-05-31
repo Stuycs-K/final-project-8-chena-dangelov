@@ -5,13 +5,12 @@ private boolean isGameOver;
 private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67F9FF, #B7BEBF, #FA9223};
 
 void setup() {
+  size(800, 850);
   isGameOver = true;
   gameBoard = null;
-  size(800, 850);
-  // SQUARE_SIZE changes depending on difficulty (implemented later)
+  difficulty = "medium";
   SQUARE_SIZE = width/16;
   bestTime = -1;
-  difficulty = "medium";
   drawBoard();
 }
 
@@ -27,8 +26,10 @@ void drawBoard() {
   } else {
     text("Best Time : "+bestTime, 50, 40);
   }
-  fill(#B9BCF7);
+  // is this code necessary
+  //fill(#B9BCF7g);
 
+  // difficulty settings
   textSize(40);
   fill(0);
   textAlign(LEFT);
@@ -39,8 +40,6 @@ void drawBoard() {
   rect(680, 5, 40, 40);
   fill(#F75339);
   rect(720, 5, 40, 40);
-
-
   fill(0);
   textAlign(CENTER);
   if (difficulty.equals("easy")) {
@@ -51,21 +50,24 @@ void drawBoard() {
     text("X", 740, 40);
   }
 
+  // board drawing
   stroke(0);
   for (int row = 0; row < width; row += SQUARE_SIZE) {
-    for (int col = 50; col < height; col += SQUARE_SIZE) { // adjustment
+    for (int col = 50; col < height; col += SQUARE_SIZE) {
       fill(#26C627);
       square(row, col, SQUARE_SIZE);
     }
   }
 }
 
+// helper method to modify difficulty
 void changeDifficulty(String d) {
   difficulty = d;
 }
 
 void draw() {
-
+  
+  // difficulty change
   if (mousePressed && mouseButton == LEFT && mouseY >= 5 && mouseY <= 45) {
     if (mouseX >= 640 && mouseX <= 680) {
       changeDifficulty("easy");
@@ -92,17 +94,11 @@ void draw() {
       timer = 0;
     }
   }
-
-
-
-
-
-
+  
+  
   if (isGameOver) {
-
-
     if (mousePressed && (mouseButton == LEFT)) {
-
+      
       // game one
       if (gameBoard == null && mouseY > 50) {
         gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE); // adjustment
@@ -128,7 +124,6 @@ void draw() {
     if (frameCount % 60 == 0 ) {
       fill(#cccccc);
       noStroke();
-      //rect(width/2-SQUARE_SIZE, 5, SQUARE_SIZE*2, SQUARE_SIZE*4/5);
       rect(width/2-50, 5, 100, 40);
       textSize(40);
       fill(0);
@@ -165,7 +160,6 @@ void draw() {
               }
             }
 
-            // this part of the code will be changed to have the gameOutcome appear on the top heading instead
             endScreen(gameOutcome);
           }
         }
@@ -175,7 +169,6 @@ void draw() {
       else if (mouseButton == RIGHT) {
 
         // this condition prevents index out of bounds error and checks countdown
-        // NOTE : there is an error related to placing flags
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdown == 0) { // adjustment
           gameBoard.placeFlag(row, col);
           drawTile(x, y);
@@ -243,7 +236,6 @@ void drawTile(int row, int col) {
   else {
 
     // if the space was flagged, a flag is drawn
-    // Note : a helper method for this might be created in the future
     if (t.flagged()) {
       fill(#000000);
       rect(row + (SQUARE_SIZE / 6), col + (SQUARE_SIZE - SQUARE_SIZE / 10), SQUARE_SIZE - 2 * (SQUARE_SIZE / 6), SQUARE_SIZE / 10);
