@@ -31,7 +31,7 @@ public class Board {
 
 
   void placeMines() {
-    while (mineCount < gameBoard.length * gameBoard[0].length * 0.16) {
+    while (mineCount <= gameBoard.length * gameBoard[0].length * 0.16) {
       int x = (int)(Math.random() * gameBoard.length);
       int y = (int)(Math.random() * gameBoard[0].length);
       if (!gameBoard[x][y].getDefaultCleared()) {

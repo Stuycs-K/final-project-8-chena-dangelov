@@ -71,7 +71,7 @@ void draw() {
 
       // game n, n is an integer other than one
       else {
-        if (mouseX >= width/2 - 3*SQUARE_SIZE/2 && mouseX <= width/2 + 3*SQUARE_SIZE/2 && mouseY >= 0 && mouseY < SQUARE_SIZE) {
+        if (mouseX >= width/2 - 75 && mouseX <= width/2 + 75 && mouseY >= 0 && mouseY < 50) {
           background(#cccccc);
           drawBoard();
           gameBoard = null;
@@ -227,8 +227,8 @@ void endScreen(boolean outcome) {
     }
   }
   fill(#B9BCF7);
-  rect(width/2-3*SQUARE_SIZE/2, 0, SQUARE_SIZE*3, SQUARE_SIZE);
-  textSize(23);
+  rect(width/2-75, 0, 150, 50);
+  textSize(25);
   fill(0);
-  text("play again", width/2, SQUARE_SIZE/2-SQUARE_SIZE/8);
+  text("play again", width/2, 20);
 }
