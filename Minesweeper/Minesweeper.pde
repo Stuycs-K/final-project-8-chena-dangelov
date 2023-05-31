@@ -11,6 +11,7 @@ void setup() {
   // SQUARE_SIZE changes depending on difficulty (implemented later)
   SQUARE_SIZE = width/16;
   bestTime = -1;
+  difficulty = "medium";
   drawBoard();
   print(colors[0]);
 }
@@ -24,18 +25,35 @@ void drawBoard() {
   textSize(40);
   fill(0);
   if (bestTime == -1) {
-    text("Best Time : --", SQUARE_SIZE, 40);
+    text("Best Time : --", 50, 40);
   } else {
-    text("Best Time : "+bestTime, SQUARE_SIZE, 40);
+    text("Best Time : "+bestTime, 50, 40);
   }
   fill(#B9BCF7);
-
+  
+  textSize(40);
+  fill(0);
+  textAlign(LEFT);
+  text("Difficulty : ", 465, 40);
   fill(#76D85C);
   rect(640, 5, 40, 40);
   fill(#EFF063);
   rect(680, 5, 40, 40);
   fill(#F75339);
   rect(720, 5, 40, 40);
+  
+  
+  fill(0);
+  textAlign(CENTER);
+  if(difficulty.equals("easy")){
+    text("X", 660, 40);
+  }
+  else if(difficulty.equals("medium")){
+    text("X", 700, 40);
+  }
+  else if(difficulty.equals("hard")){
+    text("X", 740, 40);
+  }
 
   stroke(0);
   for (int row = 0; row < width; row += SQUARE_SIZE) {
