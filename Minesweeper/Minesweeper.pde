@@ -58,18 +58,21 @@ void draw() {
       SQUARE_SIZE = width/8;
       drawBoard();
       gameBoard = null;
+      isGameOver = true;
     }
     if (mouseX >= 680 && mouseX <= 720) {
       changeDifficulty("medium");
       SQUARE_SIZE = width/16;
       drawBoard();
       gameBoard = null;
+      isGameOver = true;
     }
     if (mouseX >= 720 && mouseX <= 760) {
       changeDifficulty("hard");
       SQUARE_SIZE = width/20;
       drawBoard();
       gameBoard = null;
+      isGameOver = true;
     }
   }
 
@@ -79,29 +82,6 @@ void draw() {
 
 
   if (isGameOver) {
-
-
-
-    if (keyPressed) {
-      if (key == 'e') {
-        changeDifficulty("easy");
-        SQUARE_SIZE = width/8;
-        drawBoard();
-        gameBoard = null;
-      }
-      if (key == 'm') {
-        changeDifficulty("medium");
-        SQUARE_SIZE = width/16;
-        drawBoard();
-        gameBoard = null;
-      }
-      if (key == 'h') {
-        changeDifficulty("hard");
-        SQUARE_SIZE = width/20;
-        drawBoard();
-        gameBoard = null;
-      }
-    }
 
 
     if (mousePressed && (mouseButton == LEFT)) {
@@ -252,10 +232,7 @@ void drawTile(int row, int col) {
 void endScreen(boolean outcome) {
   isGameOver = true;
   textSize(30);
-  //<<<<<<< HEAD
-  //=======
   fill(0);
-  //>>>>>>> 2c5036c588c14044c6125bfcad0bcb81a0826e44
   rect(0, 0, width, 50);
   textAlign(CENTER, CENTER);
   fill(#FFFFFF);
@@ -264,21 +241,14 @@ void endScreen(boolean outcome) {
   } else {
     text("loser !", width/4, 20);
     textSize(15);
-    //<<<<<<< HEAD
-    //=======
-    //    fill(0);
-    //>>>>>>> 2c5036c588c14044c6125bfcad0bcb81a0826e44
     for (int i = 0; i < gameBoard.gameBoard.length; i++) {
       for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {
         Tile t = gameBoard.gameBoard[i][j];
         if (t.isMine() && !t.flagged()) {
-          //<<<<<<< HEAD
           fill(0);
           text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE*0.8+50); // adjustment
-          //=======
           fill(#E81E1E);
           circle((i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+50+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6); // adjustment
-          //>>>>>>> 2c5036c588c14044c6125bfcad0bcb81a0826e44
         }
       }
     }
