@@ -70,3 +70,7 @@ Today I made some changes to the timer. Firstly, I moved the whole board down, l
 ### 5/29/23
 
 Today I modified what is displayed when a player wins or loses a game. Instead of removing the screen entirely and just displaying a black screen, the endScreen() method now only makes the top banner black. This way, the player can see the gameBoard after the game. I also added a feature where all the remaining un-flagged mines are marked with the word "mine". I did this by simply adding a loop that searches the entire 2-d array for mines. It's likely we'll come back to these changes I made here and mix them up slightly for aesthetic purposes, but really this new aspect of the code won't change very dramatically. Really happy with the progress made this weekend.
+
+### 5/30/23 
+
+Today I added the keyPressed() method to the Minesweeper tab. Now, if the player clicks the ‘w’ key during their game, the game will immediately be won, with the board clearing all of the non-mine Tiles. This is mainly to help make our MVP presentation more fluid. I also added an array variable named colors which is used in drawTile() to display different colored numbers depending on the number of mines a Tile touches. I also made a new design for the mines, which is just a black circle.
