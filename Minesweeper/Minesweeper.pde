@@ -2,6 +2,7 @@ private Board gameBoard;
 private int SQUARE_SIZE, countdown, timer, bestTime;
 private String difficulty;
 private boolean isGameOver;
+private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #363AE8, #67F9FF, #B7BEBF, #FA9223};
 
 void setup() {
   isGameOver = true;
@@ -11,6 +12,7 @@ void setup() {
   SQUARE_SIZE = width/16;
   bestTime = -1;
   drawBoard();
+  print(colors[0]);
 }
 
 void drawBoard() {
@@ -26,6 +28,7 @@ void drawBoard() {
   } else {
     text("Best Time : "+bestTime, SQUARE_SIZE, 40);
   }
+  fill(#B9BCF7);
 
   stroke(0);
   for (int row = 0; row < width; row += SQUARE_SIZE) {
@@ -156,7 +159,7 @@ void drawTile(int row, int col) {
     textSize(SQUARE_SIZE / (6/5));
     textAlign(CENTER);
     if (t.getSurrounding() != 0) {
-      fill(0);
+      fill(colors[t.getSurrounding() - 1]);
       text(t.getSurrounding(), row + SQUARE_SIZE * 0.5, col + SQUARE_SIZE * 0.8);
     }
 
@@ -209,6 +212,10 @@ void drawTile(int row, int col) {
 void endScreen(boolean outcome) {
   isGameOver = true;
   textSize(30);
+  //<<<<<<< HEAD
+  //=======
+  fill(0);
+  //>>>>>>> 2c5036c588c14044c6125bfcad0bcb81a0826e44
   rect(0, 0, width, 50);
   textAlign(CENTER, CENTER);
   fill(#FFFFFF);
@@ -217,11 +224,21 @@ void endScreen(boolean outcome) {
   } else {
     text("loser !", width/4, 20);
     textSize(15);
+    //<<<<<<< HEAD
+    //=======
+    //    fill(0);
+    //>>>>>>> 2c5036c588c14044c6125bfcad0bcb81a0826e44
     for (int i = 0; i < gameBoard.gameBoard.length; i++) {
       for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {
         Tile t = gameBoard.gameBoard[i][j];
         if (t.isMine() && !t.flagged()) {
+          //<<<<<<< HEAD
+          fill(0);
           text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE*0.8+50); // adjustment
+          //=======
+          fill(#E81E1E);
+          circle((i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+50+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6); // adjustment
+          //>>>>>>> 2c5036c588c14044c6125bfcad0bcb81a0826e44
         }
       }
     }
@@ -231,4 +248,27 @@ void endScreen(boolean outcome) {
   textSize(25);
   fill(0);
   text("play again", width/2, 20);
+}
+
+void keyPressed() {
+  if (!isGameOver) {
+    if (key == 'w') {
+      for (int i = 0; i < gameBoard.gameBoard.length; i++) {
+        for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {
+          Tile t = gameBoard.gameBoard[i][j];
+          if (!t.isMine() && !t.cleared()) {
+            if (t.flagged())t.setFlagged(false);
+            t.toClear();
+            drawTile(i*SQUARE_SIZE, j*SQUARE_SIZE+50);
+          }
+        }
+      }
+      if (bestTime == -1) {
+        bestTime = timer;
+      } else if (timer < bestTime) {
+        bestTime = timer;
+      }
+      endScreen(true);
+    }
+  }
 }
