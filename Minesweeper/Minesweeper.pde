@@ -16,7 +16,6 @@ void setup() {
 }
 
 void drawBoard() {
-  //noStroke();
   background(200);
 
   // best time settings
@@ -29,7 +28,7 @@ void drawBoard() {
     text("Best Time : "+bestTime, 50, 40);
   }
   fill(#B9BCF7);
-  
+
   textSize(40);
   fill(0);
   textAlign(LEFT);
@@ -40,17 +39,15 @@ void drawBoard() {
   rect(680, 5, 40, 40);
   fill(#F75339);
   rect(720, 5, 40, 40);
-  
-  
+
+
   fill(0);
   textAlign(CENTER);
-  if(difficulty.equals("easy")){
+  if (difficulty.equals("easy")) {
     text("X", 660, 40);
-  }
-  else if(difficulty.equals("medium")){
+  } else if (difficulty.equals("medium")) {
     text("X", 700, 40);
-  }
-  else if(difficulty.equals("hard")){
+  } else if (difficulty.equals("hard")) {
     text("X", 740, 40);
   }
 
@@ -277,19 +274,17 @@ void endScreen(boolean outcome) {
   } else {
     text("loser !", 625, 40);
     //textSize(15);
-    
-    
-    if(difficulty.equals("easy")){
+
+
+    if (difficulty.equals("easy")) {
       textSize(30);
-    }
-    else if(difficulty.equals("medium")){
+    } else if (difficulty.equals("medium")) {
       textSize(18);
-    }
-    else if(difficulty.equals("hard")){
+    } else if (difficulty.equals("hard")) {
       textSize(14);
     }
-    
-    
+
+
     for (int i = 0; i < gameBoard.gameBoard.length; i++) {
       for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {
         Tile t = gameBoard.gameBoard[i][j];
@@ -303,7 +298,7 @@ void endScreen(boolean outcome) {
       }
     }
   }
-  
+
   textAlign(CENTER);
   fill(#B9BCF7);
   rect(width/2-75, 0, 150, 50);
