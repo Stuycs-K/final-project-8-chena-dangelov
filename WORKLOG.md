@@ -34,6 +34,9 @@ Today I took more of a perspective role. In terms of code, I had nothing written
 
 Today I met the goals that I had set for myself yesterday. These goals included creating a bigger play again button and a high score setting. Moreover, I hoped to implement multiple difficulties soon. And in light of that, I added comments to every single class to help make the process easier. On top of that, in some of my comments, I talked about ways the program can be improved and possible alternatives to certain things that we have done. In addition, I also talked about errors that we have been seeing in our program. I hope that these comments can make the problems that we have much clearer and allow us to better make improvements. And last but not least, while looking through the code, I cleaned up some of the existing code. 
 
+### 5/30/23
+
+Today I implemented additional difficulties (easy, medium, hard) and modified our existing code to suit this change. This includes modifying corresponding board sizes, adding new instance variables (private String difficulty in Minesweeper class), and modifying particular methods. However, as of now, as there is no real way to change between difficulties, the keys 'e' (easy) 'm' (medium) and 'h' (hard) will be used to toggle in between difficulties. This modification is in absolutely no way permanent and will be replaced in the future by a more user-friendly option that allows the user to more clearly change in between difficulties.
 
 
 
