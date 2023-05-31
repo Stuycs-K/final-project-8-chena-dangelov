@@ -276,13 +276,27 @@ void endScreen(boolean outcome) {
     text("winner !", 626, 40);
   } else {
     text("loser !", 625, 40);
-    textSize(15);
+    //textSize(15);
+    
+    
+    if(difficulty.equals("easy")){
+      textSize(30);
+    }
+    else if(difficulty.equals("medium")){
+      textSize(18);
+    }
+    else if(difficulty.equals("hard")){
+      textSize(14);
+    }
+    
+    
     for (int i = 0; i < gameBoard.gameBoard.length; i++) {
       for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {
         Tile t = gameBoard.gameBoard[i][j];
         if (t.isMine() && !t.flagged()) {
           fill(0);
-          text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE*0.8+50); // adjustment
+          //text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE*0.8+50); // adjustment
+          text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE+50); // adjustment
           fill(#E81E1E);
           circle((i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+50+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6); // adjustment
         }
