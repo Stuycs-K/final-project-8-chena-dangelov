@@ -76,6 +76,7 @@ void draw() {
       drawBoard();
       gameBoard = null;
       isGameOver = true;
+      timer = 0;
     }
     if (mouseX >= 680 && mouseX <= 720) {
       changeDifficulty("medium");
@@ -83,6 +84,7 @@ void draw() {
       drawBoard();
       gameBoard = null;
       isGameOver = true;
+      timer = 0;
     }
     if (mouseX >= 720 && mouseX <= 760) {
       changeDifficulty("hard");
@@ -90,6 +92,7 @@ void draw() {
       drawBoard();
       gameBoard = null;
       isGameOver = true;
+      timer = 0;
     }
   }
 
