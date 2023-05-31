@@ -2,7 +2,7 @@ private Board gameBoard;
 private int SQUARE_SIZE, countdown, timer, bestTime;
 private String difficulty;
 private boolean isGameOver;
-private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #363AE8, #67F9FF, #B7BEBF, #FA9223};
+private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67F9FF, #B7BEBF, #FA9223};
 
 void setup() {
   isGameOver = true;
@@ -12,7 +12,6 @@ void setup() {
   SQUARE_SIZE = width/16;
   bestTime = -1;
   drawBoard();
-  print(colors[0]);
 }
 
 void drawBoard() {
@@ -188,6 +187,22 @@ void drawTile(int row, int col) {
       if (y + 1 < gameBoard.gameBoard[0].length && !gameBoard.gameBoard[x][y+1].cleared()) {
         gameBoard.clearSpace(x, y+1);
         drawTile(row, col + SQUARE_SIZE);
+      }
+      if (y + 1 < gameBoard.gameBoard[0].length && x + 1 < gameBoard.gameBoard.length && !gameBoard.gameBoard[x+1][y+1].cleared()) {
+        gameBoard.clearSpace(x+1, y+1);
+        drawTile(row + SQUARE_SIZE, col + SQUARE_SIZE);
+      }
+      if (y - 1 >= 0 && x + 1 < gameBoard.gameBoard.length && !gameBoard.gameBoard[x+1][y-1].cleared()) {
+        gameBoard.clearSpace(x+1, y-1);
+        drawTile(row + SQUARE_SIZE, col - SQUARE_SIZE);
+      }
+      if (y - 1 >= 0 && x - 1 >= 0 && !gameBoard.gameBoard[x-1][y-1].cleared()) {
+        gameBoard.clearSpace(x-1, y-1);
+        drawTile(row - SQUARE_SIZE, col - SQUARE_SIZE);
+      }
+      if (y + 1 < gameBoard.gameBoard[0].length && x - 1 >= 0 && !gameBoard.gameBoard[x-1][y+1].cleared()) {
+        gameBoard.clearSpace(x-1, y+1);
+        drawTile(row - SQUARE_SIZE, col + SQUARE_SIZE);
       }
     }
   }
