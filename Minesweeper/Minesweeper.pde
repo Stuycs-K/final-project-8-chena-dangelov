@@ -269,10 +269,10 @@ void endScreen(boolean outcome) {
   textAlign(CENTER);
   fill(#FFFFFF);
   if (outcome) {
-    text("time : "+timer, 50, 40);
-    text("winner !", 200, 20);
+    text("time : "+timer, 150, 40);
+    text("winner !", 626, 40);
   } else {
-    text("loser !", 200, 40);
+    text("loser !", 625, 40);
     textSize(15);
     for (int i = 0; i < gameBoard.gameBoard.length; i++) {
       for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {
