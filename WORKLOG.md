@@ -38,6 +38,10 @@ Today I met the goals that I had set for myself yesterday. These goals included 
 
 Today I implemented additional difficulties (easy, medium, hard) and modified our existing code to suit this change. This includes modifying corresponding board sizes, adding new instance variables (private String difficulty in Minesweeper class), and modifying particular methods. However, as of now, as there is no real way to change between difficulties, the keys 'e' (easy) 'm' (medium) and 'h' (hard) will be used to toggle in between difficulties. This modification is in absolutely no way permanent and will be replaced in the future by a more user-friendly option that allows the user to more clearly change in between difficulties.
 
+### 5/31/23
+
+Today I further implemented difficulties into our program. More specifically, I added a more user friendly way to toggle between difficulties. Now instead of having to press specific keys, it is easier for players to switch between game modes. In addition, I fixed some errors regarding difficulties that include allowing users to change difficulties in midst of a game, and resetting time everytime difficulty is changed. Moreover, I also added some additional comments to help outline what is happening in our code. On top of this, today I modified how endScreen() method works. Instead of placing winner/loser text on the top left hand corner, that text has been moved to the top right hand corner. 
+
 
 
 ## Vincent D'Angelo
