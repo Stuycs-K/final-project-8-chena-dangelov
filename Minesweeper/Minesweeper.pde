@@ -7,12 +7,15 @@ private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67
 void setup() {
   size(800, 850);
   isGameOver = true;
-  gameBoard = null;
+  
+  // game defaults to medium difficulty
   difficulty = "medium";
   SQUARE_SIZE = width/16;
+  
   easyBestTime = -1;
   mediumBestTime = -1;
   hardBestTime = -1;
+  
   drawBoard();
 }
 
@@ -44,10 +47,8 @@ void drawBoard() {
       text("Best Time : "+hardBestTime, 50, 40);
     }
   }
-  // is this code necessary
-  //fill(#B9BCF7g);
 
-  // difficulty settings
+  // difficulty selector
   textSize(40);
   fill(0);
   textAlign(LEFT);
@@ -85,27 +86,19 @@ void draw() {
     if (mouseX >= 640 && mouseX <= 680) {
       difficulty = "easy";
       SQUARE_SIZE = width/8;
-      drawBoard();
-      gameBoard = null;
-      isGameOver = true;
-      timer = 0;
     }
     if (mouseX >= 680 && mouseX <= 720) {
       difficulty = "medium";
       SQUARE_SIZE = width/16;
-      drawBoard();
-      gameBoard = null;
-      isGameOver = true;
-      timer = 0;
     }
     if (mouseX >= 720 && mouseX <= 760) {
       difficulty = "hard";
       SQUARE_SIZE = width/20;
-      drawBoard();
-      gameBoard = null;
-      isGameOver = true;
-      timer = 0;
     }
+    drawBoard();
+    gameBoard = null;
+    isGameOver = true;
+    timer = 0;
   }
 
 
@@ -118,7 +111,7 @@ void draw() {
         isGameOver = false;
       }
 
-      // game n, n is an integer other than one
+      // game n, n>1
       else {
         if (mouseX >= width/2 - 75 && mouseX <= width/2 + 75 && mouseY >= 0 && mouseY < 50) {
           background(#cccccc);
@@ -161,7 +154,7 @@ void draw() {
             drawTile(x, y);
           }
 
-          // the game ends when either the game is complete or a player clears a mine (gameOutcome == false)
+          // the game ends when either the game is complete (gameOutcome == true) or a player clears a mine (gameOutcome == false)
           if (gameBoard.done() || !gameOutcome) {
 
             // if the player wins the game, a bestTime is calculated
@@ -219,12 +212,14 @@ void drawTile(int row, int col) {
     square(row, col, SQUARE_SIZE);
     textSize(SQUARE_SIZE / (6/5));
     textAlign(CENTER);
+    
+    // if the space that has been cleared has surrounding mines, display the number of mines it touches
     if (t.getSurrounding() != 0) {
       fill(colors[t.getSurrounding() - 1]);
       text(t.getSurrounding(), row + SQUARE_SIZE * 0.5, col + SQUARE_SIZE * 0.8);
     }
 
-    // if the space that has been cleared has no surrounding mines, the tiles that non-diagonally surround it, are recursively cleared
+    // if the space that has been cleared has no surrounding mines, the tiles that surround it are recursively cleared
     else {
       int x = row / SQUARE_SIZE;
       int y = (col-50) / SQUARE_SIZE; 
@@ -291,6 +286,8 @@ void endScreen(boolean outcome) {
   rect(0, 0, width, 50);
   textAlign(CENTER);
   fill(#FFFFFF);
+  
+  // displays winner or loser depending on game outcome
   if (outcome) {
     text("time : "+timer, 150, 40);
     text("winner !", 626, 40);
@@ -306,21 +303,21 @@ void endScreen(boolean outcome) {
       textSize(14);
     }
 
-
+    // displays all of the mines on the board that have not been flagged
     for (int i = 0; i < gameBoard.gameBoard.length; i++) {
       for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {
         Tile t = gameBoard.gameBoard[i][j];
         if (t.isMine() && !t.flagged()) {
           fill(0);
-          //text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE*0.8+50); 
-          text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE+50); 
+          text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE+50-SQUARE_SIZE*(1/15)); 
           fill(#E81E1E);
           circle((i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+50+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6); 
         }
       }
     }
   }
-
+ 
+  // play again button
   textAlign(CENTER);
   fill(#B9BCF7);
   rect(width/2-75, 0, 150, 50);
@@ -331,6 +328,8 @@ void endScreen(boolean outcome) {
 
 void keyPressed() {
   if (!isGameOver) {
+    
+    // press 'w' for automatic win
     if (key == 'w') {
       for (int i = 0; i < gameBoard.gameBoard.length; i++) {
         for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {

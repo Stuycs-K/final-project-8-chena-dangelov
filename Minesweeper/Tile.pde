@@ -6,14 +6,6 @@ public class Tile {
   // surrounding - the number of mines surrounding tile
   boolean mine, cleared, flagged, defaultCleared;
   int surrounding;
-
-  public Tile() {
-    mine = false;
-    cleared = false;
-    flagged = false;
-    defaultCleared = false;
-    surrounding = 0;
-  }
   
   boolean getDefaultCleared(){
     return defaultCleared;
@@ -25,10 +17,6 @@ public class Tile {
   
   boolean isMine() {
     return mine;
-  }
-  
-  void unMine() {
-    mine = false;
   }
   
   // returns false if tile has already been declared to contain a mine
