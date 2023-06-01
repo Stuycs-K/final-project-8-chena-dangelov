@@ -78,17 +78,12 @@ void drawBoard() {
   }
 }
 
-// helper method to modify difficulty
-void changeDifficulty(String d) {
-  difficulty = d;
-}
-
 void draw() {
 
   // difficulty change
   if (mousePressed && mouseButton == LEFT && mouseY >= 5 && mouseY <= 45) {
     if (mouseX >= 640 && mouseX <= 680) {
-      changeDifficulty("easy");
+      difficulty = "easy";
       SQUARE_SIZE = width/8;
       drawBoard();
       gameBoard = null;
@@ -96,7 +91,7 @@ void draw() {
       timer = 0;
     }
     if (mouseX >= 680 && mouseX <= 720) {
-      changeDifficulty("medium");
+      difficulty = "medium";
       SQUARE_SIZE = width/16;
       drawBoard();
       gameBoard = null;
@@ -104,7 +99,7 @@ void draw() {
       timer = 0;
     }
     if (mouseX >= 720 && mouseX <= 760) {
-      changeDifficulty("hard");
+      difficulty = "hard";
       SQUARE_SIZE = width/20;
       drawBoard();
       gameBoard = null;
@@ -171,10 +166,28 @@ void draw() {
 
             // if the player wins the game, a bestTime is calculated
             if (gameOutcome) {
-              if (bestTime == -1) {
-                bestTime = timer;
-              } else if (timer < bestTime) {
-                bestTime = timer;
+              if (difficulty.equals("easy")) {
+                if (easyBestTime == -1) {
+                  easyBestTime = timer;
+                } else if (timer < easyBestTime) {
+                  easyBestTime = timer;
+                }
+              }
+
+              if (difficulty.equals("medium")) {
+                if (mediumBestTime == -1) {
+                  mediumBestTime = timer;
+                } else if (timer < mediumBestTime) {
+                  mediumBestTime = timer;
+                }
+              }
+
+              if (difficulty.equals("hard")) {
+                if (hardBestTime == -1) {
+                  hardBestTime = timer;
+                } else if (timer < hardBestTime) {
+                  hardBestTime = timer;
+                }
               }
             }
 
@@ -329,11 +342,32 @@ void keyPressed() {
           }
         }
       }
-      if (bestTime == -1) {
-        bestTime = timer;
-      } else if (timer < bestTime) {
-        bestTime = timer;
+
+
+      if (difficulty.equals("easy")) {
+        if (easyBestTime == -1) {
+          easyBestTime = timer;
+        } else if (timer < easyBestTime) {
+          easyBestTime = timer;
+        }
       }
+
+      if (difficulty.equals("medium")) {
+        if (mediumBestTime == -1) {
+          mediumBestTime = timer;
+        } else if (timer < mediumBestTime) {
+          mediumBestTime = timer;
+        }
+      }
+
+      if (difficulty.equals("hard")) {
+        if (hardBestTime == -1) {
+          hardBestTime = timer;
+        } else if (timer < hardBestTime) {
+          hardBestTime = timer;
+        }
+      }
+
       endScreen(true);
     }
   }
