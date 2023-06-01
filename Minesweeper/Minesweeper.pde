@@ -1,5 +1,5 @@
 private Board gameBoard;
-private int SQUARE_SIZE, countdown, timer, bestTime;
+private int SQUARE_SIZE, countdown, timer, easyBestTime, mediumBestTime, hardBestTime;
 private String difficulty;
 private boolean isGameOver;
 private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67F9FF, #B7BEBF, #FA9223};
@@ -10,7 +10,9 @@ void setup() {
   gameBoard = null;
   difficulty = "medium";
   SQUARE_SIZE = width/16;
-  bestTime = -1;
+  easyBestTime = -1;
+  mediumBestTime = -1;
+  hardBestTime = -1;
   drawBoard();
 }
 
@@ -21,10 +23,26 @@ void drawBoard() {
   textAlign(LEFT);
   textSize(40);
   fill(0);
-  if (bestTime == -1) {
-    text("Best Time : --", 50, 40);
-  } else {
-    text("Best Time : "+bestTime, 50, 40);
+  if (difficulty.equals("easy")) {
+    if (easyBestTime == -1) {
+      text("Best Time : --", 50, 40);
+    } else {
+      text("Best Time : "+easyBestTime, 50, 40);
+    }
+  }
+  if (difficulty.equals("medium")) {
+    if (mediumBestTime == -1) {
+      text("Best Time : --", 50, 40);
+    } else {
+      text("Best Time : "+mediumBestTime, 50, 40);
+    }
+  }
+  if (difficulty.equals("hard")) {
+    if (hardBestTime == -1) {
+      text("Best Time : --", 50, 40);
+    } else {
+      text("Best Time : "+hardBestTime, 50, 40);
+    }
   }
   // is this code necessary
   //fill(#B9BCF7g);
@@ -66,7 +84,7 @@ void changeDifficulty(String d) {
 }
 
 void draw() {
-  
+
   // difficulty change
   if (mousePressed && mouseButton == LEFT && mouseY >= 5 && mouseY <= 45) {
     if (mouseX >= 640 && mouseX <= 680) {
@@ -94,11 +112,11 @@ void draw() {
       timer = 0;
     }
   }
-  
-  
+
+
   if (isGameOver) {
     if (mousePressed && (mouseButton == LEFT)) {
-      
+
       // game one
       if (gameBoard == null && mouseY > 50) {
         gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE); // adjustment
@@ -122,7 +140,7 @@ void draw() {
 
     // timer
     if (frameCount % 60 == 0 ) {
-      fill(#cccccc);
+      fill(200);
       noStroke();
       rect(width/2-50, 5, 100, 40);
       textSize(40);
@@ -232,7 +250,7 @@ void drawTile(int row, int col) {
     }
   }
 
-  // if the space is not cleared, then the method was called because... (of what)
+  // if the space is not cleared, then the method was called because the space has either been flagged or unflagged
   else {
 
     // if the space was flagged, a flag is drawn
@@ -245,7 +263,7 @@ void drawTile(int row, int col) {
       triangle(row + 9 * SQUARE_SIZE / 20, col + SQUARE_SIZE / 5, row + 9 * SQUARE_SIZE / 20, col + SQUARE_SIZE / 2, row + 9 * SQUARE_SIZE / 10, col + 7 * SQUARE_SIZE / 20);
     }
 
-    // if the space is unflagged, the flag is removed 
+    // if the space is unflagged, the flag is removed
     else {
       fill(#26C627);
       square(row, col, SQUARE_SIZE);
@@ -265,7 +283,6 @@ void endScreen(boolean outcome) {
     text("winner !", 626, 40);
   } else {
     text("loser !", 625, 40);
-    //textSize(15);
 
 
     if (difficulty.equals("easy")) {
