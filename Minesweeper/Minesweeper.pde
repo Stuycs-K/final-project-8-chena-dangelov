@@ -245,7 +245,7 @@ void drawTile(int row, int col) {
       triangle(row + 9 * SQUARE_SIZE / 20, col + SQUARE_SIZE / 5, row + 9 * SQUARE_SIZE / 20, col + SQUARE_SIZE / 2, row + 9 * SQUARE_SIZE / 10, col + 7 * SQUARE_SIZE / 20);
     }
 
-    // when is this ever called ????
+    // if the space is unflagged, the flag is removed 
     else {
       fill(#26C627);
       square(row, col, SQUARE_SIZE);
