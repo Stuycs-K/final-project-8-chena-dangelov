@@ -89,3 +89,7 @@ Today I added the keyPressed() method to the Minesweeper tab. Now, if the player
 ### 5/31/23 
 
 Call me a pesticide the way I've been taking care of these bugs. Firstly, I took care of a bug where choosing a difficulty before clicking the play again button broke the game. I did this by making sure that every time someone clicked a key to change the difficulty, the gameBoard was set to null so that a new gameBoard could be generated. Also, I added to the drawTile() method so now non-mine tiles that are diagonal to empty tiles are also cleared recursively (previously only the tiles that were adjacent to the cleared tiles were cleared). I also fixed an out of bounds error that was occurring for the easy mode upon the random generation of a board.
+
+### 6/1/23
+
+Today I just looked through the code and added comments to the Minesweeper and Board classes to explain methods and parts of methods in preparation for the Demo. I also cleaned up the code, moving around certain statements so that they only ran once instead of in three separate if statements, for example. In the Tile class, I removed the unused unMine() method, and I also removed the constructor. We don't need to write the constructor because the default constructor is sufficient for our needs.
