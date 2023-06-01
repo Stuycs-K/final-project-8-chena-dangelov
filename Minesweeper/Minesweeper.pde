@@ -114,7 +114,7 @@ void draw() {
 
       // game one
       if (gameBoard == null && mouseY > 50) {
-        gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE); // adjustment
+        gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE); 
         isGameOver = false;
       }
 
@@ -147,15 +147,15 @@ void draw() {
 
     if (mousePressed) {
       int row = mouseX / SQUARE_SIZE;
-      int col = (mouseY-50) / SQUARE_SIZE; // adjustment
+      int col = (mouseY-50) / SQUARE_SIZE; 
       int x = row*SQUARE_SIZE;
-      int y = col*SQUARE_SIZE+50; // adjustment
+      int y = col*SQUARE_SIZE+50; 
 
       // left click == clear space
       if (mouseButton == LEFT) {
 
         // this condition prevents index out of bounds errors
-        if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50) { // adjustment
+        if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50) { 
           boolean gameOutcome = gameBoard.clearSpace(row, col);
           if (gameOutcome) {
             drawTile(x, y);
@@ -200,7 +200,7 @@ void draw() {
       else if (mouseButton == RIGHT) {
 
         // this condition prevents index out of bounds error and checks countdown
-        if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdown == 0) { // adjustment
+        if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdown == 0) { 
           gameBoard.placeFlag(row, col);
           drawTile(x, y);
           countdown+=10;
@@ -211,7 +211,7 @@ void draw() {
 }
 
 void drawTile(int row, int col) {
-  Tile t = gameBoard.gameBoard[row / SQUARE_SIZE][(col-50) / SQUARE_SIZE]; // adjustment
+  Tile t = gameBoard.gameBoard[row / SQUARE_SIZE][(col-50) / SQUARE_SIZE]; 
 
   // if the space has been cleared, a cleared tile is drawn
   if (t.cleared()) {
@@ -227,7 +227,7 @@ void drawTile(int row, int col) {
     // if the space that has been cleared has no surrounding mines, the tiles that non-diagonally surround it, are recursively cleared
     else {
       int x = row / SQUARE_SIZE;
-      int y = (col-50) / SQUARE_SIZE; // adjustment
+      int y = (col-50) / SQUARE_SIZE; 
       if (x - 1 >= 0 && !gameBoard.gameBoard[x-1][y].cleared()) {
         gameBoard.clearSpace(x-1, y);
         drawTile(row - SQUARE_SIZE, col);
@@ -312,10 +312,10 @@ void endScreen(boolean outcome) {
         Tile t = gameBoard.gameBoard[i][j];
         if (t.isMine() && !t.flagged()) {
           fill(0);
-          //text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE*0.8+50); // adjustment
-          text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE+50); // adjustment
+          //text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE*0.8+50); 
+          text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE+50); 
           fill(#E81E1E);
-          circle((i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+50+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6); // adjustment
+          circle((i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+50+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6); 
         }
       }
     }
