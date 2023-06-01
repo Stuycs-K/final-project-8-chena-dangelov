@@ -81,3 +81,7 @@ Today I modified what is displayed when a player wins or loses a game. Instead o
 ### 5/30/23 
 
 Today I added the keyPressed() method to the Minesweeper tab. Now, if the player clicks the ‘w’ key during their game, the game will immediately be won, with the board clearing all of the non-mine Tiles. This is mainly to help make our MVP presentation more fluid. I also added an array variable named colors which is used in drawTile() to display different colored numbers depending on the number of mines a Tile touches. I also made a new design for the mines, which is just a black circle.
+
+### 5/31/23 
+
+Call me a pesticide the way I've been taking care of these bugs. Firstly, I took care of a bug where choosing a difficulty before clicking the play again button broke the game. I did this by making sure that every time someone clicked a key to change the difficulty, the gameBoard was set to null so that a new gameBoard could be generated. Also, I added to the drawTile() method so now non-mine tiles that are diagonal to empty tiles are also cleared recursively (previously only the tiles that were adjacent to the cleared tiles were cleared). I also fixed an out of bounds error that was occurring for the easy mode upon the random generation of a board.
