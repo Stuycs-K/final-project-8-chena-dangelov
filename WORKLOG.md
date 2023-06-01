@@ -92,4 +92,4 @@ Call me a pesticide the way I've been taking care of these bugs. Firstly, I took
 
 ### 6/1/23
 
-Today I just looked through the code and added comments to the Minesweeper and Board classes to explain methods and parts of methods in preparation for the Demo. I also cleaned up the code, moving around certain statements so that they only ran once instead of in three separate if statements, for example. In the Tile class, I removed the unused unMine() method, and I also removed the constructor. We don't need to write the constructor because the default constructor is sufficient for our needs.
+Today I just looked through the code and added comments to the Minesweeper and Board classes to explain methods and parts of methods in preparation for the Demo. I also cleaned up the code, moving around certain statements so that they only ran once instead of in three separate if statements, for example. In the Tile class, I removed the unused unMine() method, and I also removed the constructor. We don't need to write the constructor because the default constructor is sufficient for our needs. I also began the Instructions part of the README.
