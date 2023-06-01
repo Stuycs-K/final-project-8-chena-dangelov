@@ -42,6 +42,10 @@ Today I implemented additional difficulties (easy, medium, hard) and modified ou
 
 Today I further implemented difficulties into our program. More specifically, I added a more user friendly way to toggle between difficulties. Now instead of having to press specific keys, it is easier for players to switch between game modes. In addition, I fixed some errors regarding difficulties that include allowing users to change difficulties in midst of a game, and resetting time everytime difficulty is changed. Moreover, I also added some additional comments to help outline what is happening in our code. On top of this, today I modified how endScreen() method works. Instead of placing winner/loser text on the top left hand corner, that text has been moved to the top right hand corner. 
 
+### 6/1/23
+
+Today I spent half an hour testing all the features of the game to ensure that everything functions as it should. And from my tests, I found some parts of our program that needed modification. These modifications included changing the background color of the timer to have it blend in with the heading, and deleting unnecessary comments. In addition, I realized that there was an error in best time settings. I had it so that best time simply displayed when we revealed our debug program. However, best time is not displayed otherwise after winning a game. I changed that. I also made best time into three different variables, easyBestTime mediumBestTime and hardBestTime, so that based off of difficulty, there would be a different best time. 
+
 
 
 ## Vincent D'Angelo
