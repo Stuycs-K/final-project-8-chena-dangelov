@@ -46,6 +46,10 @@ Today I further implemented difficulties into our program. More specifically, I 
 
 Today I spent half an hour testing all the features of the game to ensure that everything functions as it should. And from my tests, I found some parts of our program that needed modification. These modifications included changing the background color of the timer to have it blend in with the heading, and deleting unnecessary comments. In addition, I realized that there was an error in best time settings. I had it so that best time simply displayed when we revealed our debug program. However, best time is not displayed otherwise after winning a game. I changed that. I also made best time into three different variables, easyBestTime mediumBestTime and hardBestTime, so that based off of difficulty, there would be a different best time. 
 
+### 6/2/23
+
+Today not much progress was made. However, I did start on adding the flagsLeft feature that displays the number of flags left (indicative of how many mines are left unmarked on the board). I added an integer called flagsLeft in Board class and when it is initalized, it is set to the number of mines on the board. I also have a method that returns flagsLeft so Minesweeper class can display it on the actual program. This weekend I will finish this feature and some notable aspects that I'll have to implement alongside this include decrementing flagsLeft everytime a flag is placed (Board class), incrementing flagsLeft everytime a flag is removed (Board class), making difficulty settings smaller to make space for flagsLeft feature (Minesweeper class), and displaying flagsLeft on the actual program (Minesweeper class).
+
 
 
 ## Vincent D'Angelo
@@ -93,3 +97,7 @@ Call me a pesticide the way I've been taking care of these bugs. Firstly, I took
 ### 6/1/23
 
 Today I just looked through the code and added comments to the Minesweeper and Board classes to explain methods and parts of methods in preparation for the Demo. I also cleaned up the code, moving around certain statements so that they only ran once instead of in three separate if statements, for example. In the Tile class, I removed the unused unMine() method, and I also removed the constructor. We don't need to write the constructor because the default constructor is sufficient for our needs. I also began the Instructions part of the README.
+
+### 6/2/23
+
+Today I made a pretty simple change to the game by making the default colors of the Tiles on the board alternate from a darker green to a slightly lighter green. I find this to be more visually appealing. Tomorrow I hope to do some more work, and I'd like to begin the process of making a How to Play screen. 
