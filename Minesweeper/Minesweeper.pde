@@ -21,6 +21,14 @@ void setup() {
 
 void drawBoard() {
   background(200);
+  
+  // hamburger button
+  noStroke();
+  fill(255);
+  rect(7,7,25,3,5);
+  rect(7,15,25,3,5);
+  rect(7,23,25,3,5);
+  stroke(0);
 
   // best time settings
   textAlign(LEFT);
