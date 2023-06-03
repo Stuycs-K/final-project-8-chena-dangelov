@@ -73,7 +73,12 @@ void drawBoard() {
   stroke(0);
   for (int row = 0; row < width; row += SQUARE_SIZE) {
     for (int col = 50; col < height; col += SQUARE_SIZE) {
-      fill(#26C627);
+      if((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)){
+        fill(#26C627);
+      }
+      else{
+        fill(#23B419);
+      }
       square(row, col, SQUARE_SIZE);
     }
   }
