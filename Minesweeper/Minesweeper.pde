@@ -223,9 +223,6 @@ void draw() {
 
         // this condition prevents index out of bounds error and checks countdown
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdown == 0) {
-          gameBoard.placeFlag(row, col);
-          drawTile(x, y);
-          countdown+=10;
           fill(200);
           noStroke();
           rect(425, 5, 50, 40);
@@ -237,6 +234,21 @@ void draw() {
           rect(480, 15, 5, 30);
           fill(#CE3636);
           triangle(480, 15, 480, 30, 505, 22.5);
+          
+          gameBoard.placeFlag(row, col);
+          drawTile(x, y);
+          countdown+=10;
+          //fill(200);
+          //noStroke();
+          //rect(425, 5, 50, 40);
+          //textSize(30);
+          //fill(0);
+          //text(gameBoard.getFlagsLeft(),440,40);
+          //stroke(0);
+          //rect(470, 45, 25, 5);
+          //rect(480, 15, 5, 30);
+          //fill(#CE3636);
+          //triangle(480, 15, 480, 30, 505, 22.5);
         }
       }
     }
