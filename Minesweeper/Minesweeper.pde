@@ -91,7 +91,7 @@ void drawBoard() {
   }
 }
 
-void removeHelpBox() {
+void removeHelpScreen() {
   if (gameBoard == null) {
     stroke(0);
     for (int row = 0; row < 400; row += SQUARE_SIZE) {
@@ -105,6 +105,14 @@ void removeHelpBox() {
       }
     }
   }
+  else{
+    for (int row = 0; row < 400; row += SQUARE_SIZE) {
+      for (int col = 50; col < 450; col += SQUARE_SIZE) {
+        drawTile(row, col);
+      }
+    }
+  }
+  isHelpScreen = false;
 }
 
 void draw() {
@@ -142,8 +150,7 @@ void draw() {
   if (mousePressed && mouseButton == LEFT && mouseY >= 22 && mouseY <= 41 && mouseX >= 7 && mouseX <= 32 && countdownHelpScreen == 0) {
 
     if (isHelpScreen) {
-      removeHelpBox();
-      isHelpScreen = false;
+      removeHelpScreen();
     } else {
       fill(200);
       rect(0, 50, 400, 400);
@@ -152,6 +159,10 @@ void draw() {
     }
     countdownHelpScreen+=20;
   }
+  
+  if (mousePressed && mouseButton == LEFT && isHelpScreen && mouseY >= 50  && !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) ) {
+        removeHelpScreen();
+      }
 
 
 
@@ -159,10 +170,7 @@ void draw() {
   if (isGameOver) {
     if (mousePressed && (mouseButton == LEFT)) {
 
-      if (mousePressed && (mouseButton == LEFT) && isHelpScreen && (mouseY >= 50  && !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) )) {
-        removeHelpBox();
-        isHelpScreen = false;
-      }
+   
 
       // game one
       if (gameBoard == null && mouseY > 50) {
@@ -334,7 +342,11 @@ void drawTile(int row, int col) {
 
     // if the space is unflagged, the flag is removed
     else {
-      fill(#26C627);
+      if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
+        fill(#26C627);
+      } else {
+        fill(#23B419);
+      }
       square(row, col, SQUARE_SIZE);
     }
   }
@@ -392,6 +404,7 @@ void keyPressed() {
 
     // press 'w' for automatic win
     if (key == 'w') {
+      if(isHelpScreen)removeHelpScreen();
       for (int i = 0; i < gameBoard.gameBoard.length; i++) {
         for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {
           Tile t = gameBoard.gameBoard[i][j];
