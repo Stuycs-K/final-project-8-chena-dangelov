@@ -97,3 +97,7 @@ Call me a pesticide the way I've been taking care of these bugs. Firstly, I took
 ### 6/1/23
 
 Today I just looked through the code and added comments to the Minesweeper and Board classes to explain methods and parts of methods in preparation for the Demo. I also cleaned up the code, moving around certain statements so that they only ran once instead of in three separate if statements, for example. In the Tile class, I removed the unused unMine() method, and I also removed the constructor. We don't need to write the constructor because the default constructor is sufficient for our needs. I also began the Instructions part of the README.
+
+### 6/2/23
+
+Today I made a pretty simple change to the game by making the default colors of the Tiles on the board alternate from a darker green to a slightly lighter green. I find this to be more visually appealing. Tomorrow I hope to do some more work, and I'd like to begin the process of making a How to Play screen. 
