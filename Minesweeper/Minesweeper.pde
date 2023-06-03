@@ -7,15 +7,15 @@ private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67
 void setup() {
   size(800, 850);
   isGameOver = true;
-  
+
   // game defaults to medium difficulty
   difficulty = "medium";
   SQUARE_SIZE = width/16;
-  
+
   easyBestTime = -1;
   mediumBestTime = -1;
   hardBestTime = -1;
-  
+
   drawBoard();
 }
 
@@ -61,6 +61,7 @@ void drawBoard() {
   rect(750, 5, 30, 40);
   fill(0);
   textAlign(CENTER);
+  textSize(40);
   if (difficulty.equals("easy")) {
     text("X", 705, 40);
   } else if (difficulty.equals("medium")) {
@@ -69,14 +70,30 @@ void drawBoard() {
     text("X", 765, 40);
   }
 
+  // flagsLeft settings
+  fill(200);
+      noStroke();
+      rect(270, 5, 60, 40);
+      textSize(30);
+      fill(0);
+      text(timer, 300, 40);
+      timer++;
+      stroke(0);
+  rect(470, 45, 25, 5);
+  rect(480, 15, 5, 30);
+  fill(#CE3636);
+  triangle(480, 15, 480, 30, 505, 22.5);
+
+
+
+
   // board drawing
   stroke(0);
   for (int row = 0; row < width; row += SQUARE_SIZE) {
     for (int col = 50; col < height; col += SQUARE_SIZE) {
-      if((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)){
+      if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
         fill(#26C627);
-      }
-      else{
+      } else {
         fill(#23B419);
       }
       square(row, col, SQUARE_SIZE);
@@ -112,7 +129,7 @@ void draw() {
 
       // game one
       if (gameBoard == null && mouseY > 50) {
-        gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE); 
+        gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
         isGameOver = false;
       }
 
@@ -145,15 +162,15 @@ void draw() {
 
     if (mousePressed) {
       int row = mouseX / SQUARE_SIZE;
-      int col = (mouseY-50) / SQUARE_SIZE; 
+      int col = (mouseY-50) / SQUARE_SIZE;
       int x = row*SQUARE_SIZE;
-      int y = col*SQUARE_SIZE+50; 
+      int y = col*SQUARE_SIZE+50;
 
       // left click == clear space
       if (mouseButton == LEFT) {
 
         // this condition prevents index out of bounds errors
-        if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50) { 
+        if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50) {
           boolean gameOutcome = gameBoard.clearSpace(row, col);
           if (gameOutcome) {
             drawTile(x, y);
@@ -198,7 +215,7 @@ void draw() {
       else if (mouseButton == RIGHT) {
 
         // this condition prevents index out of bounds error and checks countdown
-        if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdown == 0) { 
+        if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdown == 0) {
           gameBoard.placeFlag(row, col);
           drawTile(x, y);
           countdown+=10;
@@ -209,7 +226,7 @@ void draw() {
 }
 
 void drawTile(int row, int col) {
-  Tile t = gameBoard.gameBoard[row / SQUARE_SIZE][(col-50) / SQUARE_SIZE]; 
+  Tile t = gameBoard.gameBoard[row / SQUARE_SIZE][(col-50) / SQUARE_SIZE];
 
   // if the space has been cleared, a cleared tile is drawn
   if (t.cleared()) {
@@ -217,7 +234,7 @@ void drawTile(int row, int col) {
     square(row, col, SQUARE_SIZE);
     textSize(SQUARE_SIZE / (6/5));
     textAlign(CENTER);
-    
+
     // if the space that has been cleared has surrounding mines, display the number of mines it touches
     if (t.getSurrounding() != 0) {
       fill(colors[t.getSurrounding() - 1]);
@@ -227,7 +244,7 @@ void drawTile(int row, int col) {
     // if the space that has been cleared has no surrounding mines, the tiles that surround it are recursively cleared
     else {
       int x = row / SQUARE_SIZE;
-      int y = (col-50) / SQUARE_SIZE; 
+      int y = (col-50) / SQUARE_SIZE;
       if (x - 1 >= 0 && !gameBoard.gameBoard[x-1][y].cleared()) {
         gameBoard.clearSpace(x-1, y);
         drawTile(row - SQUARE_SIZE, col);
@@ -291,7 +308,7 @@ void endScreen(boolean outcome) {
   rect(0, 0, width, 50);
   textAlign(CENTER);
   fill(#FFFFFF);
-  
+
   // displays winner or loser depending on game outcome
   if (outcome) {
     text("time : "+timer, 150, 40);
@@ -314,14 +331,14 @@ void endScreen(boolean outcome) {
         Tile t = gameBoard.gameBoard[i][j];
         if (t.isMine() && !t.flagged()) {
           fill(0);
-          text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE+50-SQUARE_SIZE*(1/15)); 
+          text("mine", (i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+SQUARE_SIZE+50-SQUARE_SIZE*(1/15));
           fill(#E81E1E);
-          circle((i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+50+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6); 
+          circle((i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+50+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6);
         }
       }
     }
   }
- 
+
   // play again button
   textAlign(CENTER);
   fill(#B9BCF7);
@@ -333,7 +350,7 @@ void endScreen(boolean outcome) {
 
 void keyPressed() {
   if (!isGameOver) {
-    
+
     // press 'w' for automatic win
     if (key == 'w') {
       for (int i = 0; i < gameBoard.gameBoard.length; i++) {

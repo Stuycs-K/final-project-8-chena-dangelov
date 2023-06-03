@@ -93,9 +93,11 @@ public class Board {
       if (!gameBoard[x][y].flagged()) {
         gameBoard[x][y].setFlagged(true);
         flagsPlaced++;
+        flagsLeft--;
       } else {
         gameBoard[x][y].setFlagged(false);
         flagsPlaced--;
+        flagsLeft++;
       }
     }
   }
