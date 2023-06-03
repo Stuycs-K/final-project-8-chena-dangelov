@@ -1,11 +1,12 @@
 public class Board {
   Tile[][] gameBoard;
-  int flagsPlaced, spacesCleared, mineCount;
+  int flagsPlaced, spacesCleared, mineCount, flagsLeft;
 
   public Board(int x, int y, int size) {
     gameBoard = new Tile[size][size];
     randomlyClearArea(x, y);
     placeMines();
+    flagsLeft = mineCount;
   }
 
   // designate the area around where the player clicked to be clear of mines
@@ -97,5 +98,9 @@ public class Board {
         flagsPlaced--;
       }
     }
+  }
+  
+  int getFlagsLeft(){
+    return flagsLeft;
   }
 }
