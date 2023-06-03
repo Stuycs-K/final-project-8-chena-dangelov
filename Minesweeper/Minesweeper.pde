@@ -24,49 +24,49 @@ void drawBoard() {
 
   // best time settings
   textAlign(LEFT);
-  textSize(40);
+  textSize(30);
   fill(0);
   if (difficulty.equals("easy")) {
     if (easyBestTime == -1) {
-      text("Best Time : --", 50, 40);
+      text("Best Time : --", 15, 40);
     } else {
-      text("Best Time : "+easyBestTime, 50, 40);
+      text("Best Time : "+easyBestTime, 15, 40);
     }
   }
   if (difficulty.equals("medium")) {
     if (mediumBestTime == -1) {
-      text("Best Time : --", 50, 40);
+      text("Best Time : --", 15, 40);
     } else {
-      text("Best Time : "+mediumBestTime, 50, 40);
+      text("Best Time : "+mediumBestTime, 15, 40);
     }
   }
   if (difficulty.equals("hard")) {
     if (hardBestTime == -1) {
-      text("Best Time : --", 50, 40);
+      text("Best Time : --", 15, 40);
     } else {
-      text("Best Time : "+hardBestTime, 50, 40);
+      text("Best Time : "+hardBestTime, 15, 40);
     }
   }
 
   // difficulty selector
-  textSize(40);
+  textSize(30);
   fill(0);
   textAlign(LEFT);
-  text("Difficulty : ", 465, 40);
+  text("Difficulty : ", 550, 40);
   fill(#76D85C);
-  rect(640, 5, 40, 40);
+  rect(690, 5, 30, 40);
   fill(#EFF063);
-  rect(680, 5, 40, 40);
+  rect(720, 5, 30, 40);
   fill(#F75339);
-  rect(720, 5, 40, 40);
+  rect(750, 5, 30, 40);
   fill(0);
   textAlign(CENTER);
   if (difficulty.equals("easy")) {
-    text("X", 660, 40);
+    text("X", 705, 40);
   } else if (difficulty.equals("medium")) {
-    text("X", 700, 40);
+    text("X", 735, 40);
   } else if (difficulty.equals("hard")) {
-    text("X", 740, 40);
+    text("X", 765, 40);
   }
 
   // board drawing
@@ -88,15 +88,15 @@ void draw() {
 
   // difficulty change
   if (mousePressed && mouseButton == LEFT && mouseY >= 5 && mouseY <= 45) {
-    if (mouseX >= 640 && mouseX <= 680) {
+    if (mouseX >= 690 && mouseX <= 720) {
       difficulty = "easy";
       SQUARE_SIZE = width/8;
     }
-    if (mouseX >= 680 && mouseX <= 720) {
+    if (mouseX >= 720 && mouseX <= 750) {
       difficulty = "medium";
       SQUARE_SIZE = width/16;
     }
-    if (mouseX >= 720 && mouseX <= 760) {
+    if (mouseX >= 750 && mouseX <= 780) {
       difficulty = "hard";
       SQUARE_SIZE = width/20;
     }
@@ -135,10 +135,10 @@ void draw() {
     if (frameCount % 60 == 0 ) {
       fill(200);
       noStroke();
-      rect(width/2-50, 5, 100, 40);
-      textSize(40);
+      rect(270, 5, 60, 40);
+      textSize(30);
       fill(0);
-      text(timer, width/2, 40);
+      text(timer, 300, 40);
       timer++;
       stroke(0);
     }
