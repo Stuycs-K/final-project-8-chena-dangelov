@@ -154,19 +154,22 @@ void draw() {
   }
 
 
+
+
   if (isGameOver) {
     if (mousePressed && (mouseButton == LEFT)) {
-      //println(get(10,60));
 
-      if (isHelpScreen && (mouseY >= 50  )) {
+      if (mousePressed && (mouseButton == LEFT) && isHelpScreen && (mouseY >= 50  && !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) )) {
         removeHelpBox();
         isHelpScreen = false;
       }
 
       // game one
       if (gameBoard == null && mouseY > 50) {
+        if(!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450)){
         gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
         isGameOver = false;
+        }
       }
 
       // game n, n>1
@@ -185,7 +188,7 @@ void draw() {
     if (countdown > 0)countdown--;
 
     // timer
-    if (frameCount % 60 == 0 ) {
+    if (frameCount % 60 == 0 && (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) || !isGameOver)) {
       fill(200);
       noStroke();
       rect(width/2-50, 5, 100, 40);
@@ -196,7 +199,7 @@ void draw() {
       stroke(0);
     }
 
-    if (mousePressed) {
+    if (mousePressed && (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450))) {
       int row = mouseX / SQUARE_SIZE;
       int col = (mouseY-50) / SQUARE_SIZE;
       int x = row*SQUARE_SIZE;
