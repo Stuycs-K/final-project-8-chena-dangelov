@@ -72,13 +72,20 @@ void drawBoard() {
 
   // flagsLeft settings
   fill(200);
-      noStroke();
-      rect(270, 5, 60, 40);
-      textSize(30);
-      fill(0);
-      text(timer, 300, 40);
-      timer++;
-      stroke(0);
+  //noStroke();
+  //rect(270, 5, 60, 40);
+  textSize(30);
+  fill(0);
+  if (difficulty.equals("easy")) {
+    text("10", 450, 40);
+  }
+  if (difficulty.equals("medium")) {
+    text("40", 450, 40);
+  }
+  if (difficulty.equals("hard")) {
+    text("64", 450, 40);
+  }
+  stroke(0);
   rect(470, 45, 25, 5);
   rect(480, 15, 5, 30);
   fill(#CE3636);
