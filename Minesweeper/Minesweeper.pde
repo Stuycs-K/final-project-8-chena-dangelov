@@ -201,15 +201,10 @@ void draw() {
 
       // game one
       if (gameBoard == null && mouseY > 50) {
-//<<<<<<< HEAD
-//        gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
-//        isGameOver = false;
-//=======
         if (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450)) {
           gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
           isGameOver = false;
         }
-//>>>>>>> b00bb5b9324a5e9407ce77af3b29c92a3c1fac5d
       }
 
       // game n, n>1
@@ -296,21 +291,7 @@ void draw() {
 
         // this condition prevents index out of bounds error and checks countdown
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdown == 0) {
-//<<<<<<< HEAD
-          //fill(200);
-          //noStroke();
-          //rect(425, 5, 50, 40);
-          //textSize(30);
-          //fill(0);
-          //text(gameBoard.getFlagsLeft(),440,40);
-          //stroke(0);
-          //rect(470, 45, 25, 5);
-          //rect(480, 15, 5, 30);
-          //fill(#CE3636);
-          //triangle(480, 15, 480, 30, 505, 22.5);
-          
-//=======
-//>>>>>>> b00bb5b9324a5e9407ce77af3b29c92a3c1fac5d
+
           gameBoard.placeFlag(row, col);
           drawTile(x, y);
           countdown+=10;
