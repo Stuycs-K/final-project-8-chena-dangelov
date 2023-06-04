@@ -1,7 +1,7 @@
 private Board gameBoard;
-private int SQUARE_SIZE, countdown, timer, easyBestTime, mediumBestTime, hardBestTime;
+private int SQUARE_SIZE, countdown, countdownHelpScreen, timer, easyBestTime, mediumBestTime, hardBestTime;
 private String difficulty;
-private boolean isGameOver;
+private boolean isGameOver, isHelpScreen;
 private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67F9FF, #B7BEBF, #FA9223};
 
 void setup() {
@@ -22,29 +22,37 @@ void setup() {
 void drawBoard() {
   background(200);
 
+  // hamburger button
+  noStroke();
+  fill(255);
+  rect(7, 22, 25, 3, 5);
+  rect(7, 30, 25, 3, 5);
+  rect(7, 38, 25, 3, 5);
+  stroke(0);
+
   // best time settings
   textAlign(LEFT);
   textSize(30);
   fill(0);
   if (difficulty.equals("easy")) {
     if (easyBestTime == -1) {
-      text("Best Time : --", 15, 40);
+      text("Best Time : --", 40, 40);
     } else {
-      text("Best Time : "+easyBestTime, 15, 40);
+      text("Best Time : "+easyBestTime, 40, 40);
     }
   }
   if (difficulty.equals("medium")) {
     if (mediumBestTime == -1) {
-      text("Best Time : --", 15, 40);
+      text("Best Time : --", 40, 40);
     } else {
-      text("Best Time : "+mediumBestTime, 15, 40);
+      text("Best Time : "+mediumBestTime, 40, 40);
     }
   }
   if (difficulty.equals("hard")) {
     if (hardBestTime == -1) {
-      text("Best Time : --", 15, 40);
+      text("Best Time : --", 40, 40);
     } else {
-      text("Best Time : "+hardBestTime, 15, 40);
+      text("Best Time : "+hardBestTime, 40, 40);
     }
   }
 
@@ -108,36 +116,100 @@ void drawBoard() {
   }
 }
 
+void removeHelpScreen() {
+  if (gameBoard == null) {
+    stroke(0);
+    for (int row = 0; row < 400; row += SQUARE_SIZE) {
+      for (int col = 50; col < 450; col += SQUARE_SIZE) {
+        if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
+          fill(#26C627);
+        } else {
+          fill(#23B419);
+        }
+        square(row, col, SQUARE_SIZE);
+      }
+    }
+  } else {
+    for (int row = 0; row < 400; row += SQUARE_SIZE) {
+      for (int col = 50; col < 450; col += SQUARE_SIZE) {
+        drawTile(row, col);
+      }
+    }
+  }
+  isHelpScreen = false;
+}
+
 void draw() {
+
+  if (countdownHelpScreen>0)countdownHelpScreen--;
 
   // difficulty change
   if (mousePressed && mouseButton == LEFT && mouseY >= 5 && mouseY <= 45) {
     if (mouseX >= 690 && mouseX <= 720) {
       difficulty = "easy";
       SQUARE_SIZE = width/8;
+      drawBoard();
+      gameBoard = null;
+      isGameOver = true;
+      timer = 0;
     }
     if (mouseX >= 720 && mouseX <= 750) {
       difficulty = "medium";
       SQUARE_SIZE = width/16;
+      drawBoard();
+      gameBoard = null;
+      isGameOver = true;
+      timer = 0;
     }
     if (mouseX >= 750 && mouseX <= 780) {
       difficulty = "hard";
       SQUARE_SIZE = width/20;
+      drawBoard();
+      gameBoard = null;
+      isGameOver = true;
+      timer = 0;
     }
-    drawBoard();
-    gameBoard = null;
-    isGameOver = true;
-    timer = 0;
   }
+
+  // clicking on the hamburger button
+  if (mousePressed && mouseButton == LEFT && mouseY >= 22 && mouseY <= 41 && mouseX >= 7 && mouseX <= 32 && countdownHelpScreen == 0) {
+
+    if (isHelpScreen) {
+      removeHelpScreen();
+    } else {
+      fill(200);
+      rect(0, 50, 400, 400);
+      fill(0);
+      isHelpScreen = true;
+    }
+    countdownHelpScreen+=15;
+  }
+
+
+  // clicking on the board when the help screen is displayed
+  if (mousePressed && isHelpScreen && mouseY >= 50  && !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) ) {
+    removeHelpScreen();
+  }
+
+
 
 
   if (isGameOver) {
     if (mousePressed && (mouseButton == LEFT)) {
 
+
+
       // game one
       if (gameBoard == null && mouseY > 50) {
-        gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
-        isGameOver = false;
+//<<<<<<< HEAD
+//        gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
+//        isGameOver = false;
+//=======
+        if (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450)) {
+          gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
+          isGameOver = false;
+        }
+//>>>>>>> b00bb5b9324a5e9407ce77af3b29c92a3c1fac5d
       }
 
       // game n, n>1
@@ -156,7 +228,7 @@ void draw() {
     if (countdown > 0)countdown--;
 
     // timer
-    if (frameCount % 60 == 0 ) {
+    if (frameCount % 60 == 0 && (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) || !isGameOver)) {
       fill(200);
       noStroke();
       rect(270, 5, 60, 40);
@@ -167,7 +239,8 @@ void draw() {
       stroke(0);
     }
 
-    if (mousePressed) {
+    // the mouse click registers when either the help box is not displayed or if the click is outside the help screen 
+    if (mousePressed && (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450))) {
       int row = mouseX / SQUARE_SIZE;
       int col = (mouseY-50) / SQUARE_SIZE;
       int x = row*SQUARE_SIZE;
@@ -223,21 +296,7 @@ void draw() {
 
         // this condition prevents index out of bounds error and checks countdown
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdown == 0) {
-          fill(200);
-          noStroke();
-          rect(425, 5, 50, 40);
-          textSize(30);
-          fill(0);
-          text(gameBoard.getFlagsLeft(),440,40);
-          stroke(0);
-          rect(470, 45, 25, 5);
-          rect(480, 15, 5, 30);
-          fill(#CE3636);
-          triangle(480, 15, 480, 30, 505, 22.5);
-          
-          gameBoard.placeFlag(row, col);
-          drawTile(x, y);
-          countdown+=10;
+//<<<<<<< HEAD
           //fill(200);
           //noStroke();
           //rect(425, 5, 50, 40);
@@ -249,6 +308,23 @@ void draw() {
           //rect(480, 15, 5, 30);
           //fill(#CE3636);
           //triangle(480, 15, 480, 30, 505, 22.5);
+          
+//=======
+//>>>>>>> b00bb5b9324a5e9407ce77af3b29c92a3c1fac5d
+          gameBoard.placeFlag(row, col);
+          drawTile(x, y);
+          countdown+=10;
+          fill(200);
+          noStroke();
+          rect(425, 5, 50, 40);
+          textSize(30);
+          fill(0);
+          text(gameBoard.getFlagsLeft(),440,40);
+          stroke(0);
+          rect(470, 45, 25, 5);
+          rect(480, 15, 5, 30);
+          fill(#CE3636);
+          triangle(480, 15, 480, 30, 505, 22.5);
         }
       }
     }
@@ -325,7 +401,11 @@ void drawTile(int row, int col) {
 
     // if the space is unflagged, the flag is removed
     else {
-      fill(#26C627);
+      if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
+        fill(#26C627);
+      } else {
+        fill(#23B419);
+      }
       square(row, col, SQUARE_SIZE);
     }
   }
@@ -383,6 +463,7 @@ void keyPressed() {
 
     // press 'w' for automatic win
     if (key == 'w') {
+      if (isHelpScreen)removeHelpScreen();
       for (int i = 0; i < gameBoard.gameBoard.length; i++) {
         for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {
           Tile t = gameBoard.gameBoard[i][j];

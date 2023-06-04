@@ -50,6 +50,10 @@ Today I spent half an hour testing all the features of the game to ensure that e
 
 Today not much progress was made. However, I did start on adding the flagsLeft feature that displays the number of flags left (indicative of how many mines are left unmarked on the board). I added an integer called flagsLeft in Board class and when it is initalized, it is set to the number of mines on the board. I also have a method that returns flagsLeft so Minesweeper class can display it on the actual program. This weekend I will finish this feature and some notable aspects that I'll have to implement alongside this include decrementing flagsLeft everytime a flag is placed (Board class), incrementing flagsLeft everytime a flag is removed (Board class), making difficulty settings smaller to make space for flagsLeft feature (Minesweeper class), and displaying flagsLeft on the actual program (Minesweeper class).
 
+### 6/3/23
+
+Today I completed much of the goals I set for myself yesterday. My work today included changing the size of difficulty settings to make space for flagsLeft feature, displaying flagsLeft, and implementing a flagsLeft setting on the heading of the program. I am almost done with this feature, however, I noticed that there is a bug in the program as sometimes, the game displays more flagsLeft there should be. I will debug this tomorrow.
+
 
 
 ## Vincent D'Angelo
@@ -101,3 +105,7 @@ Today I just looked through the code and added comments to the Minesweeper and B
 ### 6/2/23
 
 Today I made a pretty simple change to the game by making the default colors of the Tiles on the board alternate from a darker green to a slightly lighter green. I find this to be more visually appealing. Tomorrow I hope to do some more work, and I'd like to begin the process of making a How to Play screen. 
+
+### 6/3/23
+
+Today I began work on the How to Play button. The way I want to implement this is by making a pop-up menu that you can access by clicking on a little hamburger button icon, which right now is located in the top left of the screen. By clicking on this button, a gray square appears on the board, and eventually (probably tomorrow), I will fill this square with text and possibly other icons. But the goal of today was to just get its functionality working properly. The main objective was ensuring that opening the how to play screen did not end any games that were ongoing, but rather it temporarily obscured the player's view of the gameBoard. To do this, I made a method called removeHelpScreen() which, when called, redrew the tiles under the screen, creating the effect of the how to play screen simply being removed. There are two ways to close the how to play screen: the first is by clicking the hamburger button again, and the other is by clicking (right or left) elsewhere on the gameBoard. Tomorrow, I hope to add text to the how to play screen.
