@@ -50,6 +50,10 @@ Today I spent half an hour testing all the features of the game to ensure that e
 
 Today not much progress was made. However, I did start on adding the flagsLeft feature that displays the number of flags left (indicative of how many mines are left unmarked on the board). I added an integer called flagsLeft in Board class and when it is initalized, it is set to the number of mines on the board. I also have a method that returns flagsLeft so Minesweeper class can display it on the actual program. This weekend I will finish this feature and some notable aspects that I'll have to implement alongside this include decrementing flagsLeft everytime a flag is placed (Board class), incrementing flagsLeft everytime a flag is removed (Board class), making difficulty settings smaller to make space for flagsLeft feature (Minesweeper class), and displaying flagsLeft on the actual program (Minesweeper class).
 
+### 6/3/23
+
+Today I completed much of the goals I set for myself yesterday. My work today included changing the size of difficulty settings to make space for flagsLeft feature, displaying flagsLeft, and implementing a flagsLeft setting on the heading of the program. I am almost done with this feature, however, I noticed that there is a bug in the program as sometimes, the game displays more flagsLeft there should be. I will debug this tomorrow.
+
 
 
 ## Vincent D'Angelo
