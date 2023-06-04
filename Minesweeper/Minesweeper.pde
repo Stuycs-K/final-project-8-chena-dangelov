@@ -132,6 +132,14 @@ void removeHelpScreen() {
   } else {
     for (int row = 0; row < 400; row += SQUARE_SIZE) {
       for (int col = 50; col < 450; col += SQUARE_SIZE) {
+        if (gameBoard.gameBoard[row/SQUARE_SIZE][(col-50)/SQUARE_SIZE].flagged()) {
+          if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
+            fill(#26C627);
+          } else {
+            fill(#23B419);
+          }
+          square(row, col, SQUARE_SIZE);
+        }
         drawTile(row, col);
       }
     }
@@ -234,7 +242,7 @@ void draw() {
       stroke(0);
     }
 
-    // the mouse click registers when either the help box is not displayed or if the click is outside the help screen 
+    // the mouse click registers when either the help box is not displayed or if the click is outside the help screen
     if (mousePressed && (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450))) {
       int row = mouseX / SQUARE_SIZE;
       int col = (mouseY-50) / SQUARE_SIZE;
@@ -300,7 +308,7 @@ void draw() {
           rect(425, 5, 50, 40);
           textSize(30);
           fill(0);
-          text(gameBoard.getFlagsLeft(),440,40);
+          text(gameBoard.getFlagsLeft(), 440, 40);
           stroke(0);
           rect(470, 45, 25, 5);
           rect(480, 15, 5, 30);
