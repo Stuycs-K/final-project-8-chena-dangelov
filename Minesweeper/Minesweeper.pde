@@ -184,10 +184,16 @@ void draw() {
 
     if (isHelpScreen) {
       removeHelpScreen();
-    } else {
+    } 
+    
+    // opening help screen
+    else {
       fill(200);
       rect(0, 50, 400, 400);
       fill(0);
+      textSize(15);
+      textAlign(LEFT);
+      text("this is a game called minesweeper lol hey there bucaroonie and I will certainly edit this later",5,55,400-10,400-10);
       isHelpScreen = true;
     }
     countdownHelpScreen+=15;
