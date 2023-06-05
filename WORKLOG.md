@@ -109,3 +109,7 @@ Today I made a pretty simple change to the game by making the default colors of 
 ### 6/3/23
 
 Today I began work on the How to Play button. The way I want to implement this is by making a pop-up menu that you can access by clicking on a little hamburger button icon, which right now is located in the top left of the screen. By clicking on this button, a gray square appears on the board, and eventually (probably tomorrow), I will fill this square with text and possibly other icons. But the goal of today was to just get its functionality working properly. The main objective was ensuring that opening the how to play screen did not end any games that were ongoing, but rather it temporarily obscured the player's view of the gameBoard. To do this, I made a method called removeHelpScreen() which, when called, redrew the tiles under the screen, creating the effect of the how to play screen simply being removed. There are two ways to close the how to play screen: the first is by clicking the hamburger button again, and the other is by clicking (right or left) elsewhere on the gameBoard. Tomorrow, I hope to add text to the how to play screen.
+
+### 6/4/23
+
+Today I fixed a minor bug where a flag would not be drawn correctly after the how to play box was opened and closed. I also made the box actually display some text, but I will edit this later on to better fit what we want. The text settings won't change, just the text itself. Minor changes today.
