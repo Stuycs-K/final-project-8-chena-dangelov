@@ -54,6 +54,10 @@ Today not much progress was made. However, I did start on adding the flagsLeft f
 
 Today I completed much of the goals I set for myself yesterday. My work today included changing the size of difficulty settings to make space for flagsLeft feature, displaying flagsLeft, and implementing a flagsLeft setting on the heading of the program. I am almost done with this feature, however, I noticed that there is a bug in the program as sometimes, the game displays more flagsLeft there should be. I will debug this tomorrow.
 
+### 6/4/23
+
+Today I completed the flagsLeft feature. The bug I mentioned earlier had to do with bad math on my part on how many flags are in each difficulty. However, it is now fixed and in order of easy medium hard, the number of flags in each level are 10 40 and 64 respectively. 
+
 
 
 ## Vincent D'Angelo
