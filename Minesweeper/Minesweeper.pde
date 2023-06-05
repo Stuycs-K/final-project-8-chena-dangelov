@@ -36,47 +36,47 @@ void drawBoard() {
   fill(0);
   if (difficulty.equals("easy")) {
     if (easyBestTime == -1) {
-      text("Best Time : --", 40, 40);
+      text("Best Time : --", 600, 40);
     } else {
-      text("Best Time : "+easyBestTime, 40, 40);
+      text("Best Time : "+easyBestTime, 600, 40);
     }
   }
   if (difficulty.equals("medium")) {
     if (mediumBestTime == -1) {
-      text("Best Time : --", 40, 40);
+      text("Best Time : --", 600, 40);
     } else {
-      text("Best Time : "+mediumBestTime, 40, 40);
+      text("Best Time : "+mediumBestTime, 600, 40);
     }
   }
   if (difficulty.equals("hard")) {
     if (hardBestTime == -1) {
-      text("Best Time : --", 40, 40);
+      text("Best Time : --", 600, 40);
     } else {
-      text("Best Time : "+hardBestTime, 40, 40);
+      text("Best Time : "+hardBestTime, 600, 40);
     }
   }
 
   // difficulty selector
-  textSize(30);
-  fill(0);
-  textAlign(LEFT);
-  text("Difficulty : ", 550, 40);
-  fill(#76D85C);
-  rect(690, 5, 30, 40);
-  fill(#EFF063);
-  rect(720, 5, 30, 40);
-  fill(#F75339);
-  rect(750, 5, 30, 40);
-  fill(0);
-  textAlign(CENTER);
-  textSize(40);
-  if (difficulty.equals("easy")) {
-    text("X", 705, 40);
-  } else if (difficulty.equals("medium")) {
-    text("X", 735, 40);
-  } else if (difficulty.equals("hard")) {
-    text("X", 765, 40);
-  }
+  //textSize(30);
+  //fill(0);
+  //textAlign(LEFT);
+  //text("Difficulty : ", 550, 40);
+  //fill(#76D85C);
+  //rect(690, 5, 30, 40);
+  //fill(#EFF063);
+  //rect(720, 5, 30, 40);
+  //fill(#F75339);
+  //rect(750, 5, 30, 40);
+  //fill(0);
+  //textAlign(CENTER);
+  //textSize(40);
+  //if (difficulty.equals("easy")) {
+  //  text("X", 705, 40);
+  //} else if (difficulty.equals("medium")) {
+  //  text("X", 735, 40);
+  //} else if (difficulty.equals("hard")) {
+  //  text("X", 765, 40);
+  //}
 
   // flagsLeft settings
   fill(200);
@@ -85,19 +85,19 @@ void drawBoard() {
   textSize(30);
   fill(0);
   if (difficulty.equals("easy")) {
-    text("10", 440, 40);
+    text("10", 490, 40);
   }
   if (difficulty.equals("medium")) {
-    text("40", 440, 40);
+    text("40", 490, 40);
   }
   if (difficulty.equals("hard")) {
-    text("64", 440, 40);
+    text("64", 490, 40);
   }
   stroke(0);
-  rect(470, 45, 25, 5);
-  rect(480, 15, 5, 30);
+  rect(520, 45, 25, 5);
+  rect(530, 15, 5, 30);
   fill(#CE3636);
-  triangle(480, 15, 480, 30, 505, 22.5);
+  triangle(530, 15, 530, 30, 555, 22.5);
 
 
 
@@ -226,10 +226,10 @@ void draw() {
     if (frameCount % 60 == 0 && (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) || !isGameOver)) {
       fill(200);
       noStroke();
-      rect(270, 5, 60, 40);
+      rect(320, 5, 60, 40);
       textSize(30);
       fill(0);
-      text(timer, 300, 40);
+      text(timer, 350, 40);
       timer++;
       stroke(0);
     }
