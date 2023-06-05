@@ -184,8 +184,8 @@ void draw() {
 
     if (isHelpScreen) {
       removeHelpScreen();
-    } 
-    
+    }
+
     // opening help screen
     else {
       fill(200);
@@ -193,7 +193,7 @@ void draw() {
       fill(0);
       textSize(15);
       textAlign(LEFT);
-      text("this is a game called minesweeper lol hey there bucaroonie and I will certainly edit this later",5,55,400-10,400-10);
+      text("Start the game by clicking any space on the map to initially carve out a board. Each Tile on the board is either a mine or not. If it isn't, it will display the number of mines it touches (if it touches no mines, nothing is displayed). The objective of the game is for players to uncover all Tiles that do not contain a mine while avoiding (or marking) all the mines by utilizing the clues provided by the numbers in the Tiles.\n\nLeft click to clear a Tile. Right click to place a flag, or to remove one.", 5, 55, 400-10, 400-10);
       isHelpScreen = true;
     }
     countdownHelpScreen+=15;
