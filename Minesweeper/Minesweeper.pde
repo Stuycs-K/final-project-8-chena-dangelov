@@ -29,18 +29,18 @@ void drawBoard() {
   rect(7, 30, 25, 3, 5);
   rect(7, 38, 25, 3, 5);
   stroke(0);
-  
+
   // difficulty selector
   noStroke();
   fill(220);
   rect(50, 20, 125, 24, 5);
   fill(0);
   textSize(20);
-  textAlign(CENTER,CENTER);
-  text(difficulty,95,28);
+  textAlign(CENTER, CENTER);
+  text(difficulty, 95, 28);
   fill(150);
   triangle(170, 25, 150, 25, 160, 40);
-  
+
 
   // best time settings
   textAlign(LEFT);
@@ -180,11 +180,33 @@ void draw() {
 
   // difficulty change
   if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 20 && mouseY <= 44 && countdownDifficultyScreen == 0) {
-    
-    if(isDifficultyScreen){
+
+    if (isDifficultyScreen) {
       removeDifficultyScreen();
-    }
-    else{
+    } else {
+
+      noStroke();
+      fill(220);
+      rect(50, 44, 125, 24, 5);
+      fill(0);
+      textSize(20);
+      textAlign(CENTER, CENTER);
+      text(difficulty, 95, 53);
+      
+      fill(220);
+      rect(50, 68, 125, 24, 5);
+      fill(0);
+      textSize(20);
+      textAlign(CENTER, CENTER);
+      text(difficulty, 95, 78);
+      
+      fill(220);
+      rect(50, 92, 125, 24, 5);
+      fill(0);
+      textSize(20);
+      textAlign(CENTER, CENTER);
+      text(difficulty, 95, 102);
+
       isDifficultyScreen = true;
     }
     countdown += 15;
@@ -278,7 +300,7 @@ void draw() {
       stroke(0);
     }
 
-    // the mouse click registers when either the help box is not displayed or if the click is outside the help screen 
+    // the mouse click registers when either the help box is not displayed or if the click is outside the help screen
     if (mousePressed && (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450))) {
       int row = mouseX / SQUARE_SIZE;
       int col = (mouseY-50) / SQUARE_SIZE;
@@ -344,7 +366,7 @@ void draw() {
           rect(425, 5, 50, 40);
           textSize(30);
           fill(0);
-          text(gameBoard.getFlagsLeft(),440,40);
+          text(gameBoard.getFlagsLeft(), 440, 40);
           stroke(0);
           rect(470, 45, 25, 5);
           rect(480, 15, 5, 30);
