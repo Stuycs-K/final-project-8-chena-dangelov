@@ -1,7 +1,7 @@
 private Board gameBoard;
-private int SQUARE_SIZE, countdown, countdownHelpScreen, timer, easyBestTime, mediumBestTime, hardBestTime;
+private int SQUARE_SIZE, countdown, countdownHelpScreen, countdownDifficultyScreen, timer, easyBestTime, mediumBestTime, hardBestTime;
 private String difficulty;
-private boolean isGameOver, isHelpScreen;
+private boolean isGameOver, isHelpScreen, isDifficultyScreen;
 private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67F9FF, #B7BEBF, #FA9223};
 
 void setup() {
@@ -29,6 +29,18 @@ void drawBoard() {
   rect(7, 30, 25, 3, 5);
   rect(7, 38, 25, 3, 5);
   stroke(0);
+  
+  // difficulty selector
+  noStroke();
+  fill(220);
+  rect(50, 20, 125, 24, 5);
+  fill(0);
+  textSize(20);
+  textAlign(CENTER,CENTER);
+  text(difficulty,95,28);
+  fill(150);
+  triangle(170, 25, 150, 25, 160, 40);
+  
 
   // best time settings
   textAlign(LEFT);
@@ -139,36 +151,68 @@ void removeHelpScreen() {
   isHelpScreen = false;
 }
 
+void removeDifficultyScreen() {
+  //if (gameBoard == null) {
+  //  stroke(0);
+  //  for (int row = 0; row < 400; row += SQUARE_SIZE) {
+  //    for (int col = 50; col < 450; col += SQUARE_SIZE) {
+  //      if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
+  //        fill(#26C627);
+  //      } else {
+  //        fill(#23B419);
+  //      }
+  //      square(row, col, SQUARE_SIZE);
+  //    }
+  //  }
+  //} else {
+  //  for (int row = 0; row < 400; row += SQUARE_SIZE) {
+  //    for (int col = 50; col < 450; col += SQUARE_SIZE) {
+  //      drawTile(row, col);
+  //    }
+  //  }
+  //}
+  isDifficultyScreen = false;
+}
+
 void draw() {
 
   if (countdownHelpScreen>0)countdownHelpScreen--;
 
   // difficulty change
-  if (mousePressed && mouseButton == LEFT && mouseY >= 5 && mouseY <= 45) {
-    if (mouseX >= 690 && mouseX <= 720) {
-      difficulty = "easy";
-      SQUARE_SIZE = width/8;
-      drawBoard();
-      gameBoard = null;
-      isGameOver = true;
-      timer = 0;
+  if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 20 && mouseY <= 44 && countdownDifficultyScreen == 0) {
+    
+    if(isDifficultyScreen){
+      removeDifficultyScreen();
     }
-    if (mouseX >= 720 && mouseX <= 750) {
-      difficulty = "medium";
-      SQUARE_SIZE = width/16;
-      drawBoard();
-      gameBoard = null;
-      isGameOver = true;
-      timer = 0;
+    else{
+      isDifficultyScreen = true;
     }
-    if (mouseX >= 750 && mouseX <= 780) {
-      difficulty = "hard";
-      SQUARE_SIZE = width/20;
-      drawBoard();
-      gameBoard = null;
-      isGameOver = true;
-      timer = 0;
-    }
+    countdown += 15;
+    //print("hello");
+    //if (mouseX >= 690 && mouseX <= 720) {
+    //  difficulty = "easy";
+    //  SQUARE_SIZE = width/8;
+    //  drawBoard();
+    //  gameBoard = null;
+    //  isGameOver = true;
+    //  timer = 0;
+    //}
+    //if (mouseX >= 720 && mouseX <= 750) {
+    //  difficulty = "medium";
+    //  SQUARE_SIZE = width/16;
+    //  drawBoard();
+    //  gameBoard = null;
+    //  isGameOver = true;
+    //  timer = 0;
+    //}
+    //if (mouseX >= 750 && mouseX <= 780) {
+    //  difficulty = "hard";
+    //  SQUARE_SIZE = width/20;
+    //  drawBoard();
+    //  gameBoard = null;
+    //  isGameOver = true;
+    //  timer = 0;
+    //}
   }
 
   // clicking on the hamburger button
