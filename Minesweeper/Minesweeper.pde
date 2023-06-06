@@ -295,12 +295,12 @@ void draw() {
             // if the player wins the game, a bestTime is calculated
             if (gameOutcome) {
               if (difficulty.equals("easy")) {
-                
+
                 // check to see if the timer cracks the top three best times...
                 for (int i = 0; i < 3; i++) {
 
                   if (timer < easyBestTimes[i] || easyBestTimes[i]==-1) {
-                    
+
                     // ...and if it does, move the values slower than it to the lower places in the list
                     for (int j = 2; j > i; j--) {
                       easyBestTimes[j]=easyBestTimes[j-1];
@@ -463,14 +463,17 @@ void endScreen(boolean outcome) {
     text("winner !", 626, 40);
   } else {
     text("loser !", 625, 40);
-
-
+    
+    int sizeOfText = 1;
     if (difficulty.equals("easy")) {
-      textSize(30);
+      sizeOfText = 30;
+      textSize(sizeOfText);
     } else if (difficulty.equals("medium")) {
-      textSize(18);
+      sizeOfText = 18;
+      textSize(sizeOfText);
     } else if (difficulty.equals("hard")) {
-      textSize(14);
+      sizeOfText = 14;
+      textSize(sizeOfText);
     }
 
     // displays all of the mines on the board that have not been flagged
@@ -483,13 +486,16 @@ void endScreen(boolean outcome) {
           fill(#E81E1E);
           circle((i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+50+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6);
         }
-        if (t.flagged() && !t.isMine()){
-            t.setFlagged(false);
-            drawTile(i*SQUARE_SIZE, j*SQUARE_SIZE+50);
-            fill(#FA2C03);
-            textAlign(CENTER);
-            textSize(SQUARE_SIZE);
-            text("x",i*SQUARE_SIZE+SQUARE_SIZE/2, j*SQUARE_SIZE+50+SQUARE_SIZE);
+        if (t.flagged() && !t.isMine()) {
+          t.setFlagged(false);
+          drawTile(i*SQUARE_SIZE, j*SQUARE_SIZE+50);
+          fill(#FA2C03);
+          textAlign(CENTER);
+          textSize(SQUARE_SIZE*2);
+          text("x", i*SQUARE_SIZE+SQUARE_SIZE/2, j*SQUARE_SIZE+50+SQUARE_SIZE);
+
+       // reset text size
+          textSize(sizeOfText);
         }
       }
     }
