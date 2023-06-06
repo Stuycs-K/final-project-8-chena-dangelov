@@ -1,5 +1,5 @@
 private Board gameBoard;
-private int SQUARE_SIZE, countdown, countdownHelpScreen, timer;
+private int SQUARE_SIZE, countdown, countdownHelpScreen, timer, frameCountExplosion;
 private String difficulty;
 private boolean isGameOver, isHelpScreen;
 private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67F9FF, #B7BEBF, #FA9223};
@@ -140,20 +140,34 @@ String bestTime(int time) {
   return ""+time;
 }
 
-void explosion(){
+void explosion(int value){
   int row = explosionArr[0];
   int col = explosionArr[1];
-  noStroke();
-  fill(#FF150D);
   
-  circle(row+SQUARE_SIZE/2, col+50+SQUARE_SIZE/2 - 5-SQUARE_SIZE, SQUARE_SIZE*.6);
+  fill(#FF150D, 0);
+  stroke(#FF150D);
+  strokeWeight(1);
+  
+  circle(row+SQUARE_SIZE/2, col+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6 + value*7);
   
   stroke(0);
+  
 }
 
 void draw() {
   
-  if(explosionArr!=null)explosion();
+  if(explosionArr!=null){
+    if(frameCountExplosion == 0){
+      frameCountExplosion = frameCount;
+    }
+    if(frameCount - frameCountExplosion < 10){
+      explosion( frameCount - frameCountExplosion );
+    }
+    else{
+      frameCountExplosion = 0;
+      explosionArr = null;
+    }
+  }
 
   if (countdownHelpScreen>0)countdownHelpScreen--;
 
