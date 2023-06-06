@@ -146,9 +146,11 @@ void explosion(int value){
   
   fill(#FF150D, 0);
   stroke(#FF150D);
-  strokeWeight(1);
+  strokeWeight(0.8);
   
-  circle(row+SQUARE_SIZE/2, col+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6 + value*7);
+  if(difficulty == "easy")circle(row+SQUARE_SIZE/2, col+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6 + value*15);
+  if(difficulty == "medium")circle(row+SQUARE_SIZE/2, col+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6 + value*9);
+  if(difficulty == "hard")circle(row+SQUARE_SIZE/2, col+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6 + value*7);
   
   stroke(0);
   
