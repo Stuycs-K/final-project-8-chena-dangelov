@@ -3,9 +3,9 @@ private int SQUARE_SIZE, countdown, countdownHelpScreen, timer;
 private String difficulty;
 private boolean isGameOver, isHelpScreen;
 private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67F9FF, #B7BEBF, #FA9223};
-private int[] easyBestTimes = {-1, -1, -1,};
-private int[] mediumBestTimes = {-1, -1, -1,};
-private int[] hardBestTimes = {-1, -1, -1,};
+private int[] easyBestTimes = {-1, -1, -1, };
+private int[] mediumBestTimes = {-1, -1, -1, };
+private int[] hardBestTimes = {-1, -1, -1, };
 
 void setup() {
   size(800, 850);
@@ -34,25 +34,13 @@ void drawBoard() {
   textSize(30);
   fill(0);
   if (difficulty.equals("easy")) {
-    if (easyBestTimes[0] == -1) {
-      text("Best Time : --", 40, 40);
-    } else {
-      text("Best Time : "+easyBestTimes[0], 40, 40);
-    }
+    text("Best Time : "+bestTime(easyBestTimes[0]), 40, 40);
   }
   if (difficulty.equals("medium")) {
-    if (mediumBestTimes[0] == -1) {
-      text("Best Time : --", 40, 40);
-    } else {
-      text("Best Time : "+mediumBestTimes[0], 40, 40);
-    }
+    text("Best Time : "+bestTime(mediumBestTimes[0]), 40, 40);
   }
   if (difficulty.equals("hard")) {
-    if (hardBestTimes[0] == -1) {
-      text("Best Time : --", 40, 40);
-    } else {
-      text("Best Time : "+hardBestTimes[0], 40, 40);
-    }
+    text("Best Time : "+bestTime(hardBestTimes[0]), 40, 40);
   }
 
   // difficulty selector
@@ -146,8 +134,8 @@ void removeHelpScreen() {
   isHelpScreen = false;
 }
 
-String bestTime(int time){
-  if(time < 0)return "--";
+String bestTime(int time) {
+  if (time < 0)return "--";
   return ""+time;
 }
 
@@ -196,38 +184,41 @@ void draw() {
       fill(200);
       rect(0, 50, 400, 400);
       fill(0);
+
+      // INSTRUCTIONS
       textAlign(LEFT);
       textSize(25);
-      text("INSTRUCTIONS:", 5,55+25);
+      text("INSTRUCTIONS:", 5, 55+25);
       textSize(15);
       textLeading(20);
-      text("Start the game by clicking any space on the map to initially carve out a board. Each Tile on the board is either a mine or not. If it isn't, it will display the number of mines it touches (if it touches no mines, nothing is displayed). The objective of the game is for players to uncover all Tiles that do not contain a mine while avoiding (or marking) all the mines by utilizing the clues provided by the numbers in the Tiles.\n\nLeft click to clear a Tile. Right click to place a flag, or to remove one.", 
-      5, 55+30, 400-10, 400-10);
+      text("Start the game by clicking any space on the map to initially carve out a board. Each Tile on the board is either a mine or not. If it isn't, it will display the number of mines it touches (if it touches no mines, nothing is displayed). The objective of the game is for players to uncover all Tiles that do not contain a mine while avoiding (or marking) all the mines by utilizing the clues provided by the numbers in the Tiles.\n\nLeft click to clear a Tile. Right click to place a flag, or to remove one.",
+        5, 55+30, 400-10, 400-10);
+
+
+      //PERSONAL BESTS
       textSize(25);
-      text("PERSONAL BESTS:", 5,270+45);
+      text("PERSONAL BESTS:", 5, 270+45);
       textSize(20);
-      text("EASY:", 5,270+70);
+      text("EASY:", 5, 270+70);
       textSize(15);
       text("1:  " + bestTime(easyBestTimes[0])+"\n"+
-           "2:  " + bestTime(easyBestTimes[1])+"\n"+
-           "3:  " + bestTime(easyBestTimes[2])
-      , 5,270+90);
+        "2:  " + bestTime(easyBestTimes[1])+"\n"+
+        "3:  " + bestTime(easyBestTimes[2])
+        , 5, 270+90);
       textSize(20);
-      text("MEDM:", 100,270+70);
+      text("MEDM:", 100, 270+70);
       textSize(15);
       text("1:  " + bestTime(mediumBestTimes[0])+"\n"+
-           "2:  " + bestTime(mediumBestTimes[1])+"\n"+
-           "3:  " + bestTime(mediumBestTimes[2])
-      , 100,270+90);
+        "2:  " + bestTime(mediumBestTimes[1])+"\n"+
+        "3:  " + bestTime(mediumBestTimes[2])
+        , 100, 270+90);
       textSize(20);
-      text("HARD:", 200,270+70);
+      text("HARD:", 200, 270+70);
       textSize(15);
       text("1:  " + bestTime(hardBestTimes[0])+"\n"+
-           "2:  " + bestTime(hardBestTimes[1])+"\n"+
-           "3:  " + bestTime(hardBestTimes[2])
-      , 200,270+90);
-      
-      
+        "2:  " + bestTime(hardBestTimes[1])+"\n"+
+        "3:  " + bestTime(hardBestTimes[2])
+        , 200, 270+90);
     }
     countdownHelpScreen+=15;
   }
@@ -304,10 +295,14 @@ void draw() {
             // if the player wins the game, a bestTime is calculated
             if (gameOutcome) {
               if (difficulty.equals("easy")) {
+                
+                // check to see if the timer cracks the top three best times...
                 for (int i = 0; i < 3; i++) {
 
                   if (timer < easyBestTimes[i] || easyBestTimes[i]==-1) {
-                    for(int j = 2; j > i; j--){
+                    
+                    // ...and if it does, move the values slower than it to the lower places in the list
+                    for (int j = 2; j > i; j--) {
                       easyBestTimes[j]=easyBestTimes[j-1];
                     }
                     easyBestTimes[i] = timer;
@@ -320,7 +315,7 @@ void draw() {
                 for (int i = 0; i < 3; i++) {
 
                   if (timer < mediumBestTimes[i] || mediumBestTimes[i]==-1) {
-                    for(int j = 2; j > i; j--){
+                    for (int j = 2; j > i; j--) {
                       mediumBestTimes[j]=mediumBestTimes[j-1];
                     }
                     mediumBestTimes[i] = timer;
@@ -333,7 +328,7 @@ void draw() {
                 for (int i = 0; i < 3; i++) {
 
                   if (timer < hardBestTimes[i] || hardBestTimes[i]==-1) {
-                    for(int j = 2; j > i; j--){
+                    for (int j = 2; j > i; j--) {
                       hardBestTimes[j]=hardBestTimes[j-1];
                     }
                     hardBestTimes[i] = timer;
@@ -519,43 +514,43 @@ void keyPressed() {
       }
 
       if (difficulty.equals("easy")) {
-                for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
 
-                  if (timer < easyBestTimes[i] || easyBestTimes[i]==-1) {
-                    for(int j = 2; j > i; j--){
-                      easyBestTimes[j]=easyBestTimes[j-1];
-                    }
-                    easyBestTimes[i] = timer;
-                    i+=100;
-                  }
-                }
-              }
+          if (timer < easyBestTimes[i] || easyBestTimes[i]==-1) {
+            for (int j = 2; j > i; j--) {
+              easyBestTimes[j]=easyBestTimes[j-1];
+            }
+            easyBestTimes[i] = timer;
+            i+=100;
+          }
+        }
+      }
 
       if (difficulty.equals("medium")) {
-                for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
 
-                  if (timer < mediumBestTimes[i] || mediumBestTimes[i]==-1) {
-                    for(int j = 2; j > i; j--){
-                      mediumBestTimes[j]=mediumBestTimes[j-1];
-                    }
-                    mediumBestTimes[i] = timer;
-                    i+=100;
-                  }
-                }
-              }
+          if (timer < mediumBestTimes[i] || mediumBestTimes[i]==-1) {
+            for (int j = 2; j > i; j--) {
+              mediumBestTimes[j]=mediumBestTimes[j-1];
+            }
+            mediumBestTimes[i] = timer;
+            i+=100;
+          }
+        }
+      }
 
       if (difficulty.equals("hard")) {
-                for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
 
-                  if (timer < hardBestTimes[i] || hardBestTimes[i]==-1) {
-                    for(int j = 2; j > i; j--){
-                      hardBestTimes[j]=hardBestTimes[j-1];
-                    }
-                    hardBestTimes[i] = timer;
-                    i+=100;
-                  }
-                }
-              }
+          if (timer < hardBestTimes[i] || hardBestTimes[i]==-1) {
+            for (int j = 2; j > i; j--) {
+              hardBestTimes[j]=hardBestTimes[j-1];
+            }
+            hardBestTimes[i] = timer;
+            i+=100;
+          }
+        }
+      }
 
       endScreen(true);
     }
