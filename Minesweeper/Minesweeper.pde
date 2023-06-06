@@ -224,14 +224,12 @@ void draw() {
   }
 
 
-  // clicking on the board when the help screen is displayed
+  // clicking on the board when the help screen is displayed removes the help screen
   if (mousePressed && isHelpScreen && mouseY >= 50  && !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) ) {
     removeHelpScreen();
   }
-
-
-
-
+  
+  
   if (isGameOver) {
     if (mousePressed && (mouseButton == LEFT)) {
 
