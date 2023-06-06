@@ -6,6 +6,7 @@ private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67
 private final int[] easyBestTimes = {-1, -1, -1, };
 private final int[] mediumBestTimes = {-1, -1, -1, };
 private final int[] hardBestTimes = {-1, -1, -1, };
+private int[] explosionArr;
 
 void setup() {
   size(800, 850);
@@ -139,7 +140,20 @@ String bestTime(int time) {
   return ""+time;
 }
 
+void explosion(){
+  int row = explosionArr[0];
+  int col = explosionArr[1];
+  noStroke();
+  fill(#FF150D);
+  
+  circle(row+SQUARE_SIZE/2, col+50+SQUARE_SIZE/2 - 5-SQUARE_SIZE, SQUARE_SIZE*.6);
+  
+  stroke(0);
+}
+
 void draw() {
+  
+  if(explosionArr!=null)explosion();
 
   if (countdownHelpScreen>0)countdownHelpScreen--;
 
@@ -335,6 +349,10 @@ void draw() {
                 }
               }
             }
+            
+            if(!gameOutcome){
+              explosionArr = new int[]{x,y};
+            }
 
             endScreen(gameOutcome);
           }
@@ -484,6 +502,8 @@ void endScreen(boolean outcome) {
           fill(#E81E1E);
           circle((i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+50+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6);
         }
+        
+        // removing misplaced flags
         if (t.flagged() && !t.isMine()) {
           t.setFlagged(false);
           drawTile(i*SQUARE_SIZE, j*SQUARE_SIZE+50);
