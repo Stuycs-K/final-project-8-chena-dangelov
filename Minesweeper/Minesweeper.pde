@@ -206,12 +206,27 @@ void draw() {
       textSize(25);
       text("PERSONAL BESTS:", 5,270+45);
       textSize(20);
-      text("EASY:               MEDIUM:               HARD:", 5,270+70);
+      text("EASY:", 5,270+70);
       textSize(15);
-      text("1:  " + bestTime(easyBestTimes[0])+"                           1: " + bestTime(mediumBestTimes[0])+"                                     1: "+bestTime(hardBestTimes[0])+"\n"+
-           "2:  " + bestTime(easyBestTimes[1])+"                           2: " + bestTime(mediumBestTimes[1])+"                                     2: "+bestTime(hardBestTimes[1])+"\n"+
-           "3:  " + bestTime(easyBestTimes[2])+"                           3: " + bestTime(mediumBestTimes[2])+"                                     3: "+bestTime(hardBestTimes[2])
+      text("1:  " + bestTime(easyBestTimes[0])+"\n"+
+           "2:  " + bestTime(easyBestTimes[1])+"\n"+
+           "3:  " + bestTime(easyBestTimes[2])
       , 5,270+90);
+      textSize(20);
+      text("MEDM:", 100,270+70);
+      textSize(15);
+      text("1:  " + bestTime(mediumBestTimes[0])+"\n"+
+           "2:  " + bestTime(mediumBestTimes[1])+"\n"+
+           "3:  " + bestTime(mediumBestTimes[2])
+      , 100,270+90);
+      textSize(20);
+      text("HARD:", 200,270+70);
+      textSize(15);
+      text("1:  " + bestTime(hardBestTimes[0])+"\n"+
+           "2:  " + bestTime(hardBestTimes[1])+"\n"+
+           "3:  " + bestTime(hardBestTimes[2])
+      , 200,270+90);
+      
       
     }
     countdownHelpScreen+=15;
@@ -292,6 +307,9 @@ void draw() {
                 for (int i = 0; i < 3; i++) {
 
                   if (timer < easyBestTimes[i] || easyBestTimes[i]==-1) {
+                    for(int j = 2; j > i; j--){
+                      easyBestTimes[j]=easyBestTimes[j-1];
+                    }
                     easyBestTimes[i] = timer;
                     i+=100;
                   }
@@ -302,6 +320,9 @@ void draw() {
                 for (int i = 0; i < 3; i++) {
 
                   if (timer < mediumBestTimes[i] || mediumBestTimes[i]==-1) {
+                    for(int j = 2; j > i; j--){
+                      mediumBestTimes[j]=mediumBestTimes[j-1];
+                    }
                     mediumBestTimes[i] = timer;
                     i+=100;
                   }
@@ -312,6 +333,9 @@ void draw() {
                 for (int i = 0; i < 3; i++) {
 
                   if (timer < hardBestTimes[i] || hardBestTimes[i]==-1) {
+                    for(int j = 2; j > i; j--){
+                      hardBestTimes[j]=hardBestTimes[j-1];
+                    }
                     hardBestTimes[i] = timer;
                     i+=100;
                   }
@@ -495,34 +519,43 @@ void keyPressed() {
       }
 
       if (difficulty.equals("easy")) {
-        for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 3; i++) {
 
-          if (timer < easyBestTimes[i] || easyBestTimes[i]==-1) {
-            easyBestTimes[i] = timer;
-            i+=100;
-          }
-        }
-      }
+                  if (timer < easyBestTimes[i] || easyBestTimes[i]==-1) {
+                    for(int j = 2; j > i; j--){
+                      easyBestTimes[j]=easyBestTimes[j-1];
+                    }
+                    easyBestTimes[i] = timer;
+                    i+=100;
+                  }
+                }
+              }
 
       if (difficulty.equals("medium")) {
-        for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 3; i++) {
 
-          if (timer < mediumBestTimes[i] || mediumBestTimes[i]==-1) {
-            mediumBestTimes[i] = timer;
-            i+=100;
-          }
-        }
-      }
+                  if (timer < mediumBestTimes[i] || mediumBestTimes[i]==-1) {
+                    for(int j = 2; j > i; j--){
+                      mediumBestTimes[j]=mediumBestTimes[j-1];
+                    }
+                    mediumBestTimes[i] = timer;
+                    i+=100;
+                  }
+                }
+              }
 
       if (difficulty.equals("hard")) {
-        for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 3; i++) {
 
-          if (timer < hardBestTimes[i] || hardBestTimes[i]==-1) {
-            hardBestTimes[i] = timer;
-            i+=100;
-          }
-        }
-      }
+                  if (timer < hardBestTimes[i] || hardBestTimes[i]==-1) {
+                    for(int j = 2; j > i; j--){
+                      hardBestTimes[j]=hardBestTimes[j-1];
+                    }
+                    hardBestTimes[i] = timer;
+                    i+=100;
+                  }
+                }
+              }
 
       endScreen(true);
     }
