@@ -117,3 +117,7 @@ Today I began work on the How to Play button. The way I want to implement this i
 ### 6/4/23
 
 Today I fixed a minor bug where a flag would not be drawn correctly after the how to play box was opened and closed. I also made the box actually display some text, but I will edit this later on to better fit what we want. The text settings won't change, just the text itself. Minor changes today.
+
+### 6/5/23
+
+Today I made some more work with the how to play box, which honestly I think now would be more appropriately called the "more info" box. Anyway, I added the rest of the instructions of the game here, and made sure to wrap the text so that they stayed in our box. I also added another feature to the box: a list of personal bests. Really, it's three lists, the top three fastest times that the player has achieved in each mode. I implemented this by changing the bestTime integer variables into arrays with a length of 3. I tried to use a heap, but processing wasn't letting me do that, so this probably took longer than it would have otherwise, and it is perhaps slightly less efficient than the heap algorithm (but I'd argue that does not matter too much as these arrays are very small).
