@@ -3,9 +3,9 @@ private int SQUARE_SIZE, countdown, countdownHelpScreen, timer;
 private String difficulty;
 private boolean isGameOver, isHelpScreen;
 private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67F9FF, #B7BEBF, #FA9223};
-private int[] easyBestTimes = {-1, -1, -1, };
-private int[] mediumBestTimes = {-1, -1, -1, };
-private int[] hardBestTimes = {-1, -1, -1, };
+private final int[] easyBestTimes = {-1, -1, -1, };
+private final int[] mediumBestTimes = {-1, -1, -1, };
+private final int[] hardBestTimes = {-1, -1, -1, };
 
 void setup() {
   size(800, 850);
