@@ -483,9 +483,13 @@ void endScreen(boolean outcome) {
           fill(#E81E1E);
           circle((i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+50+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6);
         }
-        if (t.flagged()){
+        if (t.flagged() && !t.isMine()){
             t.setFlagged(false);
             drawTile(i*SQUARE_SIZE, j*SQUARE_SIZE+50);
+            fill(#FA2C03);
+            textAlign(CENTER);
+            textSize(SQUARE_SIZE);
+            text("x",i*SQUARE_SIZE+SQUARE_SIZE/2, j*SQUARE_SIZE+50+SQUARE_SIZE);
         }
       }
     }
