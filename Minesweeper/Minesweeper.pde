@@ -36,8 +36,8 @@ void drawBoard() {
   rect(50, 20, 125, 24, 5);
   fill(0);
   textSize(20);
-  textAlign(CENTER, CENTER);
-  text(difficulty, 95, 28);
+  //textAlign(CENTER, CENTER);
+  text(difficulty, 65, 38);
   fill(150);
   triangle(170, 25, 150, 25, 160, 40);
 
@@ -187,25 +187,31 @@ void draw() {
 
       noStroke();
       fill(220);
+      if(difficulty.equals("easy")){
+        fill(200);
+      }
       rect(50, 44, 125, 24, 5);
       fill(0);
       textSize(20);
-      textAlign(CENTER, CENTER);
-      text(difficulty, 95, 53);
+      text("easy", 65, 62);
       
       fill(220);
+      if(difficulty.equals("medium")){
+        fill(200);
+      }
       rect(50, 68, 125, 24, 5);
       fill(0);
       textSize(20);
-      textAlign(CENTER, CENTER);
-      text(difficulty, 95, 78);
+      text("medium", 65, 86);
       
       fill(220);
+      if(difficulty.equals("hard")){
+        fill(200);
+      }
       rect(50, 92, 125, 24, 5);
       fill(0);
       textSize(20);
-      textAlign(CENTER, CENTER);
-      text(difficulty, 95, 102);
+      text("hard", 65, 110);
 
       isDifficultyScreen = true;
     }
