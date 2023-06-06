@@ -121,3 +121,7 @@ Today I fixed a minor bug where a flag would not be drawn correctly after the ho
 ### 6/5/23
 
 Today I made some more work with the how to play box, which honestly I think now would be more appropriately called the "more info" box. Anyway, I added the rest of the instructions of the game here, and made sure to wrap the text so that they stayed in our box. I also added another feature to the box: a list of personal bests. Really, it's three lists, the top three fastest times that the player has achieved in each mode. I implemented this by changing the bestTime integer variables into arrays with a length of 3. I tried to use a heap, but processing wasn't letting me do that, so this probably took longer than it would have otherwise, and it is perhaps slightly less efficient than the heap algorithm (but I'd argue that does not matter too much as these arrays are very small).
+
+### 6/6/23
+
+Today I made it so that, upon losing the game, the board removes any flags that were not placed correctly (i.e. they were not placed on a mine), and replaces them all with a big red “x”. Also, I added a fun little animation. When the player clicks a mine, multiple rings of red circles emanate from the mine. This animation lasts for ten frames, and I created a method called explosion() for it. This way the specific mine the player messed up on is prioritized.
