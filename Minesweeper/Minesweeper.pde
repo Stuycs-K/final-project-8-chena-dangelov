@@ -483,6 +483,10 @@ void endScreen(boolean outcome) {
           fill(#E81E1E);
           circle((i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+50+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6);
         }
+        if (t.flagged()){
+            t.setFlagged(false);
+            drawTile(i*SQUARE_SIZE, j*SQUARE_SIZE+50);
+        }
       }
     }
   }
