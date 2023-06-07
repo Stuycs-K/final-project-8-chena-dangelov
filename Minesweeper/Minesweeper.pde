@@ -187,32 +187,7 @@ void draw() {
 
       isDifficultyScreen = true;
     }
-    countdown += 15;
-    //print("hello");
-    //if (mouseX >= 690 && mouseX <= 720) {
-    //  difficulty = "easy";
-    //  SQUARE_SIZE = width/8;
-    //  drawBoard();
-    //  gameBoard = null;
-    //  isGameOver = true;
-    //  timer = 0;
-    //}
-    //if (mouseX >= 720 && mouseX <= 750) {
-    //  difficulty = "medium";
-    //  SQUARE_SIZE = width/16;
-    //  drawBoard();
-    //  gameBoard = null;
-    //  isGameOver = true;
-    //  timer = 0;
-    //}
-    //if (mouseX >= 750 && mouseX <= 780) {
-    //  difficulty = "hard";
-    //  SQUARE_SIZE = width/20;
-    //  drawBoard();
-    //  gameBoard = null;
-    //  isGameOver = true;
-    //  timer = 0;
-    //}
+    countdownDifficultyScreen += 15;
   }
 
   if (isDifficultyScreen) {
@@ -245,11 +220,9 @@ void draw() {
   if (isGameOver) {
     if (mousePressed && (mouseButton == LEFT)) {
 
-
-
       // game one
       if (gameBoard == null && mouseY > 50) {
-        if (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450)) {
+        if (!isHelpScreen || !isDifficultyScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450)) {
           gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
           isGameOver = false;
         }
@@ -271,7 +244,7 @@ void draw() {
     if (countdown > 0)countdown--;
 
     // timer
-    if (frameCount % 60 == 0 && (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) || !isGameOver)) {
+    if (frameCount % 60 == 0 && (!isHelpScreen || !isDifficultyScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) || !isGameOver)) {
       fill(200);
       noStroke();
       rect(320, 5, 60, 40);
@@ -283,7 +256,7 @@ void draw() {
     }
 
     // the mouse click registers when either the help box is not displayed or if the click is outside the help screen
-    if (mousePressed && (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450))) {
+    if (mousePressed && (!isHelpScreen || !isDifficultyScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450))) {
       int row = mouseX / SQUARE_SIZE;
       int col = (mouseY-50) / SQUARE_SIZE;
       int x = row*SQUARE_SIZE;
