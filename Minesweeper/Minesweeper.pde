@@ -249,6 +249,7 @@ void draw() {
         "2:  " + bestTime(hardBestTimes[1])+"\n"+
         "3:  " + bestTime(hardBestTimes[2])
         , 200, 270+90);
+        textAlign(CENTER);
     }
     countdownHelpScreen+=15;
   }
@@ -290,7 +291,6 @@ void draw() {
 
     // timer
     if (frameCount % 60 == 0 ) {
-      textAlign(CENTER);
       fill(200);
       noStroke();
       rect(270, 5, 60, 40);
