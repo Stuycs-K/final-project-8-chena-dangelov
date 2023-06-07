@@ -41,7 +41,6 @@ void drawBoard() {
   fill(150);
   triangle(170, 25, 150, 25, 160, 40);
 
-
   // best time settings
   textAlign(LEFT);
   textSize(30);
@@ -70,8 +69,6 @@ void drawBoard() {
 
   // flagsLeft settings
   fill(200);
-  //noStroke();
-  //rect(270, 5, 60, 40);
   textSize(30);
   fill(0);
   if (difficulty.equals("easy")) {
@@ -88,9 +85,6 @@ void drawBoard() {
   rect(530, 15, 5, 30);
   fill(#CE3636);
   triangle(530, 15, 530, 30, 555, 22.5);
-
-
-
 
   // board drawing
   stroke(0);
@@ -200,6 +194,7 @@ void draw() {
     else{
       difficulty = "medium";
     }
+    drawBoard();
     print(difficulty+"-");
   }
 
