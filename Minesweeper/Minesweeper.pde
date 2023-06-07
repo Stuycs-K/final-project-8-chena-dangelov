@@ -452,15 +452,16 @@ void draw() {
           countdown+=10;
           fill(200);
           noStroke();
-          rect(425, 5, 50, 40);
+          rect(480, 5, 50, 40);
           textSize(30);
           fill(0);
-          text(gameBoard.getFlagsLeft(), 440, 40);
+          textAlign(LEFT);  
+          text(gameBoard.getFlagsLeft(), 490, 40);
           stroke(0);
-          rect(470, 45, 25, 5);
-          rect(480, 15, 5, 30);
+          rect(520, 45, 25, 5);
+          rect(530, 15, 5, 30);
           fill(#CE3636);
-          triangle(480, 15, 480, 30, 505, 22.5);
+          triangle(530, 15, 530, 30, 555, 22.5);
         }
       }
     }
@@ -574,6 +575,8 @@ void endScreen(boolean outcome) {
       textSize(sizeOfText);
     }
 
+
+textAlign(CENTER);
     // displays all of the mines on the board that have not been flagged
     for (int i = 0; i < gameBoard.gameBoard.length; i++) {
       for (int j = 0; j < gameBoard.gameBoard[0].length; j++) {
