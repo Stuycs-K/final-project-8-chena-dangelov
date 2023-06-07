@@ -41,7 +41,7 @@ void drawBoard() {
   triangle(170, 25, 150, 25, 160, 40);
 
   // best time settings
-  textAlign(LEFT);
+  //textAlign(LEFT);
   textSize(30);
   fill(0);
   if (difficulty.equals("easy")) {
@@ -218,8 +218,8 @@ void draw() {
 
   // difficulty change
   if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 20 && mouseY <= 44 && countdownDifficultyScreen == 0) {
-    
-    if(isHelpScreen){
+
+    if (isHelpScreen) {
       removeHelpScreen();
     }
 
@@ -266,8 +266,8 @@ void draw() {
 
   // clicking on the hamburger button
   if (mousePressed && mouseButton == LEFT && mouseY >= 22 && mouseY <= 41 && mouseX >= 7 && mouseX <= 32 && countdownHelpScreen == 0) {
-    
-    if(isDifficultyScreen){
+
+    if (isDifficultyScreen) {
       removeDifficultyScreen();
     }
 
@@ -555,7 +555,7 @@ void endScreen(boolean outcome) {
   textSize(40);
   fill(0);
   rect(0, 0, width, 50);
-  textAlign(CENTER);
+  //textAlign(CENTER);
   fill(#FFFFFF);
 
   // displays winner or loser depending on game outcome
@@ -593,7 +593,7 @@ void endScreen(boolean outcome) {
           t.setFlagged(false);
           drawTile(i*SQUARE_SIZE, j*SQUARE_SIZE+50);
           fill(#FA2C03);
-          textAlign(CENTER);
+          //textAlign(CENTER);
           textSize(SQUARE_SIZE*2);
           text("x", i*SQUARE_SIZE+SQUARE_SIZE/2, j*SQUARE_SIZE+50+SQUARE_SIZE);
 
