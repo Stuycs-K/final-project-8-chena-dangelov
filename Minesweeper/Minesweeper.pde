@@ -218,6 +218,10 @@ void draw() {
 
   // difficulty change
   if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 20 && mouseY <= 44 && countdownDifficultyScreen == 0) {
+    
+    if(isHelpScreen){
+      removeHelpScreen();
+    }
 
     if (isDifficultyScreen) {
       removeDifficultyScreen();
@@ -262,6 +266,10 @@ void draw() {
 
   // clicking on the hamburger button
   if (mousePressed && mouseButton == LEFT && mouseY >= 22 && mouseY <= 41 && mouseX >= 7 && mouseX <= 32 && countdownHelpScreen == 0) {
+    
+    if(isDifficultyScreen){
+      removeDifficultyScreen();
+    }
 
     if (isHelpScreen) {
       removeHelpScreen();
