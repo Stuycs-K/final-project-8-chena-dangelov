@@ -233,6 +233,7 @@ void draw() {
       noStroke();
       fill(0);
       textSize(20);
+      textAlign(LEFT);
       text("easy", 65, 62);
       text("medium", 65, 86);
       text("hard", 65, 110);
@@ -283,7 +284,7 @@ void draw() {
       fill(0);
 
       // INSTRUCTIONS
-      //textAlign(LEFT);
+      textAlign(LEFT);
       textSize(25);
       text("INSTRUCTIONS:", 5, 55+25);
       textSize(15);
