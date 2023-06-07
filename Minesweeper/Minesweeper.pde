@@ -283,7 +283,7 @@ void draw() {
       fill(0);
 
       // INSTRUCTIONS
-      textAlign(LEFT);
+      //textAlign(LEFT);
       textSize(25);
       text("INSTRUCTIONS:", 5, 55+25);
       textSize(15);
@@ -316,7 +316,7 @@ void draw() {
         "2:  " + bestTime(hardBestTimes[1])+"\n"+
         "3:  " + bestTime(hardBestTimes[2])
         , 200, 270+90);
-      textAlign(CENTER);
+      //textAlign(CENTER);
     }
     countdownHelpScreen+=15;
   }
