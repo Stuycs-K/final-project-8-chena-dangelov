@@ -120,7 +120,7 @@ void removeHelpScreen() {
 }
 
 void removeDifficultyScreen() {
-  
+
   noStroke();
   fill(200);
   rect(50, 20, 130, 30);
@@ -187,6 +187,25 @@ void explosion(int value) {
   stroke(0);
 }
 
+void changeDifficulty(String d) {
+  difficulty = d;
+  if (difficulty.equals("easy")) {
+    SQUARE_SIZE = width/8;
+  }
+  if (difficulty.equals("medium")) {
+    SQUARE_SIZE = width/16;
+  }
+  if (difficulty.equals("hard")) {
+    SQUARE_SIZE = width/20;
+  }
+
+  //drawBoard();
+  gameBoard = null;
+  drawBoard();
+  isGameOver = true;
+  timer = 0;
+}
+
 void draw() {
 
   if (explosionArr!=null) {
@@ -240,15 +259,17 @@ void draw() {
 
   if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 44 && mouseY <= 116 && isDifficultyScreen && countdownDifficultyScreen == 0) {
     if (mouseY <= 62) {
-      difficulty = "easy";
+      changeDifficulty("easy");
     } else if (mouseY <= 86) {
-      difficulty = "medium";
+      changeDifficulty("medium");
     } else {
-      difficulty = "hard";
+      changeDifficulty("hard");
     }
-    drawBoard();
+    isDifficultyScreen = false;
     countdownDifficultyScreen += 10;
   }
+
+
 
   // clicking on the hamburger button
   if (mousePressed && mouseButton == LEFT && mouseY >= 22 && mouseY <= 41 && mouseX >= 7 && mouseX <= 32 && countdownHelpScreen == 0) {
@@ -298,6 +319,7 @@ void draw() {
         "2:  " + bestTime(hardBestTimes[1])+"\n"+
         "3:  " + bestTime(hardBestTimes[2])
         , 200, 270+90);
+      textAlign(CENTER);
     }
     countdownHelpScreen+=15;
   }
@@ -335,7 +357,11 @@ void draw() {
     if (countdown > 0)countdown--;
 
     // timer
-    if ((frameCount % 60 == 0 && (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) || !isGameOver)) && !isDifficultyScreen) {
+    //<<<<<<< HEAD
+    //    if ((frameCount % 60 == 0 && (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) || !isGameOver)) && !isDifficultyScreen) {
+    //=======
+    if (frameCount % 60 == 0 ) {
+      //>>>>>>> e17278bb6a3e5a3ff05a7f6b0976ffa60646aa89
       fill(200);
       noStroke();
       rect(320, 5, 60, 40);
