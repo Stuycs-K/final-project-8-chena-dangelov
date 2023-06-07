@@ -68,28 +68,6 @@ void drawBoard() {
     }
   }
 
-  // difficulty selector
-  //textSize(30);
-  //fill(0);
-  //textAlign(LEFT);
-  //text("Difficulty : ", 550, 40);
-  //fill(#76D85C);
-  //rect(690, 5, 30, 40);
-  //fill(#EFF063);
-  //rect(720, 5, 30, 40);
-  //fill(#F75339);
-  //rect(750, 5, 30, 40);
-  //fill(0);
-  //textAlign(CENTER);
-  //textSize(40);
-  //if (difficulty.equals("easy")) {
-  //  text("X", 705, 40);
-  //} else if (difficulty.equals("medium")) {
-  //  text("X", 735, 40);
-  //} else if (difficulty.equals("hard")) {
-  //  text("X", 765, 40);
-  //}
-
   // flagsLeft settings
   fill(200);
   //noStroke();
@@ -184,67 +162,27 @@ void draw() {
     if (isDifficultyScreen) {
       removeDifficultyScreen();
     } else {
-
-      noStroke();
-      fill(220);
-      if (difficulty.equals("easy")) {
-        fill(200);
-      }
-      rect(50, 44, 125, 24, 5);
-      fill(0);
-      textSize(20);
-      text("easy", 85, 62);
-
-      fill(220);
-      if (difficulty.equals("medium")) {
-        fill(200);
-      }
-      rect(50, 68, 125, 24, 5);
-      fill(0);
-      textSize(20);
-      text("medium", 65, 86);
-
-      fill(220);
-      if (difficulty.equals("hard")) {
-        fill(200);
-      }
-      rect(50, 92, 125, 24, 5);
-      fill(0);
-      textSize(20);
-      text("hard", 65, 110);
-
-
-      //
+      
       stroke(0);
       fill(220);
       rect(50, 44, 125, 72, 5);
       noStroke();
 
-
-      if (difficulty.equals("easy")) {
-        fill(200);
-        rect(50, 44, 125, 24, 5);
-      }
       fill(0);
       textSize(20);
       text("easy", 65, 62);
-
-      fill(220);
-      if (difficulty.equals("medium")) {
-        fill(200);
-        rect(50, 68, 125, 24, 5);
-      }
-      fill(0);
       text("medium", 65, 86);
-
-      fill(220);
-      if (difficulty.equals("hard")) {
-        fill(200);
-        rect(50, 92, 125, 24, 5);
-      }
-      fill(0);
       text("hard", 65, 110);
-
+      
+      if(difficulty.equals("easy")){
+        text("X", 155, 62);
+      }
+      if(difficulty.equals("medium")){
+        text("X", 155, 86);
+      }
+      if(difficulty.equals("gard")){
+        text("X", 155, 110);
+      }
 
 
       isDifficultyScreen = true;
