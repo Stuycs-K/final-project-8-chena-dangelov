@@ -121,9 +121,39 @@ void removeHelpScreen() {
 
 void removeDifficultyScreen() {
   
-  for(int r = 50; r < 200; r += SQUARE_SIZE){
-    for(int c = 0; c < 100; c += SQUARE_SIZE){
-      drawTile(
+  //for(int r = 50; r < 200; r += SQUARE_SIZE){
+  //  for(int c = 0; c < 100; c += SQUARE_SIZE){
+  //    drawTile(
+  stroke(0);
+      
+      
+      if (gameBoard == null) {
+    //stroke(0);
+    for (int row = 0; row < 200; row += SQUARE_SIZE) {
+      for (int col = 50; col < 150; col += SQUARE_SIZE) {
+        if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
+          fill(#26C627);
+        } else {
+          fill(#23B419);
+        }
+        square(row, col, SQUARE_SIZE);
+      }
+    }
+  } else {
+    for (int row = 0; row < 200; row += SQUARE_SIZE) {
+      for (int col = 50; col < 150; col += SQUARE_SIZE) {
+        if (gameBoard.gameBoard[row/SQUARE_SIZE][(col-50)/SQUARE_SIZE].flagged()) {
+          if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
+            fill(#26C627);
+          } else {
+            fill(#23B419);
+          }
+          square(row, col, SQUARE_SIZE);
+        }
+        drawTile(row, col);
+      }
+    }
+  }
 
   isDifficultyScreen = false;
 }
