@@ -36,7 +36,6 @@ void drawBoard() {
   rect(50, 20, 125, 24, 5);
   fill(0);
   textSize(20);
-  //textAlign(CENTER, CENTER);
   text(difficulty, 65, 38);
   fill(150);
   triangle(170, 25, 150, 25, 160, 40);
@@ -132,12 +131,8 @@ void removeDifficultyScreen() {
   fill(150);
   triangle(170, 25, 150, 25, 160, 40);
 
-
   stroke(0);
-
-
   if (gameBoard == null) {
-    //stroke(0);
     for (int row = 0; row < 200; row += SQUARE_SIZE) {
       for (int col = 50; col < 150; col += SQUARE_SIZE) {
         if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
@@ -163,7 +158,6 @@ void removeDifficultyScreen() {
       }
     }
   }
-
   isDifficultyScreen = false;
 }
 
@@ -199,7 +193,6 @@ void changeDifficulty(String d) {
     SQUARE_SIZE = width/20;
   }
 
-  //drawBoard();
   gameBoard = null;
   drawBoard();
   isGameOver = true;
@@ -234,13 +227,11 @@ void draw() {
       fill(220);
       rect(50, 44, 125, 72, 5);
       noStroke();
-
       fill(0);
       textSize(20);
       text("easy", 65, 62);
       text("medium", 65, 86);
       text("hard", 65, 110);
-
       if (difficulty.equals("easy")) {
         text("X", 155, 62);
       }
@@ -250,7 +241,6 @@ void draw() {
       if (difficulty.equals("hard")) {
         text("X", 155, 110);
       }
-
 
       isDifficultyScreen = true;
     }
@@ -268,7 +258,6 @@ void draw() {
     isDifficultyScreen = false;
     countdownDifficultyScreen += 10;
   }
-
 
 
   // clicking on the hamburger button
@@ -335,7 +324,7 @@ void draw() {
 
       // game one
       if (gameBoard == null && mouseY > 50) {
-        if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450)) && !isDifficultyScreen) {
+        if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450)) && !isDifficultyScreen && countdownDifficultyScreen == 0) {
           gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
           isGameOver = false;
         }
