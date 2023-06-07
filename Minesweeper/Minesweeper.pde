@@ -120,6 +120,10 @@ void removeHelpScreen() {
 }
 
 void removeDifficultyScreen() {
+  
+  for(int r = 50; r < 200; r += SQUARE_SIZE){
+    for(int c = 0; c < 100; c += SQUARE_SIZE){
+      drawTile(
 
   isDifficultyScreen = false;
 }
@@ -203,7 +207,7 @@ void draw() {
     else if(mouseY <= 86){
       difficulty = "medium";
     }
-    else{
+    else {
       difficulty = "hard";
     }
     drawBoard();
