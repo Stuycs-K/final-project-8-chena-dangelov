@@ -353,12 +353,7 @@ void draw() {
     // countdown used as a timer for placing flags
     if (countdown > 0)countdown--;
 
-    // timer
-    //<<<<<<< HEAD
-    //    if ((frameCount % 60 == 0 && (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) || !isGameOver)) && !isDifficultyScreen) {
-    //=======
     if (frameCount % 60 == 0 ) {
-      //>>>>>>> e17278bb6a3e5a3ff05a7f6b0976ffa60646aa89
       fill(200);
       noStroke();
       rect(320, 5, 60, 40);
@@ -397,7 +392,7 @@ void draw() {
                 for (int i = 0; i < 3; i++) {
 
                   if (timer < easyBestTimes[i] || easyBestTimes[i]==-1) {
-
+                    
                     // ...and if it does, move the values slower than it to the lower places in the list
                     for (int j = 2; j > i; j--) {
                       easyBestTimes[j]=easyBestTimes[j-1];
@@ -561,7 +556,7 @@ void endScreen(boolean outcome) {
   // displays winner or loser depending on game outcome
   if (outcome) {
     text("time : "+timer, 150, 40);
-    text("winner !", 626, 40);
+    text("winner !", 625, 40);
   } else {
     text("loser !", 625, 40);
 
@@ -605,7 +600,7 @@ void endScreen(boolean outcome) {
   }
 
   // play again button
-  textAlign(CENTER);
+  //textAlign(CENTER);
   fill(#B9BCF7);
   rect(width/2-75, 0, 150, 50);
   textSize(30);
