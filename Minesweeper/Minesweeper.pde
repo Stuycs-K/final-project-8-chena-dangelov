@@ -6,7 +6,7 @@ private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67
 private final int[] easyBestTimes = {-1, -1, -1, };
 private final int[] mediumBestTimes = {-1, -1, -1, };
 private final int[] hardBestTimes = {-1, -1, -1, };
-private int[] explosionArr;
+private int[] explosionArr, flagArr;
 
 void setup() {
   size(800, 850);
@@ -170,6 +170,15 @@ void draw() {
       explosionArr = null;
     }
   }
+  
+  if(flagArr!=null){
+    println("hey");
+    
+    
+    
+    flagArr=null;
+  }
+  
 
   if (countdownHelpScreen>0)countdownHelpScreen--;
 
@@ -249,6 +258,7 @@ void draw() {
         "2:  " + bestTime(hardBestTimes[1])+"\n"+
         "3:  " + bestTime(hardBestTimes[2])
         , 200, 270+90);
+      textAlign(CENTER);
     }
     countdownHelpScreen+=15;
   }
@@ -290,7 +300,6 @@ void draw() {
 
     // timer
     if (frameCount % 60 == 0 ) {
-      textAlign(CENTER);
       fill(200);
       noStroke();
       rect(270, 5, 60, 40);
@@ -478,6 +487,7 @@ void drawTile(int row, int col) {
         fill(#23B419);
       }
       square(row, col, SQUARE_SIZE);
+      flagArr = new int[]{row,col};
     }
   }
 }
