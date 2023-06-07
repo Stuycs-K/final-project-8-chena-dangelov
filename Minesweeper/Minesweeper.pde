@@ -180,7 +180,7 @@ void draw() {
       if(difficulty.equals("medium")){
         text("X", 155, 86);
       }
-      if(difficulty.equals("gard")){
+      if(difficulty.equals("hard")){
         text("X", 155, 110);
       }
 
@@ -190,8 +190,17 @@ void draw() {
     countdownDifficultyScreen += 15;
   }
 
-  if (isDifficultyScreen) {
-    //
+  if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 44 && mouseY <= 116 && isDifficultyScreen) {
+    if(mouseY <= 62){
+      difficulty = "easy";
+    }
+    else if(mouseY >= 110){
+      difficulty = "hard";
+    }
+    else{
+      difficulty = "medium";
+    }
+    print(difficulty+"-");
   }
 
   // clicking on the hamburger button
@@ -213,9 +222,6 @@ void draw() {
   if (mousePressed && isHelpScreen && mouseY >= 50  && !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) ) {
     removeHelpScreen();
   }
-
-
-
 
   if (isGameOver) {
     if (mousePressed && (mouseButton == LEFT)) {
