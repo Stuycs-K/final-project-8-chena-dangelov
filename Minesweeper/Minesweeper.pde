@@ -289,7 +289,8 @@ void draw() {
     if (countdown > 0)countdown--;
 
     // timer
-    if (frameCount % 60 == 0 && (!isHelpScreen || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) || !isGameOver)) {
+    if (frameCount % 60 == 0 ) {
+      textAlign(CENTER);
       fill(200);
       noStroke();
       rect(270, 5, 60, 40);
