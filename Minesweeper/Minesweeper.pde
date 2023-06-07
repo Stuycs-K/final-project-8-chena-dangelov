@@ -121,9 +121,25 @@ void removeHelpScreen() {
 
 void removeDifficultyScreen() {
   
-  //for(int r = 50; r < 200; r += SQUARE_SIZE){
-  //  for(int c = 0; c < 100; c += SQUARE_SIZE){
-  //    drawTile(
+  //background(200);
+  
+  fill(200);
+  rect(50,20,130,30);
+
+  // difficulty selector
+  noStroke();
+  fill(220);
+  rect(50, 20, 125, 24, 5);
+  fill(0);
+  textSize(20);
+  text(difficulty, 65, 38);
+  fill(150);
+  triangle(170, 25, 150, 25, 160, 40);
+
+
+
+  
+
   stroke(0);
       
       
