@@ -160,6 +160,7 @@ void draw() {
   }
 
   if (countdownHelpScreen>0)countdownHelpScreen--;
+  if (countdownDifficultyScreen>0)countdownDifficultyScreen--;
 
   // difficulty change
   if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 20 && mouseY <= 44 && countdownDifficultyScreen == 0) {
@@ -192,21 +193,21 @@ void draw() {
 
       isDifficultyScreen = true;
     }
-    countdownDifficultyScreen += 15;
+    countdownDifficultyScreen += 10;
   }
 
-  if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 44 && mouseY <= 116 && isDifficultyScreen) {
+  if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 44 && mouseY <= 116 && isDifficultyScreen && countdownDifficultyScreen == 0) {
     if(mouseY <= 62){
       difficulty = "easy";
     }
-    else if(mouseY >= 110){
-      difficulty = "hard";
-    }
-    else{
+    else if(mouseY <= 86){
       difficulty = "medium";
     }
+    else{
+      difficulty = "hard";
+    }
     drawBoard();
-    print(difficulty+"-");
+    countdownDifficultyScreen += 10;
   }
 
   // clicking on the hamburger button
