@@ -36,6 +36,7 @@ void drawBoard() {
   rect(50, 20, 125, 24, 5);
   fill(0);
   textSize(20);
+  textAlign(LEFT);
   text(difficulty, 65, 38);
   fill(150);
   triangle(170, 25, 150, 25, 160, 40);
