@@ -58,6 +58,14 @@ Today I completed much of the goals I set for myself yesterday. My work today in
 
 Today I completed the flagsLeft feature. The bug I mentioned earlier had to do with bad math on my part on how many flags are in each difficulty. However, it is now fixed and in order of easy medium hard, the number of flags in each level are 10 40 and 64 respectively. 
 
+### 6/5/23
+
+Today I tried to implement a dropdown menu for difficulty. With this implementation, I moved around some features / settings in the heading and made alterations. I also added two new variables (boolean isDifficultyScreen and int countdownDifficultyScreen). I am not exactly sure how I want the dropdown menu to look but I have created the necessary methods and variblaes so I am prepared for however I decide I want it to look.  
+
+### 6/6/23
+
+Today I continued to work on the dropdown menu for difficulty. I ran into some setbacks while working on removeDifficultyScreen() method however, I think I have a general idea on how I want it to work. I want the space that the dropdown menu to take up to drawn back again and I will implement this idea tomorrow. Moreover, I still have to work on the selection of different difficulties. These are the goals I will set for myself to accomplish tomorrow, however, after meeting these goals, the dropdown menu feature for difficulty should be up and working !
+
 
 
 ## Vincent D'Angelo
@@ -117,3 +125,11 @@ Today I began work on the How to Play button. The way I want to implement this i
 ### 6/4/23
 
 Today I fixed a minor bug where a flag would not be drawn correctly after the how to play box was opened and closed. I also made the box actually display some text, but I will edit this later on to better fit what we want. The text settings won't change, just the text itself. Minor changes today.
+
+### 6/5/23
+
+Today I made some more work with the how to play box, which honestly I think now would be more appropriately called the "more info" box. Anyway, I added the rest of the instructions of the game here, and made sure to wrap the text so that they stayed in our box. I also added another feature to the box: a list of personal bests. Really, it's three lists, the top three fastest times that the player has achieved in each mode. I implemented this by changing the bestTime integer variables into arrays with a length of 3. I tried to use a heap, but processing wasn't letting me do that, so this probably took longer than it would have otherwise, and it is perhaps slightly less efficient than the heap algorithm (but I'd argue that does not matter too much as these arrays are very small).
+
+### 6/6/23
+
+Today I made it so that, upon losing the game, the board removes any flags that were not placed correctly (i.e. they were not placed on a mine), and replaces them all with a big red “x”. Also, I added a fun little animation. When the player clicks a mine, multiple rings of red circles emanate from the mine. This animation lasts for ten frames, and I created a method called explosion() for it. This way the specific mine the player messed up on is prioritized.
