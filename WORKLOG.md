@@ -58,6 +58,14 @@ Today I completed much of the goals I set for myself yesterday. My work today in
 
 Today I completed the flagsLeft feature. The bug I mentioned earlier had to do with bad math on my part on how many flags are in each difficulty. However, it is now fixed and in order of easy medium hard, the number of flags in each level are 10 40 and 64 respectively. 
 
+### 6/5/23
+
+Today I tried to implement a dropdown menu for difficulty. With this implementation, I moved around some features / settings in the heading and made alterations. I also added two new variables (boolean isDifficultyScreen and int countdownDifficultyScreen). I am not exactly sure how I want the dropdown menu to look but I have created the necessary methods and variblaes so I am prepared for however I decide I want it to look.  
+
+### 6/6/23
+
+Today I continued to work on the dropdown menu for difficulty. I ran into some setbacks while working on removeDifficultyScreen() method however, I think I have a general idea on how I want it to work. I want the space that the dropdown menu to take up to drawn back again and I will implement this idea tomorrow. Moreover, I still have to work on the selection of different difficulties. These are the goals I will set for myself to accomplish tomorrow, however, after meeting these goals, the dropdown menu feature for difficulty should be up and working !
+
 
 
 ## Vincent D'Angelo
