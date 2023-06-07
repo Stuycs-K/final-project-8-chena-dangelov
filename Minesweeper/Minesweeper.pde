@@ -187,65 +187,65 @@ void draw() {
 
       noStroke();
       fill(220);
-      if(difficulty.equals("easy")){
+      if (difficulty.equals("easy")) {
         fill(200);
       }
       rect(50, 44, 125, 24, 5);
       fill(0);
       textSize(20);
-      text("easy", 65, 62);
-      
+      text("easy", 85, 62);
+
       fill(220);
-      if(difficulty.equals("medium")){
+      if (difficulty.equals("medium")) {
         fill(200);
       }
       rect(50, 68, 125, 24, 5);
       fill(0);
       textSize(20);
       text("medium", 65, 86);
-      
+
       fill(220);
-      if(difficulty.equals("hard")){
+      if (difficulty.equals("hard")) {
         fill(200);
       }
       rect(50, 92, 125, 24, 5);
       fill(0);
       textSize(20);
       text("hard", 65, 110);
-      
-      
-//
-stroke(0);
-fill(220);
-rect(50, 44, 125, 72, 5);
-noStroke();
 
 
-      if(difficulty.equals("easy")){
+      //
+      stroke(0);
+      fill(220);
+      rect(50, 44, 125, 72, 5);
+      noStroke();
+
+
+      if (difficulty.equals("easy")) {
         fill(200);
         rect(50, 44, 125, 24, 5);
       }
       fill(0);
       textSize(20);
       text("easy", 65, 62);
-      
+
       fill(220);
-      if(difficulty.equals("medium")){
+      if (difficulty.equals("medium")) {
         fill(200);
         rect(50, 68, 125, 24, 5);
       }
       fill(0);
       text("medium", 65, 86);
-      
+
       fill(220);
-      if(difficulty.equals("hard")){
+      if (difficulty.equals("hard")) {
         fill(200);
         rect(50, 92, 125, 24, 5);
       }
       fill(0);
       text("hard", 65, 110);
-      
-      
+
+
 
       isDifficultyScreen = true;
     }
@@ -275,6 +275,10 @@ noStroke();
     //  isGameOver = true;
     //  timer = 0;
     //}
+  }
+
+  if (isDifficultyScreen) {
+    //
   }
 
   // clicking on the hamburger button
