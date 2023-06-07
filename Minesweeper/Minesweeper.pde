@@ -121,13 +121,9 @@ void removeHelpScreen() {
 
 void removeDifficultyScreen() {
   
-  //background(200);
-  
-  fill(200);
-  rect(50,20,130,30);
-
-  // difficulty selector
   noStroke();
+  fill(200);
+  rect(50, 20, 130, 30);
   fill(220);
   rect(50, 20, 125, 24, 5);
   fill(0);
@@ -137,13 +133,10 @@ void removeDifficultyScreen() {
   triangle(170, 25, 150, 25, 160, 40);
 
 
-
-  
-
   stroke(0);
-      
-      
-      if (gameBoard == null) {
+
+
+  if (gameBoard == null) {
     //stroke(0);
     for (int row = 0; row < 200; row += SQUARE_SIZE) {
       for (int col = 50; col < 150; col += SQUARE_SIZE) {
@@ -179,31 +172,30 @@ String bestTime(int time) {
   return ""+time;
 }
 
-void explosion(int value){
+void explosion(int value) {
   int row = explosionArr[0];
   int col = explosionArr[1];
-  
+
   fill(#FF150D, 0);
   stroke(#FF150D);
   strokeWeight(0.8);
-  
-  if(difficulty == "easy")circle(row+SQUARE_SIZE/2, col+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6 + value*15);
-  if(difficulty == "medium")circle(row+SQUARE_SIZE/2, col+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6 + value*9);
-  if(difficulty == "hard")circle(row+SQUARE_SIZE/2, col+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6 + value*7);
-  
+
+  if (difficulty == "easy")circle(row+SQUARE_SIZE/2, col+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6 + value*15);
+  if (difficulty == "medium")circle(row+SQUARE_SIZE/2, col+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6 + value*9);
+  if (difficulty == "hard")circle(row+SQUARE_SIZE/2, col+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6 + value*7);
+
   stroke(0);
 }
 
 void draw() {
-  
-  if(explosionArr!=null){
-    if(frameCountExplosion == 0){
+
+  if (explosionArr!=null) {
+    if (frameCountExplosion == 0) {
       frameCountExplosion = frameCount;
     }
-    if(frameCount - frameCountExplosion < 10){
+    if (frameCount - frameCountExplosion < 10) {
       explosion( frameCount - frameCountExplosion );
-    }
-    else{
+    } else {
       frameCountExplosion = 0;
       explosionArr = null;
     }
@@ -218,7 +210,7 @@ void draw() {
     if (isDifficultyScreen) {
       removeDifficultyScreen();
     } else {
-      
+
       stroke(0);
       fill(220);
       rect(50, 44, 125, 72, 5);
@@ -229,14 +221,14 @@ void draw() {
       text("easy", 65, 62);
       text("medium", 65, 86);
       text("hard", 65, 110);
-      
-      if(difficulty.equals("easy")){
+
+      if (difficulty.equals("easy")) {
         text("X", 155, 62);
       }
-      if(difficulty.equals("medium")){
+      if (difficulty.equals("medium")) {
         text("X", 155, 86);
       }
-      if(difficulty.equals("hard")){
+      if (difficulty.equals("hard")) {
         text("X", 155, 110);
       }
 
@@ -247,13 +239,11 @@ void draw() {
   }
 
   if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 44 && mouseY <= 116 && isDifficultyScreen && countdownDifficultyScreen == 0) {
-    if(mouseY <= 62){
+    if (mouseY <= 62) {
       difficulty = "easy";
-    }
-    else if(mouseY <= 86){
+    } else if (mouseY <= 86) {
       difficulty = "medium";
-    }
-    else {
+    } else {
       difficulty = "hard";
     }
     drawBoard();
@@ -421,9 +411,9 @@ void draw() {
                 }
               }
             }
-            
-            if(!gameOutcome){
-              explosionArr = new int[]{x,y};
+
+            if (!gameOutcome) {
+              explosionArr = new int[]{x, y};
             }
 
             endScreen(gameOutcome);
@@ -551,7 +541,7 @@ void endScreen(boolean outcome) {
     text("winner !", 626, 40);
   } else {
     text("loser !", 625, 40);
-    
+
     int sizeOfText = 1;
     if (difficulty.equals("easy")) {
       sizeOfText = 30;
@@ -574,7 +564,7 @@ void endScreen(boolean outcome) {
           fill(#E81E1E);
           circle((i*SQUARE_SIZE)+SQUARE_SIZE/2, (j*SQUARE_SIZE)+50+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6);
         }
-        
+
         // removing misplaced flags
         if (t.flagged() && !t.isMine()) {
           t.setFlagged(false);
@@ -584,7 +574,7 @@ void endScreen(boolean outcome) {
           textSize(SQUARE_SIZE*2);
           text("x", i*SQUARE_SIZE+SQUARE_SIZE/2, j*SQUARE_SIZE+50+SQUARE_SIZE);
 
-       // reset text size
+          // reset text size
           textSize(sizeOfText);
         }
       }
