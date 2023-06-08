@@ -364,10 +364,9 @@ void draw() {
   } else {
 
     if (keyboardInput.isPressed(Controller.P1_LEFT)) {
-      if (findNearestArr[0] == -1) {
+      if (!foundNearest) {
         findNearest(mouseX, mouseY);
         println(""+findNearestArr[0]+" "+findNearestArr[1]);
-        findNearestArr = new int[]{-1, -1};
         foundNearest = true;
       }
     }
@@ -495,47 +494,47 @@ void findNearest( int row, int col) {
 
   int i = 1;
   while ( i <= x || i <= y || i < gameBoard.gameBoard.length - x || i < gameBoard.gameBoard[0].length - y) {
-    if ( x-i >= 0 ) {
+    if ( !foundNearest && x-i >= 0 ) {
       if (gameBoard.gameBoard[x-i][y].isMine() && !gameBoard.gameBoard[x-i][y].cleared() && !gameBoard.gameBoard[x-i][y].flagged()) {
         findNearestArr = new int[]{x-i, y};
       }
     }
-    if (findNearestArr[0] == -1 && y-i >= 0 ) {
+    if (!foundNearest && y-i >= 0 ) {
       if (gameBoard.gameBoard[x][y-i].isMine() && !gameBoard.gameBoard[x][y-i].cleared() && !gameBoard.gameBoard[x][y-i].flagged()) {
         findNearestArr = new int[]{x, y-i};
       }
     }
-    if (findNearestArr[0] == -1 &&  y+i < gameBoard.gameBoard.length ) {
+    if (!foundNearest &&  y+i < gameBoard.gameBoard.length ) {
       if (gameBoard.gameBoard[x][y+i].isMine() && !gameBoard.gameBoard[x][y+i].cleared() && !gameBoard.gameBoard[x][y+i].flagged()) {
         findNearestArr = new int[]{x, y+i};
       }
     }
-    if (findNearestArr[0] == -1 &&  x+i < gameBoard.gameBoard.length ) {
+    if (!foundNearest &&  x+i < gameBoard.gameBoard.length ) {
       if (gameBoard.gameBoard[x+i][y].isMine() && !gameBoard.gameBoard[x+i][y].cleared() && !gameBoard.gameBoard[x+i][y].flagged()) {
         findNearestArr = new int[]{x+i, y};
       }
     }
-    if (findNearestArr[0] == -1 &&  x+i < gameBoard.gameBoard.length && y-i >= 0 ) {
+    if (!foundNearest &&  x+i < gameBoard.gameBoard.length && y-i >= 0 ) {
       if (gameBoard.gameBoard[x+i][y-i].isMine() && !gameBoard.gameBoard[x+i][y-i].cleared() && !gameBoard.gameBoard[x+i][y-i].flagged()) {
         findNearestArr = new int[]{x+i, y-1};
       }
     }
-    if (findNearestArr[0] == -1 &&  x-i >=0 && y-i >= 0 ) {
+    if (!foundNearest &&  x-i >=0 && y-i >= 0 ) {
       if (gameBoard.gameBoard[x-i][y-i].isMine() && !gameBoard.gameBoard[x-i][y-i].cleared() && !gameBoard.gameBoard[x-i][y-i].flagged()) {
         findNearestArr = new int[]{x-i, y-1};
       }
     }
-    if (findNearestArr[0] == -1 &&  x-i >=0 && y+i < gameBoard.gameBoard.length ) {
+    if (!foundNearest &&  x-i >=0 && y+i < gameBoard.gameBoard.length ) {
       if (gameBoard.gameBoard[x-i][y+i].isMine() && !gameBoard.gameBoard[x-i][y+i].cleared() && !gameBoard.gameBoard[x-i][y+i].flagged()) {
         findNearestArr = new int[]{x-i, y+1};
       }
     }
-    if (findNearestArr[0] == -1 &&  x+i < gameBoard.gameBoard.length && y+i < gameBoard.gameBoard.length ) {
+    if (!foundNearest &&  x+i < gameBoard.gameBoard.length && y+i < gameBoard.gameBoard.length ) {
       if (gameBoard.gameBoard[x+i][y+i].isMine() && !gameBoard.gameBoard[x+i][y+i].cleared() && !gameBoard.gameBoard[x+i][y+i].flagged()) {
         findNearestArr = new int[]{x+i, y+1};
       }
     }
-    if (findNearestArr[0]!=-1)i+=100;
+    if (foundNearest)i+=100;
     i++;
   }
 }
@@ -686,7 +685,10 @@ void endScreen(boolean outcome) {
 
 void keyPressed() {
 
+  if(keyCode == 'H'){
+    foundNearest = false;
   keyboardInput.press(keyCode);
+  }
 
 
   if (!isGameOver) {
