@@ -218,7 +218,8 @@ void draw() {
   if (countdownDifficultyScreen>0)countdownDifficultyScreen--;
 
   // difficulty change
-  if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 20 && mouseY <= 44 && countdownDifficultyScreen == 0) {
+  if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 20 && mouseY <= 44 && countdownDifficultyScreen == 0 && get(2,2) != -16777216 ){
+    
 
     if (isHelpScreen) {
       removeHelpScreen();
@@ -267,7 +268,7 @@ void draw() {
 
 
   // clicking on the hamburger button
-  if (mousePressed && mouseButton == LEFT && mouseY >= 22 && mouseY <= 41 && mouseX >= 7 && mouseX <= 32 && countdownHelpScreen == 0) {
+  if (mousePressed && mouseButton == LEFT && mouseY >= 22 && mouseY <= 41 && mouseX >= 7 && mouseX <= 32 && countdownHelpScreen == 0  && get(2,2) != -16777216 /*black*/ ) {
 
     if (isDifficultyScreen) {
       removeDifficultyScreen();
@@ -562,6 +563,7 @@ void endScreen(boolean outcome) {
     text("winner !", 625, 40);
   } else {
     text("loser !", 625, 40);
+    println(get(2,2));
 
     int sizeOfText = 1;
     if (difficulty.equals("easy")) {
@@ -593,7 +595,6 @@ textAlign(CENTER);
           t.setFlagged(false);
           drawTile(i*SQUARE_SIZE, j*SQUARE_SIZE+50);
           fill(#FA2C03);
-          //textAlign(CENTER);
           textSize(SQUARE_SIZE*2);
           text("x", i*SQUARE_SIZE+SQUARE_SIZE/2, j*SQUARE_SIZE+50+SQUARE_SIZE);
 
