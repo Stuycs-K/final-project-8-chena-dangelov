@@ -362,11 +362,16 @@ void draw() {
       }
     }
   } else {
-
+  
+    
+    // if the player needs HELP!! HELP MEEE!!
     if (keyboardInput.isPressed(Controller.P1_LEFT)) {
       if (!foundNearest) {
-        findNearest(mouseX, mouseY);
-        println(""+findNearestArr[0]+" "+findNearestArr[1]);
+        boolean res = findNearest(mouseX, mouseY);
+        println(res);
+        if(res){
+          println(""+findNearestArr[0]+" "+findNearestArr[1]);
+        }
         foundNearest = true;
       }
     }
@@ -488,7 +493,7 @@ void draw() {
   }
 }
 
-void findNearest( int row, int col) {
+boolean findNearest( int row, int col) {
   int x = row/SQUARE_SIZE;
   int y = (col-50)/SQUARE_SIZE;
 
@@ -497,46 +502,55 @@ void findNearest( int row, int col) {
     if ( !foundNearest && x-i >= 0 ) {
       if (gameBoard.gameBoard[x-i][y].isMine() && !gameBoard.gameBoard[x-i][y].cleared() && !gameBoard.gameBoard[x-i][y].flagged()) {
         findNearestArr = new int[]{x-i, y};
+        foundNearest = true;
       }
     }
     if (!foundNearest && y-i >= 0 ) {
       if (gameBoard.gameBoard[x][y-i].isMine() && !gameBoard.gameBoard[x][y-i].cleared() && !gameBoard.gameBoard[x][y-i].flagged()) {
         findNearestArr = new int[]{x, y-i};
+        foundNearest = true;
       }
     }
     if (!foundNearest &&  y+i < gameBoard.gameBoard.length ) {
       if (gameBoard.gameBoard[x][y+i].isMine() && !gameBoard.gameBoard[x][y+i].cleared() && !gameBoard.gameBoard[x][y+i].flagged()) {
         findNearestArr = new int[]{x, y+i};
+        foundNearest = true;
       }
     }
     if (!foundNearest &&  x+i < gameBoard.gameBoard.length ) {
       if (gameBoard.gameBoard[x+i][y].isMine() && !gameBoard.gameBoard[x+i][y].cleared() && !gameBoard.gameBoard[x+i][y].flagged()) {
         findNearestArr = new int[]{x+i, y};
+        foundNearest = true;
       }
     }
     if (!foundNearest &&  x+i < gameBoard.gameBoard.length && y-i >= 0 ) {
       if (gameBoard.gameBoard[x+i][y-i].isMine() && !gameBoard.gameBoard[x+i][y-i].cleared() && !gameBoard.gameBoard[x+i][y-i].flagged()) {
         findNearestArr = new int[]{x+i, y-1};
+        foundNearest = true;
       }
     }
     if (!foundNearest &&  x-i >=0 && y-i >= 0 ) {
       if (gameBoard.gameBoard[x-i][y-i].isMine() && !gameBoard.gameBoard[x-i][y-i].cleared() && !gameBoard.gameBoard[x-i][y-i].flagged()) {
         findNearestArr = new int[]{x-i, y-1};
+        foundNearest = true;
       }
     }
     if (!foundNearest &&  x-i >=0 && y+i < gameBoard.gameBoard.length ) {
       if (gameBoard.gameBoard[x-i][y+i].isMine() && !gameBoard.gameBoard[x-i][y+i].cleared() && !gameBoard.gameBoard[x-i][y+i].flagged()) {
         findNearestArr = new int[]{x-i, y+1};
+        foundNearest = true;
       }
     }
     if (!foundNearest &&  x+i < gameBoard.gameBoard.length && y+i < gameBoard.gameBoard.length ) {
       if (gameBoard.gameBoard[x+i][y+i].isMine() && !gameBoard.gameBoard[x+i][y+i].cleared() && !gameBoard.gameBoard[x+i][y+i].flagged()) {
         findNearestArr = new int[]{x+i, y+1};
+        foundNearest = true;
       }
     }
     if (foundNearest)i+=100;
     i++;
   }
+  return foundNearest;
 }
 
 void drawTile(int row, int col) {
