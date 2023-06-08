@@ -15,7 +15,7 @@ void keyReleased() {
   if (!isGameOver){
     keyboardInput.release(keyCode);
   if (findNearestArr[0]!=-1) {
-    drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+    if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1] <= gameBoard.gameBoard.length/2)) && !isDifficultyScreen && countdownDifficultyScreen == 0)drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
     isNearestDisplayed = false;
   }
 }}
@@ -371,19 +371,14 @@ void draw() {
 
 
     // if the player needs HELP!! HELP MEEE!!
-
-
-
     if (keyboardInput.isPressed(Controller.P1_LEFT)) {
 
       if (!foundNearest && !isNearestDisplayed && !gameBoard.gameBoard[mouseX / SQUARE_SIZE][(mouseY-50)/ SQUARE_SIZE].cleared() && !gameBoard.gameBoard[mouseX / SQUARE_SIZE][(mouseY-50)/ SQUARE_SIZE].flagged()) {
 
         boolean res = findNearest(mouseX, mouseY);
-        //println(res);
         if (res) {
-          //println(""+findNearestArr[0]+" "+findNearestArr[1]);
           fill(#5C70DE);
-          circle(findNearestArr[0]*SQUARE_SIZE+SQUARE_SIZE/2, findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2, 20);
+          if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1] <= gameBoard.gameBoard.length/2)) && !isDifficultyScreen && countdownDifficultyScreen == 0)circle(findNearestArr[0]*SQUARE_SIZE+SQUARE_SIZE/2, findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2, 20);
           fill(0);
           isNearestDisplayed = true;
         }
@@ -560,9 +555,12 @@ boolean findNearest( int row, int col) {
       if (gameBoard.gameBoard[x+i][y+i].isMine() && !gameBoard.gameBoard[x+i][y+i].cleared() && !gameBoard.gameBoard[x+i][y+i].flagged()) {
         findNearestArr = new int[]{x+i, y+1};
         foundNearest = true;
-      }
+      } 
     }
-    if (foundNearest)i+=100;
+    if (foundNearest && !gameBoard.gameBoard[findNearestArr[0]][findNearestArr[1]].isMine()){
+      foundNearest = false;
+    }
+    else if (foundNearest)i+=100;
     i++;
   }
   return foundNearest;
