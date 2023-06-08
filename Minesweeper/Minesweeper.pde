@@ -1,7 +1,7 @@
 private Board gameBoard;
 private int SQUARE_SIZE, countdown, countdownHelpScreen, countdownDifficultyScreen, timer, frameCountExplosion;
 private String difficulty;
-private boolean isGameOver, isHelpScreen, isDifficultyScreen, foundNearest;
+private boolean isGameOver, isHelpScreen, isDifficultyScreen, foundNearest, isNearestDisplayed;
 private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67F9FF, #B7BEBF, #FA9223};
 private final int[] easyBestTimes = {-1, -1, -1, };
 private final int[] mediumBestTimes = {-1, -1, -1, };
@@ -13,6 +13,10 @@ Controller keyboardInput;
 
 void keyReleased() {
   keyboardInput.release(keyCode);
+  if(findNearestArr[0]!=-1){
+     drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+     isNearestDisplayed = false;
+  }
 }
 
 void setup() {
@@ -365,12 +369,21 @@ void draw() {
   
     
     // if the player needs HELP!! HELP MEEE!!
+    
+   
+    
     if (keyboardInput.isPressed(Controller.P1_LEFT)) {
-      if (!foundNearest) {
+      
+      if (!foundNearest && !isNearestDisplayed && !gameBoard.gameBoard[mouseX / SQUARE_SIZE][(mouseY-50)/ SQUARE_SIZE].cleared() && !gameBoard.gameBoard[mouseX / SQUARE_SIZE][(mouseY-50)/ SQUARE_SIZE].flagged()) {
+        
         boolean res = findNearest(mouseX, mouseY);
-        println(res);
+        //println(res);
         if(res){
-          println(""+findNearestArr[0]+" "+findNearestArr[1]);
+          //println(""+findNearestArr[0]+" "+findNearestArr[1]);
+          fill(#5C70DE);
+          circle(findNearestArr[0]*SQUARE_SIZE+SQUARE_SIZE/2, findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2,20);
+          fill(0);
+          isNearestDisplayed = true;
         }
         foundNearest = true;
       }
