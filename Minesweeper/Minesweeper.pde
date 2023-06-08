@@ -12,12 +12,14 @@ Controller keyboardInput;
 
 
 void keyReleased() {
-  keyboardInput.release(keyCode);
-  if(findNearestArr[0]!=-1){
-     drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
-     isNearestDisplayed = false;
+  if (!isGameOver){
+    keyboardInput.release(keyCode);
+  if (findNearestArr[0]!=-1) {
+    drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+    isNearestDisplayed = false;
   }
-}
+}}
+
 
 void setup() {
   keyboardInput = new Controller();
@@ -366,22 +368,22 @@ void draw() {
       }
     }
   } else {
-  
-    
+
+
     // if the player needs HELP!! HELP MEEE!!
-    
-   
-    
+
+
+
     if (keyboardInput.isPressed(Controller.P1_LEFT)) {
-      
+
       if (!foundNearest && !isNearestDisplayed && !gameBoard.gameBoard[mouseX / SQUARE_SIZE][(mouseY-50)/ SQUARE_SIZE].cleared() && !gameBoard.gameBoard[mouseX / SQUARE_SIZE][(mouseY-50)/ SQUARE_SIZE].flagged()) {
-        
+
         boolean res = findNearest(mouseX, mouseY);
         //println(res);
-        if(res){
+        if (res) {
           //println(""+findNearestArr[0]+" "+findNearestArr[1]);
           fill(#5C70DE);
-          circle(findNearestArr[0]*SQUARE_SIZE+SQUARE_SIZE/2, findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2,20);
+          circle(findNearestArr[0]*SQUARE_SIZE+SQUARE_SIZE/2, findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2, 20);
           fill(0);
           isNearestDisplayed = true;
         }
@@ -712,9 +714,9 @@ void endScreen(boolean outcome) {
 
 void keyPressed() {
 
-  if(keyCode == 'H'){
+  if (keyCode == 'H') {
     foundNearest = false;
-  keyboardInput.press(keyCode);
+    keyboardInput.press(keyCode);
   }
 
 
