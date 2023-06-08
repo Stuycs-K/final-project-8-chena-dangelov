@@ -7,6 +7,13 @@ private final int[] easyBestTimes = {-1, -1, -1, };
 private final int[] mediumBestTimes = {-1, -1, -1, };
 private final int[] hardBestTimes = {-1, -1, -1, };
 private int[] explosionArr;
+Controller keyboardInput;
+
+
+
+void keyReleased() {
+  keyboardInput.release(keyCode);
+}
 
 void setup() {
   size(800, 850);
@@ -352,6 +359,10 @@ void draw() {
       }
     }
   } else {
+    
+    if (keyboardInput.isPressed(Controller.P1_LEFT)) {
+      
+    }
 
     // countdown used as a timer for placing flags
     if (countdown > 0)countdown--;
@@ -563,7 +574,6 @@ void endScreen(boolean outcome) {
     text("winner !", 625, 40);
   } else {
     text("loser !", 625, 40);
-    println(get(2,2));
 
     int sizeOfText = 1;
     if (difficulty.equals("easy")) {
@@ -615,6 +625,10 @@ textAlign(CENTER);
 }
 
 void keyPressed() {
+  
+  keyboardInput.press(keyCode);
+  
+  
   if (!isGameOver) {
 
     // press 'w' for automatic win
