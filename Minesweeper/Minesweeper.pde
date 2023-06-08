@@ -16,6 +16,8 @@ void keyReleased() {
 }
 
 void setup() {
+  keyboardInput = new Controller();
+
   size(800, 850);
   isGameOver = true;
 
@@ -361,13 +363,15 @@ void draw() {
   } else {
     
     if (keyboardInput.isPressed(Controller.P1_LEFT)) {
-      
+      int[] find = findNearest(mouseX,mouseY);
+      println(""+find[0]+" "+find[1]);
     }
 
     // countdown used as a timer for placing flags
     if (countdown > 0)countdown--;
 
     if (frameCount % 60 == 0 ) {
+      textAlign(CENTER);
       fill(200);
       noStroke();
       rect(320, 5, 60, 40);
@@ -478,6 +482,61 @@ void draw() {
       }
     }
   }
+}
+
+int[] findNearest( int row,int col){
+  int[] find = {-1,-1};
+  int x = row/SQUARE_SIZE;
+  int y = (col-50)/SQUARE_SIZE;
+
+  int i = 1;
+  while( i <= x || i <= y || i < gameBoard.gameBoard.length - x || i < gameBoard.gameBoard[0].length - y){
+    if( x-i >= 0 ){
+      if(gameBoard.gameBoard[x-i][y].isMine() && !gameBoard.gameBoard[x-i][y].cleared() && !gameBoard.gameBoard[x-i][y].flagged()){
+        find = new int[]{x-i,y};
+      }
+    }
+    if(find[0] == -1 && y-i >= 0 ){
+      if(gameBoard.gameBoard[x][y-i].isMine() && !gameBoard.gameBoard[x][y-i].cleared() && !gameBoard.gameBoard[x][y-i].flagged()){
+        find = new int[]{x,y-i};
+      }
+    }
+     if(find[0] == -1 &&  y+i < gameBoard.gameBoard.length ){
+      if(gameBoard.gameBoard[x][y+i].isMine() && !gameBoard.gameBoard[x][y+i].cleared() && !gameBoard.gameBoard[x][y+i].flagged()){
+        find = new int[]{x,y+i};
+      }
+    }
+     if(find[0] == -1 &&  x+i < gameBoard.gameBoard.length ){
+      if(gameBoard.gameBoard[x+i][y].isMine() && !gameBoard.gameBoard[x+i][y].cleared() && !gameBoard.gameBoard[x+i][y].flagged()){
+        find = new int[]{x+i,y};
+      }
+    }
+     if(find[0] == -1 &&  x+i < gameBoard.gameBoard.length && y-i >= 0 ){
+      if(gameBoard.gameBoard[x+i][y-i].isMine() && !gameBoard.gameBoard[x+i][y-i].cleared() && !gameBoard.gameBoard[x+i][y-i].flagged()){
+        find = new int[]{x+i,y-1};
+      }
+    }
+     if(find[0] == -1 &&  x-i >=0 && y-i >= 0 ){
+      if(gameBoard.gameBoard[x-i][y-i].isMine() && !gameBoard.gameBoard[x-i][y-i].cleared() && !gameBoard.gameBoard[x-i][y-i].flagged()){
+        find = new int[]{x-i,y-1};
+      }
+    }
+    if(find[0] == -1 &&  x-i >=0 && y+i < gameBoard.gameBoard.length ){
+      if(gameBoard.gameBoard[x-i][y+i].isMine() && !gameBoard.gameBoard[x-i][y+i].cleared() && !gameBoard.gameBoard[x-i][y+i].flagged()){
+        find = new int[]{x-i,y+1};
+      }
+    }
+    if(find[0] == -1 &&  x+i < gameBoard.gameBoard.length && y+i < gameBoard.gameBoard.length ){
+      if(gameBoard.gameBoard[x+i][y+i].isMine() && !gameBoard.gameBoard[x+i][y+i].cleared() && !gameBoard.gameBoard[x+i][y+i].flagged()){
+        find = new int[]{x+i,y+1};
+      }
+    }
+    if(find[0]!=-1)i+=100;
+    i++;
+  }
+  
+  if(find[0]==-1)return null;
+  return find;
 }
 
 void drawTile(int row, int col) {
