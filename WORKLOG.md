@@ -70,6 +70,10 @@ Today I continued to work on the dropdown menu for difficulty. I ran into some s
 
 Today I completed the dropdown menu for difficulty. My work today consisted of removeDifficultyScreen() method (a method that draws back the area taken over by the difficulty screen) and quite a lot of debugging. I ran into multiple issues with text alignment as for some reason text would be shifted to the left after the first game ends. On top of that, I ran into confusion on when removeDifficultyScreen() is called and isDifficultyScreen is true. This affected how the difficultyScreen functioned and I spent an embarassingly long time trying to figure out why difficultyScreen was not always functional. For the most part I am satisfied with what we have right now and am excited to move onto more cool additions to the game. 
 
+### 6/8/23
+
+Today I started to implement sound into the game. I found some really cool sounds for winner screen, loser screen, and clearing tiles and had them implemented. I learned about processing's sound class and it seems simple enough to use. However, one issue I am encountering is that the game takes a bit longer to set up but I guess that is a consequence of adding sound. Tomorrow I will add flag sounds (flag removing and adding) and clean up a lot of the code.
+
 
 ## Vincent D'Angelo
 
