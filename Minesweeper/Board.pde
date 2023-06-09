@@ -85,7 +85,7 @@ public class Board {
   }
 
   // right click
-  void placeFlag(int x, int y) {
+  boolean placeFlag(int x, int y) {
     if (!gameBoard[x][y].cleared()) {
       if (!gameBoard[x][y].flagged()) {
         gameBoard[x][y].setFlagged(true);
@@ -96,7 +96,9 @@ public class Board {
         flagsPlaced--;
         flagsLeft++;
       }
+      return true;
     }
+    return false;
   }
 
   int getFlagsLeft() {

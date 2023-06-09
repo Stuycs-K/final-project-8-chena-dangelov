@@ -3,7 +3,7 @@ private Board gameBoard;
 private int SQUARE_SIZE, countdown, countdownHelpScreen, countdownDifficultyScreen, timer, frameCountExplosion;
 private String difficulty;
 private boolean isGameOver, isHelpScreen, isDifficultyScreen, foundNearest, isNearestDisplayed;
-private SoundFile winnerSound, loserSound, clearTileSound;
+private SoundFile winnerSound, loserSound, clearTileSound, placeFlagSound, removeFlagSound;
 private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67F9FF, #B7BEBF, #FA9223};
 private final int[] easyBestTimes = {-1, -1, -1, };
 private final int[] mediumBestTimes = {-1, -1, -1, };
@@ -14,13 +14,14 @@ Controller keyboardInput;
 
 
 void keyReleased() {
-  if (!isGameOver){
+  if (!isGameOver) {
     keyboardInput.release(keyCode);
-  if (findNearestArr[0]!=-1) {
-    drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
-    isNearestDisplayed = false;
+    if (findNearestArr[0]!=-1) {
+      drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+      isNearestDisplayed = false;
+    }
   }
-}}
+}
 
 
 void setup() {
@@ -29,10 +30,12 @@ void setup() {
 
   size(800, 850);
   isGameOver = true;
-  
+
   clearTileSound = new SoundFile(this, "minesweeperClearTileSound.mp3");
   winnerSound = new SoundFile(this, "minesweeperWinnerSound.mp3");
   loserSound = new SoundFile(this, "minesweeperLoserSound.mp3");
+  placeFlagSound = new SoundFile(this, "minesweeperPlaceFlagSound.mp3");
+  removeFlagSound = new SoundFile(this, "minesweeperRemoveFlagSound.mp3");
 
   // game defaults to medium difficulty
   difficulty = "medium";
@@ -425,17 +428,16 @@ void draw() {
 
         // this condition prevents index out of bounds errors
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50) {
-          if(!gameBoard.gameBoard[row][col].cleared() && !gameBoard.gameBoard[row][col].isMine()){
+          if (!gameBoard.gameBoard[row][col].cleared() && !gameBoard.gameBoard[row][col].isMine() && !gameBoard.gameBoard[row][col].flagged()) {
             clearTileSound.play();
-            }
+          }
           boolean gameOutcome = gameBoard.clearSpace(row, col);
           if (gameOutcome) {
             drawTile(x, y);
-            
+
             //if(gameBoard.gameBoard[row][col].cleared() == false){
             //clearTileSound.play();
             //}
-          
           }
 
           // the game ends when either the game is complete (gameOutcome == true) or a player clears a mine (gameOutcome == false)
@@ -502,7 +504,16 @@ void draw() {
         // this condition prevents index out of bounds error and checks countdown
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdown == 0) {
 
-          gameBoard.placeFlag(row, col);
+          if (gameBoard.placeFlag(row, col)) {
+
+            if (gameBoard.gameBoard[row][col].flagged()) {
+              placeFlagSound.play();
+            } else {
+              removeFlagSound.play();
+            }
+          }
+
+
           drawTile(x, y);
           countdown+=10;
           fill(200);
@@ -675,11 +686,11 @@ void endScreen(boolean outcome) {
   if (outcome) {
     text("time : "+timer, 150, 40);
     text("winner !", 625, 40);
-    
+
     winnerSound.play();
   } else {
     text("loser !", 625, 40);
-    
+
     loserSound.play();
 
     int sizeOfText = 1;
