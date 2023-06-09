@@ -16,9 +16,8 @@ void keyReleased() {
     keyboardInput.release(keyCode);
     if (findNearestArr[0]!=-1) {
 //<<<<<<< HEAD
-      drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
 //=======
-      if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1] <= gameBoard.gameBoard.length/2)) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+      if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE <= 550)) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
 //>>>>>>> 359a5302ba8f0243908906718a45b26d76068a33
       isNearestDisplayed = false;
     }
@@ -43,6 +42,7 @@ void setup() {
   SQUARE_SIZE = width/16;
 
   drawBoard();
+  
 }
 
 void drawBoard() {
@@ -118,7 +118,7 @@ void removeHelpScreen() {
   if (gameBoard == null) {
     stroke(0);
     for (int row = 0; row < 400; row += SQUARE_SIZE) {
-      for (int col = 50; col < 450; col += SQUARE_SIZE) {
+      for (int col = 50; col < 550; col += SQUARE_SIZE) {
         if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
           fill(#26C627);
         } else {
@@ -129,7 +129,7 @@ void removeHelpScreen() {
     }
   } else {
     for (int row = 0; row < 400; row += SQUARE_SIZE) {
-      for (int col = 50; col < 450; col += SQUARE_SIZE) {
+      for (int col = 50; col < 550; col += SQUARE_SIZE) {
         if (gameBoard.gameBoard[row/SQUARE_SIZE][(col-50)/SQUARE_SIZE].flagged()) {
           if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
             fill(#26C627);
@@ -315,7 +315,7 @@ void draw() {
     else {
       isHelpScreen = true;
       fill(200);
-      rect(0, 50, 400, 400);
+      rect(0, 50, 400, 500);
       fill(0);
 
       // INSTRUCTIONS
@@ -359,7 +359,7 @@ void draw() {
 
 
   // clicking on the board when the help screen is displayed removes the help screen
-  if (mousePressed && isHelpScreen && mouseY >= 50  && !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) ) {
+  if (mousePressed && isHelpScreen && mouseY >= 50  && !(mouseX <= 400 && mouseY >= 50 && mouseY <= 550) ) {
     removeHelpScreen();
   }
   
@@ -373,7 +373,7 @@ void draw() {
 
       // game one
       if (gameBoard == null && mouseY > 50 && afterChoosingDiff ==0) {
-        if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450)) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {/////////////////
+        if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 550)) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {/////////////////
           gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
           isGameOver = false;
 //<<<<<<< HEAD
@@ -405,7 +405,7 @@ void draw() {
         boolean res = findNearest(mouseX, mouseY);
         if (res) {
           fill(#5C70DE);
-          if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1] <= gameBoard.gameBoard.length/2)) && !isDifficultyScreen && countdownDifficultyScreen == 0)circle(findNearestArr[0]*SQUARE_SIZE+SQUARE_SIZE/2, findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2, 20);
+          if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE <= 550)) && !isDifficultyScreen && countdownDifficultyScreen == 0)circle(findNearestArr[0]*SQUARE_SIZE+SQUARE_SIZE/2, findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2, 20);
           fill(0);
           isNearestDisplayed = true;
         }
@@ -429,7 +429,7 @@ void draw() {
     }
 
     // the mouse click registers when either the help box is not displayed or if the click is outside the help screen
-    if ((mousePressed && (!isHelpScreen|| !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450))) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {
+    if ((mousePressed && (!isHelpScreen|| !(mouseX <= 400 && mouseY >= 50 && mouseY <= 550))) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {
       int row = mouseX / SQUARE_SIZE;
       int col = (mouseY-50) / SQUARE_SIZE;
       int x = row*SQUARE_SIZE;
