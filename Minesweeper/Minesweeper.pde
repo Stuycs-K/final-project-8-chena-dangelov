@@ -15,7 +15,7 @@ void keyReleased() {
   if (!isGameOver) {
     keyboardInput.release(keyCode);
     if (findNearestArr[0]!=-1) {
-      if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1] <= gameBoard.gameBoard.length/2)) && !isDifficultyScreen && countdownDifficultyScreen == 0)drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+      if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1] <= gameBoard.gameBoard.length/2)) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
       isNearestDisplayed = false;
     }
   }
@@ -137,6 +137,8 @@ void removeHelpScreen() {
 }
 
 void removeDifficultyScreen() {
+  
+  textAlign(LEFT);
 
   noStroke();
   fill(200);
@@ -245,6 +247,8 @@ void draw() {
     if (isDifficultyScreen) {
       removeDifficultyScreen();
     } else {
+      
+      textAlign(LEFT);
 
       stroke(0);
       fill(220);
@@ -346,13 +350,18 @@ void draw() {
   if (mousePressed && isHelpScreen && mouseY >= 50  && !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450) ) {
     removeHelpScreen();
   }
+  
+  // clicking on the board when the difficulty selector is displayed removes the difficulty selector
+  if(mousePressed && isDifficultyScreen && mouseY >= 50 && !(mouseX <= 175 && mouseX >= 50 && mouseY <= 116)) {
+    removeDifficultyScreen();
+  }
 
   if (isGameOver) {
     if (mousePressed && (mouseButton == LEFT)) {
 
       // game one
       if (gameBoard == null && mouseY > 50) {
-        if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450)) && !isDifficultyScreen && countdownDifficultyScreen == 0) {
+        if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450)) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {
           gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
           isGameOver = false;
         }
@@ -403,7 +412,7 @@ void draw() {
     }
 
     // the mouse click registers when either the help box is not displayed or if the click is outside the help screen
-    if ((mousePressed && (!isHelpScreen|| !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450))) && !isDifficultyScreen) {
+    if ((mousePressed && (!isHelpScreen|| !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450))) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {
       int row = mouseX / SQUARE_SIZE;
       int col = (mouseY-50) / SQUARE_SIZE;
       int x = row*SQUARE_SIZE;
@@ -751,6 +760,9 @@ void endScreen(boolean outcome) {
 void keyPressed() {
 
   if (keyCode == 'H') {
+    if (isDifficultyScreen) {
+      removeDifficultyScreen();
+    }
     foundNearest = false;
     keyboardInput.press(keyCode);
   }
