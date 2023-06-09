@@ -66,6 +66,13 @@ Today I tried to implement a dropdown menu for difficulty. With this implementat
 
 Today I continued to work on the dropdown menu for difficulty. I ran into some setbacks while working on removeDifficultyScreen() method however, I think I have a general idea on how I want it to work. I want the space that the dropdown menu to take up to drawn back again and I will implement this idea tomorrow. Moreover, I still have to work on the selection of different difficulties. These are the goals I will set for myself to accomplish tomorrow, however, after meeting these goals, the dropdown menu feature for difficulty should be up and working !
 
+### 6/7/23
+
+Today I completed the dropdown menu for difficulty. My work today consisted of removeDifficultyScreen() method (a method that draws back the area taken over by the difficulty screen) and quite a lot of debugging. I ran into multiple issues with text alignment as for some reason text would be shifted to the left after the first game ends. On top of that, I ran into confusion on when removeDifficultyScreen() is called and isDifficultyScreen is true. This affected how the difficultyScreen functioned and I spent an embarassingly long time trying to figure out why difficultyScreen was not always functional. For the most part I am satisfied with what we have right now and am excited to move onto more cool additions to the game. 
+
+### 6/8/23
+
+Today I started to implement sound into the game. I found some really cool sounds for winner screen, loser screen, and clearing tiles and had them implemented. I learned about processing's sound class and it seems simple enough to use. However, one issue I am encountering is that the game takes a bit longer to set up but I guess that is a consequence of adding sound. Tomorrow I will add flag sounds (flag removing and adding) and clean up a lot of the code.
 
 
 ## Vincent D'Angelo
@@ -137,3 +144,8 @@ Today I made it so that, upon losing the game, the board removes any flags that 
 ### 6/7/23
 
 On this day I made some pretty cool additions. Firstly, I debugged some stuff. There was an issue with the two drop down menus where they were still clickable even when the "loser" or "winner" screens were displayed, in which case the hamburger button and the drop down menu for the difficulty were covered by a black screen. Now, it is only possible to click on these icons when they are displayed. Additionally, I made an addition where the player can actually see where the closest mine (or one of the closest mines) is to them on the map. This is done by clicking and holding the ‘h’ key (h for help), which will cause a blue circle to appear over the mine. This serves two purposes. Firstly, it can serve simply as a hint if the player needs it. But additionally, it prevents the situation that can occur in many online Minesweeper games where the player simply has to guess because the only option is to guess. I did this by creating a new tab (!!) for the controller, which processes the clicking and holding of a key. I also had a small debug session, and now I ensured that holding h is only effective if the game is ongoing. I hope to debug some more and add this new feature to the more info box tomorrow.
+
+### 6/8/23
+
+Today I did some debugging. Firstly I dealt with some lingering bugs from my “press h to help” addition yesterday, particularly how this could sometimes destroy the more info box / difficult selector if the closest mine was located in those respective regions. I also fixed a logical issue that caused this tool to not search for nearby mines that were not a knight-move away. Note that this tool doesn’t always return the exact nearest mine due to the way I’ve implemented it. Occasionally there will be slight discrepancies. But that was not the goal of this tool, as I did this just so that the player could find a nearby mine if they needed a hint. Next I moved onto bugs with the difficulty selector. Now, just like the more info box, clicking outside somewhere on the rest of the board will close the difficulty selector. Also, it is now much more unlikely to accidentally start a game right after choosing a new difficulty because of Processing registering one click from the user as multiple. Tomorrow, I hope to add more information to the more info box. 
+
