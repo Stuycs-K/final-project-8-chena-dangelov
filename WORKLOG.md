@@ -66,6 +66,9 @@ Today I tried to implement a dropdown menu for difficulty. With this implementat
 
 Today I continued to work on the dropdown menu for difficulty. I ran into some setbacks while working on removeDifficultyScreen() method however, I think I have a general idea on how I want it to work. I want the space that the dropdown menu to take up to drawn back again and I will implement this idea tomorrow. Moreover, I still have to work on the selection of different difficulties. These are the goals I will set for myself to accomplish tomorrow, however, after meeting these goals, the dropdown menu feature for difficulty should be up and working !
 
+### 6/7/23
+
+Today I completed the dropdown menu for difficulty. My work today consisted of removeDifficultyScreen() method (a method that draws back the area taken over by the difficulty screen) and quite a lot of debugging. I ran into multiple issues with text alignment as for some reason text would be shifted to the left after the first game ends. On top of that, I ran into confusion on when removeDifficultyScreen() is called and isDifficultyScreen is true. This affected how the difficultyScreen functioned and I spent an embarassingly long time trying to figure out why difficultyScreen was not always functional. For the most part I am satisfied with what we have right now and am excited to move onto more cool additions to the game. 
 
 
 ## Vincent D'Angelo
