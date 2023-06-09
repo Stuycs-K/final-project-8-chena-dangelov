@@ -11,8 +11,6 @@ private final int[] hardBestTimes = {-1, -1, -1, };
 private int[] explosionArr, findNearestArr;
 Controller keyboardInput;
 
-
-
 void keyReleased() {
   if (!isGameOver) {
     keyboardInput.release(keyCode);
@@ -26,7 +24,6 @@ void keyReleased() {
     }
   }
 }
-
 
 void setup() {
   keyboardInput = new Controller();
