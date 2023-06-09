@@ -361,9 +361,10 @@ void draw() {
 
       // game one
       if (gameBoard == null && mouseY > 50) {
-        if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450)) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {
+        if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450)) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {/////////////////
           gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
           isGameOver = false;
+          foundNearest = true;
         }
       }
 
@@ -380,7 +381,7 @@ void draw() {
   } else {
 
 
-    // if the player needs HELP!! HELP MEEE!!
+    // if the player needs HELP (show nearest* mine)!
     if (keyboardInput.isPressed(Controller.P1_LEFT)) {
 
       if (!foundNearest && !isNearestDisplayed && !gameBoard.gameBoard[mouseX / SQUARE_SIZE][(mouseY-50)/ SQUARE_SIZE].cleared() && !gameBoard.gameBoard[mouseX / SQUARE_SIZE][(mouseY-50)/ SQUARE_SIZE].flagged()) {
