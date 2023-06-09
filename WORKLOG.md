@@ -66,6 +66,9 @@ Today I tried to implement a dropdown menu for difficulty. With this implementat
 
 Today I continued to work on the dropdown menu for difficulty. I ran into some setbacks while working on removeDifficultyScreen() method however, I think I have a general idea on how I want it to work. I want the space that the dropdown menu to take up to drawn back again and I will implement this idea tomorrow. Moreover, I still have to work on the selection of different difficulties. These are the goals I will set for myself to accomplish tomorrow, however, after meeting these goals, the dropdown menu feature for difficulty should be up and working !
 
+### 6/7/23
+
+Today I completed the dropdown menu for difficulty. My work today consisted of removeDifficultyScreen() method (a method that draws back the area taken over by the difficulty screen) and quite a lot of debugging. I ran into multiple issues with text alignment as for some reason text would be shifted to the left after the first game ends. On top of that, I ran into confusion on when removeDifficultyScreen() is called and isDifficultyScreen is true. This affected how the difficultyScreen functioned and I spent an embarassingly long time trying to figure out why difficultyScreen was not always functional. For the most part I am satisfied with what we have right now and am excited to move onto more cool additions to the game. 
 
 
 ## Vincent D'Angelo
@@ -133,3 +136,7 @@ Today I made some more work with the how to play box, which honestly I think now
 ### 6/6/23
 
 Today I made it so that, upon losing the game, the board removes any flags that were not placed correctly (i.e. they were not placed on a mine), and replaces them all with a big red “x”. Also, I added a fun little animation. When the player clicks a mine, multiple rings of red circles emanate from the mine. This animation lasts for ten frames, and I created a method called explosion() for it. This way the specific mine the player messed up on is prioritized.
+
+### 6/7/23
+
+On this day I made some pretty cool additions. Firstly, I debugged some stuff. There was an issue with the two drop down menus where they were still clickable even when the "loser" or "winner" screens were displayed, in which case the hamburger button and the drop down menu for the difficulty were covered by a black screen. Now, it is only possible to click on these icons when they are displayed. Additionally, I made an addition where the player can actually see where the closest mine (or one of the closest mines) is to them on the map. This is done by clicking and holding the ‘h’ key (h for help), which will cause a blue circle to appear over the mine. This serves two purposes. Firstly, it can serve simply as a hint if the player needs it. But additionally, it prevents the situation that can occur in many online Minesweeper games where the player simply has to guess because the only option is to guess. I did this by creating a new tab (!!) for the controller, which processes the clicking and holding of a key. I also had a small debug session, and now I ensured that holding h is only effective if the game is ongoing. I hope to debug some more and add this new feature to the more info box tomorrow.
