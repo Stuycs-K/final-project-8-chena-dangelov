@@ -17,11 +17,18 @@ void keyReleased() {
     if (findNearestArr[0]!=-1) {
 //<<<<<<< HEAD
 //=======
+
+if(difficulty.equals("medium") || difficulty.equals("hard")){
       if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE <= 550)) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
 //>>>>>>> 359a5302ba8f0243908906718a45b26d76068a33
-      isNearestDisplayed = false;
+}
+if(difficulty.equals("hard")){
+  if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2 <= 550)) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+      
     }
+    isNearestDisplayed = false;
   }
+}
 }
 
 void setup() {
@@ -352,7 +359,11 @@ void draw() {
         "2:  " + bestTime(hardBestTimes[1])+"\n"+
         "3:  " + bestTime(hardBestTimes[2])
         , 200, 270+90);
-      //textAlign(CENTER);
+      
+      
+      //HELP
+      textSize(25);
+      text("STUCK?", 5, 270+45);
     }
     countdownHelpScreen+=15;
   }
@@ -405,7 +416,13 @@ void draw() {
         boolean res = findNearest(mouseX, mouseY);
         if (res) {
           fill(#5C70DE);
-          if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE <= 550)) && !isDifficultyScreen && countdownDifficultyScreen == 0)circle(findNearestArr[0]*SQUARE_SIZE+SQUARE_SIZE/2, findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2, 20);
+          if(difficulty.equals("medium") || difficulty.equals("hard")){
+            if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE <= 550)) && !isDifficultyScreen && countdownDifficultyScreen == 0)circle(findNearestArr[0]*SQUARE_SIZE+SQUARE_SIZE/2, findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2, 20);
+          
+          }
+          else {
+            if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2 <= 550)) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+          }
           fill(0);
           isNearestDisplayed = true;
         }
@@ -787,7 +804,6 @@ void endScreen(boolean outcome) {
   }
 
   // play again button
-  //textAlign(CENTER);
   fill(#B9BCF7);
   rect(width/2-75, 0, 150, 50);
   textSize(30);
