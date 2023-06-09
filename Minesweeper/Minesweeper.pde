@@ -363,7 +363,12 @@ void draw() {
       
       //HELP
       textSize(25);
-      text("STUCK?", 5, 270+45);
+      text("STUCK?", 5, 445+3);
+      textSize(17);
+      textLeading(20);
+      text("Do not fret! Hover above an untouched Tile and hold the 'h' key on your keyboard to reveal a nearby mine. Alternatively, click the letter 'w' to automatically win the game.",
+      5,450+3,400-10,550-10);
+      
     }
     countdownHelpScreen+=15;
   }
