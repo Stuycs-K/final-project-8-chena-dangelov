@@ -1,5 +1,5 @@
 private Board gameBoard;
-private int SQUARE_SIZE, countdown, countdownHelpScreen, countdownDifficultyScreen, timer, frameCountExplosion;
+private int SQUARE_SIZE, countdown, countdownHelpScreen, countdownDifficultyScreen, timer, frameCountExplosion, afterChoosingDiff;
 private String difficulty;
 private boolean isGameOver, isHelpScreen, isDifficultyScreen, foundNearest, isNearestDisplayed;
 private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67F9FF, #B7BEBF, #FA9223};
@@ -219,7 +219,9 @@ void changeDifficulty(String d) {
   timer = 0;
 }
 
-void draw() {
+void draw() {  
+  
+  if(afterChoosingDiff > 0)afterChoosingDiff--;
 
   if (explosionArr!=null) {
     if (frameCountExplosion == 0) {
@@ -285,6 +287,7 @@ void draw() {
     }
     isDifficultyScreen = false;
     countdownDifficultyScreen += 10;
+    afterChoosingDiff+=7;
   }
 
 
@@ -360,7 +363,7 @@ void draw() {
     if (mousePressed && (mouseButton == LEFT)) {
 
       // game one
-      if (gameBoard == null && mouseY > 50) {
+      if (gameBoard == null && mouseY > 50 && afterChoosingDiff ==0) {
         if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450)) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {/////////////////
           gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
           isGameOver = false;
@@ -400,7 +403,7 @@ void draw() {
     // countdown used as a timer for placing flags
     if (countdown > 0)countdown--;
 
-    if (frameCount % 60 == 0 ) {
+    if (frameCount % 60 == 0 && !isGameOver) {
       textAlign(CENTER);
       fill(200);
       noStroke();
@@ -511,6 +514,7 @@ void draw() {
         }
       }
     }
+  
   }
 }
 
