@@ -1,7 +1,9 @@
+import processing.sound.*;
 private Board gameBoard;
 private int SQUARE_SIZE, countdown, countdownHelpScreen, countdownDifficultyScreen, timer, frameCountExplosion;
 private String difficulty;
 private boolean isGameOver, isHelpScreen, isDifficultyScreen, foundNearest, isNearestDisplayed;
+private SoundFile winnerSound, loserSound, clearTileSound;
 private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67F9FF, #B7BEBF, #FA9223};
 private final int[] easyBestTimes = {-1, -1, -1, };
 private final int[] mediumBestTimes = {-1, -1, -1, };
@@ -27,6 +29,10 @@ void setup() {
 
   size(800, 850);
   isGameOver = true;
+  
+  clearTileSound = new SoundFile(this, "minesweeperClearTileSound.mp3");
+  winnerSound = new SoundFile(this, "minesweeperWinnerSound.mp3");
+  loserSound = new SoundFile(this, "minesweeperLoserSound.mp3");
 
   // game defaults to medium difficulty
   difficulty = "medium";
@@ -354,6 +360,7 @@ void draw() {
         if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 450)) && !isDifficultyScreen && countdownDifficultyScreen == 0) {
           gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
           isGameOver = false;
+          clearTileSound.play();
         }
       }
 
@@ -418,9 +425,17 @@ void draw() {
 
         // this condition prevents index out of bounds errors
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50) {
+          if(!gameBoard.gameBoard[row][col].cleared() && !gameBoard.gameBoard[row][col].isMine()){
+            clearTileSound.play();
+            }
           boolean gameOutcome = gameBoard.clearSpace(row, col);
           if (gameOutcome) {
             drawTile(x, y);
+            
+            //if(gameBoard.gameBoard[row][col].cleared() == false){
+            //clearTileSound.play();
+            //}
+          
           }
 
           // the game ends when either the game is complete (gameOutcome == true) or a player clears a mine (gameOutcome == false)
@@ -660,8 +675,12 @@ void endScreen(boolean outcome) {
   if (outcome) {
     text("time : "+timer, 150, 40);
     text("winner !", 625, 40);
+    
+    winnerSound.play();
   } else {
     text("loser !", 625, 40);
+    
+    loserSound.play();
 
     int sizeOfText = 1;
     if (difficulty.equals("easy")) {

@@ -4,8 +4,8 @@ public class Tile {
   // flagged - true if tile is flagged, false otherwise
   // defaultCleared - true if tile (by default) is cleared ( - occurs when a player clears their first tiles of every new game), false otherwise
   // surrounding - the number of mines surrounding tile
-  boolean mine, cleared, flagged, defaultCleared;
-  int surrounding;
+  private boolean mine, cleared, flagged, defaultCleared;
+  private int surrounding;
   
   boolean getDefaultCleared(){
     return defaultCleared;

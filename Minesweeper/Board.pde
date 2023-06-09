@@ -1,6 +1,7 @@
 public class Board {
   Tile[][] gameBoard;
   int flagsPlaced, spacesCleared, mineCount, flagsLeft;
+  SoundFile clearTileSound;
 
   public Board(int x, int y, int size) {
     gameBoard = new Tile[size][size];
