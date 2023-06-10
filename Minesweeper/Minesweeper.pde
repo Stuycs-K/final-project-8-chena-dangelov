@@ -16,11 +16,11 @@ void keyReleased() {
     keyboardInput.release(keyCode);
     if (findNearestArr[0]!=-1) {
 
-      if (difficulty.equals("medium") || difficulty.equals("hard")) {
-        if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE <= 550)) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+      if (difficulty.equals("medium") || difficulty.equals("easy")) {
+        if ((!isHelpScreen) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
       }
       if (difficulty.equals("hard")) {
-        if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2 <= 550)) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+        if ((!isHelpScreen) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
       }
       
       isNearestDisplayed = false;
@@ -408,17 +408,17 @@ void draw() {
 
 
     // if the player needs HELP (show a nearby mine)!
-    if (keyboardInput.isPressed(Controller.P1_LEFT)) {
+    if (mouseX >= 0 && mouseX <= 800 && mouseY >= 50 && mouseY <= 850 && keyboardInput.isPressed(Controller.P1_LEFT)) {
 
       if (!foundNearest && !isNearestDisplayed && !gameBoard.gameBoard[mouseX / SQUARE_SIZE][(mouseY-50)/ SQUARE_SIZE].cleared() && !gameBoard.gameBoard[mouseX / SQUARE_SIZE][(mouseY-50)/ SQUARE_SIZE].flagged()) {
 
         boolean res = findNearest(mouseX, mouseY);
         if (res) {
           fill(#5C70DE);
-          if (difficulty.equals("medium") || difficulty.equals("hard")) {
-            if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE <= 550)) && !isDifficultyScreen && countdownDifficultyScreen == 0)circle(findNearestArr[0]*SQUARE_SIZE+SQUARE_SIZE/2, findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2, 20);
+          if (difficulty.equals("medium") || difficulty.equals("easy")) {
+            if ((!isHelpScreen) && !isDifficultyScreen)circle(findNearestArr[0]*SQUARE_SIZE+SQUARE_SIZE/2, findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2, 20);
           } else {
-            if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2 <= 550)) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+            if ((!isHelpScreen) && (!isDifficultyScreen))circle(findNearestArr[0]*SQUARE_SIZE+SQUARE_SIZE/2, findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2, 20);
           }
           fill(0);
           isNearestDisplayed = true;
@@ -811,6 +811,9 @@ void keyPressed() {
   if (keyCode == 'H') {
     if (isDifficultyScreen) {
       removeDifficultyScreen();
+    }
+    if (isHelpScreen) {
+      removeHelpScreen();
     }
     foundNearest = false;
     keyboardInput.press(keyCode);
