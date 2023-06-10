@@ -50,17 +50,26 @@ void setup() {
 
 void drawBoard() {
   background(200);
+  
+  // mute button
+  noStroke();
+  fill(225);
+  rect(width-30,10,10,10);
+  quad(width-20,10,width-20,20,width-12,26,width-12,4);
+  noFill();
+  stroke(225);
+  arc(width-10,15,8,11,-HALF_PI,HALF_PI);
+  //textSize(17);
+  //text("x",width-10,18);
+  
 
   // hamburger button
-  noStroke();
-  fill(255);
+  fill(235);
   rect(7, 22, 25, 3, 5);
   rect(7, 30, 25, 3, 5);
   rect(7, 38, 25, 3, 5);
-  stroke(0);
 
   // difficulty selector
-  noStroke();
   fill(220);
   rect(50, 20, 125, 24, 5);
   fill(0);
@@ -115,6 +124,7 @@ void drawBoard() {
       square(row, col, SQUARE_SIZE);
     }
   }
+    
 }
 
 void removeHelpScreen() {
