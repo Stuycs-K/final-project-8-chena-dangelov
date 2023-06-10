@@ -371,11 +371,6 @@ void draw() {
       }
     }
   } else {
-//<<<<<<< HEAD
-//    // if the player needs HELP (show nearest* mine)!
-//    if (keyboardInput.isPressed(Controller.P1_LEFT)) {
-//=======
-
 
     // if the player needs HELP (show a nearby mine)!
     if (mouseX >= 0 && mouseX <= 800 && mouseY >= 50 && mouseY <= 850 && keyboardInput.isPressed(Controller.P1_LEFT)) {
