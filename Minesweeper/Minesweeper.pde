@@ -1,6 +1,6 @@
 import processing.sound.*;
 private Board gameBoard;
-private int SQUARE_SIZE, countdown, countdownHelpScreen, countdownDifficultyScreen, countdownMute, timer, frameCountExplosion, afterChoosingDiff;
+private int SQUARE_SIZE, countdownFlag, countdownHelpScreen, countdownDifficultyScreen, countdownMute, timer, frameCountExplosion, afterChoosingDiff;
 private String difficulty;
 private boolean isGameOver, isHelpScreen, isDifficultyScreen, foundNearest, isNearestDisplayed, muted;
 private SoundFile winnerSound, loserSound, clearTileSound, placeFlagSound, removeFlagSound;
@@ -15,36 +15,29 @@ void keyReleased() {
   if (!isGameOver) {
     keyboardInput.release(keyCode);
     if (findNearestArr[0]!=-1) {
-
       if (difficulty.equals("medium") || difficulty.equals("easy")) {
         if ((!isHelpScreen) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
       }
       if (difficulty.equals("hard")) {
         if ((!isHelpScreen) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
       }
-
       isNearestDisplayed = false;
     }
   }
 }
 
 void setup() {
+  size(800, 850);
+  difficulty = "medium";
+  SQUARE_SIZE = width/16;
+  isGameOver = true;
   keyboardInput = new Controller();
   findNearestArr = new int[]{-1, -1};
-
-  size(800, 850);
-  isGameOver = true;
-
   clearTileSound = new SoundFile(this, "minesweeperClearTileSound.mp3");
   winnerSound = new SoundFile(this, "minesweeperWinnerSound.mp3");
   loserSound = new SoundFile(this, "minesweeperLoserSound.mp3");
   placeFlagSound = new SoundFile(this, "minesweeperPlaceFlagSound.mp3");
   removeFlagSound = new SoundFile(this, "minesweeperRemoveFlagSound.mp3");
-
-  // game defaults to medium difficulty
-  difficulty = "medium";
-  SQUARE_SIZE = width/16;
-
   drawBoard();
 }
 
@@ -83,7 +76,6 @@ void drawBoard() {
   triangle(170, 25, 150, 25, 160, 40);
 
   // best time settings
-  //textAlign(LEFT);
   textSize(30);
   fill(0);
   if (difficulty.equals("easy")) {
@@ -161,9 +153,7 @@ void removeHelpScreen() {
 }
 
 void removeDifficultyScreen() {
-
   textAlign(LEFT);
-
   noStroke();
   fill(200);
   rect(50, 20, 130, 30);
@@ -174,7 +164,6 @@ void removeDifficultyScreen() {
   text(difficulty, 65, 38);
   fill(150);
   triangle(170, 25, 150, 25, 160, 40);
-
   stroke(0);
   if (gameBoard == null) {
     for (int row = 0; row < 200; row += SQUARE_SIZE) {
@@ -213,15 +202,12 @@ String bestTime(int time) {
 void explosion(int value) {
   int row = explosionArr[0];
   int col = explosionArr[1];
-
   fill(#FF150D, 0);
   stroke(#FF150D);
   strokeWeight(0.8);
-
   if (difficulty == "easy")circle(row+SQUARE_SIZE/2, col+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6 + value*15);
   if (difficulty == "medium")circle(row+SQUARE_SIZE/2, col+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6 + value*9);
   if (difficulty == "hard")circle(row+SQUARE_SIZE/2, col+SQUARE_SIZE/2 - 5, SQUARE_SIZE*.6 + value*7);
-
   stroke(0);
 }
 
@@ -236,7 +222,6 @@ void changeDifficulty(String d) {
   if (difficulty.equals("hard")) {
     SQUARE_SIZE = width/20;
   }
-
   gameBoard = null;
   drawBoard();
   isGameOver = true;
@@ -244,10 +229,10 @@ void changeDifficulty(String d) {
 }
 
 void draw() {
-
   // the following if statement is to prevent the situation where a player chooses a difficulty and then immediately clicks on the new board as a result of them holding the mouse for a tad too long
   if (afterChoosingDiff > 0)afterChoosingDiff--;
 
+  // explosion settings
   if (explosionArr!=null) {
     if (frameCountExplosion == 0) {
       frameCountExplosion = frameCount;
@@ -260,10 +245,11 @@ void draw() {
     }
   }
 
-  // so that clicking to open the more info box and the difficulty screen is always only registered as one click
+  // countdowns for helpScreen and difficultyScreen and flags (variable : countdown) so that clicking to open the more info box and the difficulty screen is always only registered as one click
   if (countdownHelpScreen>0)countdownHelpScreen--;
   if (countdownDifficultyScreen>0)countdownDifficultyScreen--;
   if (countdownMute>0)countdownMute--;
+  if (countdownFlag > 0)countdownFlag--;
 
 
   // mute
@@ -287,20 +273,20 @@ void draw() {
     stroke(0);
   }
 
-  // difficulty change
-  if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 20 && mouseY <= 44 && countdownDifficultyScreen == 0 && get(2, 2) != -16777216 ) {
+  
 
 
+  // difficulty settings
+  if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 20 && mouseY <= 44 && countdownDifficultyScreen == 0 && get(2, 2) != -16777216 /*black*/) {
+    // clicking on the difficultyScreen removes helpScreen
     if (isHelpScreen) {
       removeHelpScreen();
     }
-
+    // clicking on the difficultyScreen again removes difficultyScreen
     if (isDifficultyScreen) {
       removeDifficultyScreen();
     } else {
-
       textAlign(LEFT);
-
       stroke(0);
       fill(220);
       rect(50, 44, 125, 72, 5);
@@ -320,12 +306,11 @@ void draw() {
       if (difficulty.equals("hard")) {
         text("X", 155, 110);
       }
-
       isDifficultyScreen = true;
     }
     countdownDifficultyScreen += 10;
   }
-
+  // change in difficulty
   if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 44 && mouseY <= 116 && isDifficultyScreen && countdownDifficultyScreen == 0) {
     if (mouseY <= 62) {
       changeDifficulty("easy");
@@ -339,25 +324,22 @@ void draw() {
     afterChoosingDiff+=7;
   }
 
-
   // clicking on the hamburger button
   if (mousePressed && mouseButton == LEFT && mouseY >= 22 && mouseY <= 41 && mouseX >= 7 && mouseX <= 32 && countdownHelpScreen == 0  && get(2, 2) != -16777216 /*black*/ ) {
-
+    // clicking on the helpScreen removes difficultyScreen
     if (isDifficultyScreen) {
       removeDifficultyScreen();
     }
-
+    // clicking on the helpScreen again removes helpScreen
     if (isHelpScreen) {
       removeHelpScreen();
     }
-
     // opening help screen
     else {
       isHelpScreen = true;
       fill(200);
       rect(0, 50, 400, 500);
       fill(0);
-
       // INSTRUCTIONS
       textAlign(LEFT);
       textSize(25);
@@ -366,8 +348,6 @@ void draw() {
       textLeading(20);
       text("Start the game by clicking any space on the map to initially carve out a board. Each Tile on the board is either a mine or not. If it isn't, it will display the number of mines it touches (if it touches no mines, nothing is displayed). The objective of the game is for players to uncover all Tiles that do not contain a mine while avoiding (or marking) all the mines by utilizing the clues provided by the numbers in the Tiles.\n\nLeft click to clear a Tile. Right click to place a flag, or to remove one.",
         5, 55+30, 400-10, 400-10);
-
-
       //PERSONAL BESTS
       textSize(25);
       text("PERSONAL BESTS:", 5, 270+45);
@@ -392,8 +372,6 @@ void draw() {
         "2:  " + bestTime(hardBestTimes[1])+"\n"+
         "3:  " + bestTime(hardBestTimes[2])
         , 200, 270+90);
-
-
       //HELP
       textSize(25);
       text("STUCK?", 5, 445+3);
@@ -404,8 +382,6 @@ void draw() {
     }
     countdownHelpScreen+=15;
   }
-
-
   // clicking on the board when the help screen is displayed removes the help screen
   if (mousePressed && isHelpScreen && mouseY >= 50  && !(mouseX <= 400 && mouseY >= 50 && mouseY <= 550) ) {
     removeHelpScreen();
@@ -418,7 +394,6 @@ void draw() {
 
   if (isGameOver) {
     if (mousePressed && (mouseButton == LEFT)) {
-
       // game one
       if (gameBoard == null && mouseY > 50 && afterChoosingDiff ==0) {
         if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 550)) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {
@@ -428,7 +403,6 @@ void draw() {
           foundNearest = true;
         }
       }
-
       // game n, n>1
       else {
         if (mouseX >= width/2 - 75 && mouseX <= width/2 + 75 && mouseY >= 0 && mouseY < 50) {
@@ -441,12 +415,9 @@ void draw() {
     }
   } else {
 
-
     // if the player needs HELP (show a nearby mine)!
     if (mouseX >= 0 && mouseX <= 800 && mouseY >= 50 && mouseY <= 850 && keyboardInput.isPressed(Controller.P1_LEFT)) {
-
       if (!foundNearest && !isNearestDisplayed && !gameBoard.gameBoard[mouseX / SQUARE_SIZE][(mouseY-50)/ SQUARE_SIZE].cleared() && !gameBoard.gameBoard[mouseX / SQUARE_SIZE][(mouseY-50)/ SQUARE_SIZE].flagged()) {
-
         boolean res = findNearest(mouseX, mouseY);
         if (res) {
           fill(#5C70DE);
@@ -462,9 +433,7 @@ void draw() {
       }
     }
 
-    // the variable countdown used as a timer for placing flags
-    if (countdown > 0)countdown--;
-
+    // timer
     if (frameCount % 60 == 0 && !isGameOver) {
       textAlign(CENTER);
       fill(200);
@@ -483,36 +452,27 @@ void draw() {
       int col = (mouseY-50) / SQUARE_SIZE;
       int x = row*SQUARE_SIZE;
       int y = col*SQUARE_SIZE+50;
-
       // left click == clear space
       if (mouseButton == LEFT) {
-
         // this condition prevents index out of bounds errors
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50) {
+          // clear tile sound playing
           if (!gameBoard.gameBoard[row][col].cleared() && !gameBoard.gameBoard[row][col].isMine() && !gameBoard.gameBoard[row][col].flagged()) {
             if(!muted)clearTileSound.play();
           }
+          // clear tile
           boolean gameOutcome = gameBoard.clearSpace(row, col);
           if (gameOutcome) {
             drawTile(x, y);
-
-            //if(gameBoard.gameBoard[row][col].cleared() == false){
-            //clearTileSound.play();
-            //}
           }
-
           // the game ends when either the game is complete (gameOutcome == true) or a player clears a mine (gameOutcome == false)
           if (gameBoard.done() || !gameOutcome) {
-
             // if the player wins the game, a bestTime is calculated
             if (gameOutcome) {
               if (difficulty.equals("easy")) {
-
                 // check to see if the timer cracks the top three best times...
                 for (int i = 0; i < 3; i++) {
-
                   if (timer < easyBestTimes[i] || easyBestTimes[i]==-1) {
-
                     // ...and if it does, move the values slower than it to the lower places in the list
                     for (int j = 2; j > i; j--) {
                       easyBestTimes[j]=easyBestTimes[j-1];
@@ -522,10 +482,8 @@ void draw() {
                   }
                 }
               }
-
               if (difficulty.equals("medium")) {
                 for (int i = 0; i < 3; i++) {
-
                   if (timer < mediumBestTimes[i] || mediumBestTimes[i]==-1) {
                     for (int j = 2; j > i; j--) {
                       mediumBestTimes[j]=mediumBestTimes[j-1];
@@ -535,10 +493,8 @@ void draw() {
                   }
                 }
               }
-
               if (difficulty.equals("hard")) {
                 for (int i = 0; i < 3; i++) {
-
                   if (timer < hardBestTimes[i] || hardBestTimes[i]==-1) {
                     for (int j = 2; j > i; j--) {
                       hardBestTimes[j]=hardBestTimes[j-1];
@@ -549,34 +505,29 @@ void draw() {
                 }
               }
             }
-
+            // if the player loses the game, an explosion animation occurs 
             if (!gameOutcome) {
               explosionArr = new int[]{x, y};
             }
-
             endScreen(gameOutcome);
           }
         }
       }
-
+      
       // right click == place flag
       else if (mouseButton == RIGHT) {
-
         // this condition prevents index out of bounds error and checks countdown
-        if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdown == 0) {
-
+        if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdownFlag == 0) {
           if (gameBoard.placeFlag(row, col)) {
-
+            // plays sound
             if (gameBoard.gameBoard[row][col].flagged()) {
               if(!muted)placeFlagSound.play();
             } else {
               if(!muted)removeFlagSound.play();
             }
           }
-
-
           drawTile(x, y);
-          countdown+=10;
+          countdownFlag+=15;
           fill(200);
           noStroke();
           rect(480, 5, 50, 40);
@@ -842,7 +793,6 @@ void endScreen(boolean outcome) {
 }
 
 void keyPressed() {
-
   if (keyCode == 'H') {
     if (isDifficultyScreen) {
       removeDifficultyScreen();
@@ -853,8 +803,6 @@ void keyPressed() {
     foundNearest = false;
     keyboardInput.press(keyCode);
   }
-
-
   if (!isGameOver) {
 
     // press 'w' for automatic win
@@ -883,7 +831,6 @@ void keyPressed() {
           }
         }
       }
-
       if (difficulty.equals("medium")) {
         for (int i = 0; i < 3; i++) {
 
@@ -896,7 +843,6 @@ void keyPressed() {
           }
         }
       }
-
       if (difficulty.equals("hard")) {
         for (int i = 0; i < 3; i++) {
 
@@ -909,7 +855,6 @@ void keyPressed() {
           }
         }
       }
-
       endScreen(true);
       if(!muted)winnerSound.play();
     }

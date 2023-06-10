@@ -74,6 +74,10 @@ Today I completed the dropdown menu for difficulty. My work today consisted of r
 
 Today I started to implement sound into the game. I found some really cool sounds for winner screen, loser screen, and clearing tiles and had them implemented. I learned about processing's sound class and it seems simple enough to use. However, one issue I am encountering is that the game takes a bit longer to set up but I guess that is a consequence of adding sound. Tomorrow I will add flag sounds (flag removing and adding) and clean up a lot of the code.
 
+### 6/9/23
+
+Today I completed the implementation of sound into the game. I hope that these improvements greatly improve the quality of gameplay. On top of that, I tested the game multiple times to make sure all the features of the game work well. And they do ! As we are nearing the end of the project, I don't think more changes will be made (except for maybe slight ones). Other than that, I think the next few days I will be working on updating our prototype to accompany for any changes we might not have included on there yet and making sure everything is ready to be submitted !
+
 
 ## Vincent D'Angelo
 
