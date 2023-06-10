@@ -280,6 +280,8 @@ void draw() {
       text("x", width-10, 18);
     }
     countdownMute += 10;
+    fill(0);
+    stroke(0);
   }
 
   // difficulty change
@@ -419,7 +421,7 @@ void draw() {
         if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 550)) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {
           gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
           isGameOver = false;
-          clearTileSound.play();
+          if(!muted)clearTileSound.play();
           foundNearest = true;
         }
       }
@@ -485,7 +487,7 @@ void draw() {
         // this condition prevents index out of bounds errors
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50) {
           if (!gameBoard.gameBoard[row][col].cleared() && !gameBoard.gameBoard[row][col].isMine() && !gameBoard.gameBoard[row][col].flagged()) {
-            clearTileSound.play();
+            if(!muted)clearTileSound.play();
           }
           boolean gameOutcome = gameBoard.clearSpace(row, col);
           if (gameOutcome) {
@@ -563,9 +565,9 @@ void draw() {
           if (gameBoard.placeFlag(row, col)) {
 
             if (gameBoard.gameBoard[row][col].flagged()) {
-              placeFlagSound.play();
+              if(!muted)placeFlagSound.play();
             } else {
-              removeFlagSound.play();
+              if(!muted)removeFlagSound.play();
             }
           }
 
@@ -782,11 +784,11 @@ void endScreen(boolean outcome) {
     text("time : "+timer, 150, 40);
     text("winner !", 625, 40);
 
-    winnerSound.play();
+    if(!muted)winnerSound.play();
   } else {
     text("loser !", 625, 40);
 
-    loserSound.play();
+    if(!muted)loserSound.play();
 
     int sizeOfText = 1;
     if (difficulty.equals("easy")) {
@@ -906,6 +908,7 @@ void keyPressed() {
       }
 
       endScreen(true);
+      if(!muted)winnerSound.play();
     }
   }
 }
