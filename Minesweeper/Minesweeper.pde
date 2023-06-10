@@ -1,8 +1,8 @@
 import processing.sound.*;
 private Board gameBoard;
-private int SQUARE_SIZE, countdown, countdownHelpScreen, countdownDifficultyScreen, timer, frameCountExplosion, afterChoosingDiff;
+private int SQUARE_SIZE, countdown, countdownHelpScreen, countdownDifficultyScreen, countdownMute, timer, frameCountExplosion, afterChoosingDiff;
 private String difficulty;
-private boolean isGameOver, isHelpScreen, isDifficultyScreen, foundNearest, isNearestDisplayed;
+private boolean isGameOver, isHelpScreen, isDifficultyScreen, foundNearest, isNearestDisplayed, muted;
 private SoundFile winnerSound, loserSound, clearTileSound, placeFlagSound, removeFlagSound;
 private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67F9FF, #B7BEBF, #FA9223};
 private final int[] easyBestTimes = {-1, -1, -1, };
@@ -22,7 +22,7 @@ void keyReleased() {
       if (difficulty.equals("hard")) {
         if ((!isHelpScreen) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
       }
-      
+
       isNearestDisplayed = false;
     }
   }
@@ -50,18 +50,21 @@ void setup() {
 
 void drawBoard() {
   background(200);
-  
+
   // mute button
   noStroke();
   fill(225);
-  rect(width-30,10,10,10);
-  quad(width-20,10,width-20,20,width-12,26,width-12,4);
+  rect(width-30, 10, 10, 10);
+  quad(width-20, 10, width-20, 20, width-12, 26, width-12, 4);
   noFill();
   stroke(225);
-  arc(width-10,15,8,11,-HALF_PI,HALF_PI);
-  //textSize(17);
-  //text("x",width-10,18);
-  
+  if (!muted) {
+    arc(width-10, 15, 8, 11, -HALF_PI, HALF_PI);
+  } else {
+    textSize(17);
+    text("x", width-10, 18);
+  }
+
 
   // hamburger button
   fill(235);
@@ -124,7 +127,6 @@ void drawBoard() {
       square(row, col, SQUARE_SIZE);
     }
   }
-    
 }
 
 void removeHelpScreen() {
@@ -261,6 +263,24 @@ void draw() {
   // so that clicking to open the more info box and the difficulty screen is always only registered as one click
   if (countdownHelpScreen>0)countdownHelpScreen--;
   if (countdownDifficultyScreen>0)countdownDifficultyScreen--;
+  if (countdownMute>0)countdownMute--;
+
+  if (mousePressed && mouseButton == LEFT && mouseX >= width-30 && mouseX <= width-(5) && mouseY >= 10 && mouseY <= 26 && countdownMute == 0) {
+    fill(200);
+    noStroke();
+    rect(width-10, 5, 10, 20);
+    if (muted) {
+      muted = false;
+      stroke(225);
+      arc(width-10, 15, 8, 11, -HALF_PI, HALF_PI);
+    } else {
+      muted = true;
+      fill(225);
+      textSize(17);
+      text("x", width-10, 18);
+    }
+    countdownMute += 10;
+  }
 
   // difficulty change
   if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 20 && mouseY <= 44 && countdownDifficultyScreen == 0 && get(2, 2) != -16777216 ) {
