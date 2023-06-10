@@ -265,6 +265,8 @@ void draw() {
   if (countdownDifficultyScreen>0)countdownDifficultyScreen--;
   if (countdownMute>0)countdownMute--;
 
+
+  // mute
   if (mousePressed && mouseButton == LEFT && mouseX >= width-30 && mouseX <= width-(5) && mouseY >= 10 && mouseY <= 26 && countdownMute == 0) {
     fill(200);
     noStroke();
@@ -277,6 +279,7 @@ void draw() {
       muted = true;
       fill(225);
       textSize(17);
+      textAlign(LEFT);
       text("x", width-10, 18);
     }
     countdownMute += 10;
