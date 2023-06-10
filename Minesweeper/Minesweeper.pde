@@ -79,13 +79,13 @@ void drawBoard() {
   textSize(30);
   fill(0);
   if (difficulty.equals("easy")) {
-    text("Best Time : "+bestTime(easyBestTimes[0]), 600, 40);
+    text("Best Time : "+bestTime(easyBestTimes[0]), 570, 40);
   }
   if (difficulty.equals("medium")) {
-    text("Best Time : "+bestTime(mediumBestTimes[0]), 600, 40);
+    text("Best Time : "+bestTime(mediumBestTimes[0]), 570, 40);
   }
   if (difficulty.equals("hard")) {
-    text("Best Time : "+bestTime(hardBestTimes[0]), 600, 40);
+    text("Best Time : "+bestTime(hardBestTimes[0]), 570, 40);
   }
 
   // flagsLeft settings
@@ -93,19 +93,19 @@ void drawBoard() {
   textSize(30);
   fill(0);
   if (difficulty.equals("easy")) {
-    text("10", 490, 40);
+    text("10", 460, 40);
   }
   if (difficulty.equals("medium")) {
-    text("40", 490, 40);
+    text("40", 460, 40);
   }
   if (difficulty.equals("hard")) {
-    text("64", 490, 40);
+    text("64", 460, 40);
   }
   stroke(0);
-  rect(520, 45, 25, 5);
-  rect(530, 15, 5, 30);
+  rect(520-30, 45, 25, 5);
+  rect(530-30, 15, 5, 30);
   fill(#CE3636);
-  triangle(530, 15, 530, 30, 555, 22.5);
+  triangle(530-30, 15, 530-30, 30, 555-30, 22.5);
 
   // board drawing
   stroke(0);
@@ -267,6 +267,8 @@ void draw() {
       textSize(17);
       textAlign(LEFT);
       text("x", width-10, 18);
+      while(winnerSound.isPlaying())winnerSound.stop();
+      while(loserSound.isPlaying())loserSound.stop();
     }
     countdownMute += 10;
     fill(0);
@@ -530,16 +532,16 @@ void draw() {
           countdownFlag+=15;
           fill(200);
           noStroke();
-          rect(480, 5, 50, 40);
+          rect(480-30, 5, 50, 40);
           textSize(30);
           fill(0);
           textAlign(LEFT);
-          text(gameBoard.getFlagsLeft(), 490, 40);
+          text(gameBoard.getFlagsLeft(), 490-30, 40);
           stroke(0);
-          rect(520, 45, 25, 5);
-          rect(530, 15, 5, 30);
+          rect(520-30, 45, 25, 5);
+          rect(530-30, 15, 5, 30);
           fill(#CE3636);
-          triangle(530, 15, 530, 30, 555, 22.5);
+          triangle(530-30, 15, 530-30, 30, 555-30, 22.5);
         }
       }
     }
@@ -646,7 +648,9 @@ boolean findNearest( int row, int col) {
 }
 
 void drawTile(int row, int col) {
-  Tile t = gameBoard.gameBoard[row / SQUARE_SIZE][(col-50) / SQUARE_SIZE];
+  if(row / SQUARE_SIZE < gameBoard.gameBoard.length && (col-50) / SQUARE_SIZE < gameBoard.gameBoard.length){
+    Tile t = gameBoard.gameBoard[row / SQUARE_SIZE][(col-50) / SQUARE_SIZE];
+  
 
   // if the space has been cleared, a cleared tile is drawn
   if (t.cleared()) {
@@ -722,8 +726,7 @@ void drawTile(int row, int col) {
       }
       square(row, col, SQUARE_SIZE);
     }
-  }
-}
+  }}}
 
 void endScreen(boolean outcome) {
   isGameOver = true;
