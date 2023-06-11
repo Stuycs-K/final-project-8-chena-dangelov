@@ -273,10 +273,7 @@ void draw() {
         winnerSound.cue((float)(frameCount - winnerFramesStart) / (float)(60));
         winnerSound.play();
       }
-      if(loserFramesStart + (int)(loserFrames) > frameCount){
-        loserSound.cue((float)(frameCount - loserFramesStart) / (float)(60));
-        loserSound.play();
-      }
+      loserSound.amp(1);
     } else {
       muted = true;
       fill(225);
@@ -284,13 +281,12 @@ void draw() {
       textAlign(LEFT);
       text("x", width-10, 18);
       if(winnerSound.isPlaying()){
-        winnerSound.pause();
-        winnerFramesHere = frameCount;
+        winnerSound.stop();
       }
-      if(loserSound.isPlaying()){
-        loserSound.pause();
-        loserFramesHere = frameCount;
-      }
+      //if(loserSound.isPlaying()){
+      //  loserSound.pause();
+      //}
+      loserSound.amp(.000000001);
     }
     countdownMute += 10;
     fill(0);
@@ -771,11 +767,13 @@ void endScreen(boolean outcome) {
   } else {
     text("loser !", 625, 40);
 
-    if(!muted && !loserSound.isPlaying()){
-      loserSound.cue(0.0);
-      loserFramesStart = frameCount;
-      loserSound.play();
-    }
+    //if(!muted && !loserSound.isPlaying()){
+    //  loserSound.cue(0.0);
+    //  loserFramesStart = frameCount;
+    //  loserSound.play();
+    //}
+    loserSound.cue(0.0);
+    loserSound.play();
 
     int sizeOfText = 1;
     if (difficulty.equals("easy")) {
