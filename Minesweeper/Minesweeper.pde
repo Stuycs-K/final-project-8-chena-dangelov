@@ -1,6 +1,6 @@
 import processing.sound.*;
 private Board gameBoard;
-private int SQUARE_SIZE, countdownFlag, countdownHelpScreen, countdownDifficultyScreen, countdownMute, timer, frameCountExplosion, afterChoosingDiff;
+private int SQUARE_SIZE, countdownFlag, countdownHelpScreen, countdownDifficultyScreen, countdownMute, timer, frameCountExplosion, afterChoosingDiff, winnerFrames, loserFrames, winnerFramesStart,loserFramesStart;
 private String difficulty;
 private boolean isGameOver, isHelpScreen, isDifficultyScreen, foundNearest, isNearestDisplayed, muted;
 private SoundFile winnerSound, loserSound, clearTileSound, placeFlagSound, removeFlagSound;
@@ -231,6 +231,9 @@ void changeDifficulty(String d) {
 void draw() {
   // the following if statement is to prevent the situation where a player chooses a difficulty and then immediately clicks on the new board as a result of them holding the mouse for a tad too long
   if (afterChoosingDiff > 0)afterChoosingDiff--;
+  
+  //if(winnerSound.isPlaying() && muted)winnerSound.stop();
+  //if(loserSound.isPlaying() && muted)loserSound.stop();
 
   // explosion settings
   if (explosionArr!=null) {
@@ -741,11 +744,11 @@ void endScreen(boolean outcome) {
     text("time : "+timer, 150, 40);
     text("winner !", 625, 40);
 
-    if(!muted)winnerSound.play();
+    if(!muted && !winnerSound.isPlaying())winnerSound.play();
   } else {
     text("loser !", 625, 40);
 
-    if(!muted)loserSound.play();
+    if(!muted && !loserSound.isPlaying())loserSound.play();
 
     int sizeOfText = 1;
     if (difficulty.equals("easy")) {
@@ -859,7 +862,7 @@ void keyPressed() {
         }
       }
       endScreen(true);
-      if(!muted)winnerSound.play();
+      if(!muted && !winnerSound.isPlaying())winnerSound.play();
     }
   }
 }
