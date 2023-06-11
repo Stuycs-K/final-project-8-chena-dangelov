@@ -1,4 +1,4 @@
-
+// the controller class is for the holding 'h' tool explained in the more info box
 class Controller {
   static final int P1_LEFT = 0;
   boolean [] inputs;
