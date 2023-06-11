@@ -232,9 +232,6 @@ void changeDifficulty(String d) {
 void draw() {
   // the following if statement is to prevent the situation where a player chooses a difficulty and then immediately clicks on the new board as a result of them holding the mouse for a tad too long
   if (afterChoosingDiff > 0)afterChoosingDiff--;
-  
-  //if(winnerSound.isPlaying() && muted)winnerSound.stop();
-  //if(loserSound.isPlaying() && muted)loserSound.stop();
 
   // explosion settings
   if (explosionArr!=null) {
@@ -249,7 +246,7 @@ void draw() {
     }
   }
 
-  // countdowns for helpScreen and difficultyScreen and flags (variable : countdown) so that clicking to open the more info box and the difficulty screen is always only registered as one click
+  // countdowns for helpScreen, difficultyScreen, mute, and flags so that clicks to open the more info box, to open the difficulty screen, to mute, and to place a flag are always only registered as one click
   if (countdownHelpScreen>0)countdownHelpScreen--;
   if (countdownDifficultyScreen>0)countdownDifficultyScreen--;
   if (countdownMute>0)countdownMute--;
@@ -291,11 +288,15 @@ void draw() {
 
 
   // difficulty settings
+  
+   // this boolean ensures that the player clicks within the difficulty screen area
   if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 20 && mouseY <= 44 && countdownDifficultyScreen == 0 && get(2, 2) != -16777216 /*black*/) {
+    
     // clicking on the difficultyScreen removes helpScreen
     if (isHelpScreen) {
       removeHelpScreen();
     }
+    
     // clicking on the difficultyScreen again removes difficultyScreen
     if (isDifficultyScreen) {
       removeDifficultyScreen();
@@ -324,6 +325,7 @@ void draw() {
     }
     countdownDifficultyScreen += 10;
   }
+  
   // change in difficulty
   if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 44 && mouseY <= 116 && isDifficultyScreen && countdownDifficultyScreen == 0) {
     if (mouseY <= 62) {
@@ -337,14 +339,17 @@ void draw() {
     countdownDifficultyScreen += 10;
     afterChoosingDiff+=7;
   }
+  
 
   // clicking on the hamburger button
   if (mousePressed && mouseButton == LEFT && mouseY >= 22 && mouseY <= 41 && mouseX >= 7 && mouseX <= 32 && countdownHelpScreen == 0  && get(2, 2) != -16777216 /*black*/ ) {
+    
     // clicking on the helpScreen removes difficultyScreen
     if (isDifficultyScreen) {
       removeDifficultyScreen();
     }
-    // clicking on the helpScreen again removes helpScreen
+    
+    // clicking on the hamburger button again removes helpScreen
     if (isHelpScreen) {
       removeHelpScreen();
     }
@@ -396,18 +401,22 @@ void draw() {
     }
     countdownHelpScreen+=15;
   }
-  // clicking on the board when the help screen is displayed removes the help screen
+  
+  // clicking on the rest of the board when the help screen is displayed removes the help screen
   if (mousePressed && isHelpScreen && mouseY >= 50  && !(mouseX <= 400 && mouseY >= 50 && mouseY <= 550) ) {
     removeHelpScreen();
   }
 
-  // clicking on the board when the difficulty selector is displayed removes the difficulty selector
+  // clicking on the rest of the board when the difficulty selector is displayed removes the difficulty selector
   if (mousePressed && isDifficultyScreen && mouseY >= 50 && !(mouseX <= 175 && mouseX >= 50 && mouseY <= 116)) {
     removeDifficultyScreen();
   }
 
   if (isGameOver) {
+    // if the game is not ongoing
+    
     if (mousePressed && (mouseButton == LEFT)) {
+      
       // game one
       if (gameBoard == null && mouseY > 50 && afterChoosingDiff ==0) {
         if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 550)) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {
@@ -428,12 +437,13 @@ void draw() {
       }
     }
   } else {
+    // if the game is ongoing
 
     // if the player needs HELP (show a nearby mine)!
     if (mouseX >= 0 && mouseX <= 800 && mouseY >= 50 && mouseY <= 850 && keyboardInput.isPressed(Controller.P1_LEFT)) {
       if (!foundNearest && !isNearestDisplayed && !gameBoard.gameBoard[mouseX / SQUARE_SIZE][(mouseY-50)/ SQUARE_SIZE].cleared() && !gameBoard.gameBoard[mouseX / SQUARE_SIZE][(mouseY-50)/ SQUARE_SIZE].flagged()) {
         boolean res = findNearest(mouseX, mouseY);
-        if (res) {
+        if (res) { // if the search was successful
           fill(#5C70DE);
           if (difficulty.equals("medium") || difficulty.equals("easy")) {
             if ((!isHelpScreen) && !isDifficultyScreen)circle(findNearestArr[0]*SQUARE_SIZE+SQUARE_SIZE/2, findNearestArr[1]*SQUARE_SIZE+50+SQUARE_SIZE/2, 20);
@@ -460,25 +470,29 @@ void draw() {
       stroke(0);
     }
 
-    // the mouse click registers when either the help box is not displayed or if the click is outside the help screen
+    // the mouse click registers when either the help box/difficulty selector is not displayed or if the click is outside the help screen/difficulty selector
     if ((mousePressed && (!isHelpScreen|| !(mouseX <= 400 && mouseY >= 50 && mouseY <= 550))) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {
       int row = mouseX / SQUARE_SIZE;
       int col = (mouseY-50) / SQUARE_SIZE;
       int x = row*SQUARE_SIZE;
       int y = col*SQUARE_SIZE+50;
+      
       // left click == clear space
       if (mouseButton == LEFT) {
+        
         // this condition prevents index out of bounds errors
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50) {
           // clear tile sound playing
           if (!gameBoard.gameBoard[row][col].cleared() && !gameBoard.gameBoard[row][col].isMine() && !gameBoard.gameBoard[row][col].flagged()) {
             clearTileSound.play();
           }
+          
           // clear tile
           boolean gameOutcome = gameBoard.clearSpace(row, col);
           if (gameOutcome) {
             drawTile(x, y);
           }
+          
           // the game ends when either the game is complete (gameOutcome == true) or a player clears a mine (gameOutcome == false)
           if (gameBoard.done() || !gameOutcome) {
             // if the player wins the game, a bestTime is calculated
@@ -519,6 +533,7 @@ void draw() {
                 }
               }
             }
+            
             // if the player loses the game, an explosion animation occurs 
             if (!gameOutcome) {
               explosionArr = new int[]{x, y};
@@ -530,6 +545,7 @@ void draw() {
       
       // right click == place flag
       else if (mouseButton == RIGHT) {
+        
         // this condition prevents index out of bounds error and checks countdown
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdownFlag == 0) {
           if (gameBoard.placeFlag(row, col)) {
@@ -540,8 +556,11 @@ void draw() {
               removeFlagSound.play();
             }
           }
+          
           drawTile(x, y);
           countdownFlag+=15;
+          
+          // updating the flags left setting
           fill(200);
           noStroke();
           rect(480-30, 5, 50, 40);
@@ -554,12 +573,14 @@ void draw() {
           rect(530-30, 15, 5, 30);
           fill(#CE3636);
           triangle(530-30, 15, 530-30, 30, 555-30, 22.5);
+          
         }
       }
     }
   }
 }
 
+// if the player holds 'h' while the game is ongoing, find a nearby mine
 boolean findNearest( int row, int col) {
   int x = row/SQUARE_SIZE;
   int y = (col-50)/SQUARE_SIZE;
@@ -659,6 +680,7 @@ boolean findNearest( int row, int col) {
   return foundNearest;
 }
 
+// responsible for drawing individual tiles
 void drawTile(int row, int col) {
   if(row / SQUARE_SIZE < gameBoard.gameBoard.length && (col-50) / SQUARE_SIZE < gameBoard.gameBoard.length){
     Tile t = gameBoard.gameBoard[row / SQUARE_SIZE][(col-50) / SQUARE_SIZE];
@@ -740,6 +762,8 @@ void drawTile(int row, int col) {
     }
   }}}
 
+
+// called when the game is either lost or won
 void endScreen(boolean outcome) {
   isGameOver = true;
   textSize(40);
