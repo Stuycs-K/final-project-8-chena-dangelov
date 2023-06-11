@@ -78,6 +78,10 @@ Today I started to implement sound into the game. I found some really cool sound
 
 Today I completed the implementation of sound into the game. I hope that these improvements greatly improve the quality of gameplay. On top of that, I tested the game multiple times to make sure all the features of the game work well. And they do ! As we are nearing the end of the project, I don't think more changes will be made (except for maybe slight ones). Other than that, I think the next few days I will be working on updating our prototype to accompany for any changes we might not have included on there yet and making sure everything is ready to be submitted !
 
+### 6/10/23
+
+Today, other than adding some explanatory comments throughout the code, I worked mostly on the prototype document. I read over the entire prototype document and made sure all the changes we had made have been incorporated. However, it still looks like some changes need to be made. The method outline is mostly done except for some relatively new methods in Minesweeper class and our new controller class. On top of that, our UML diagram still has to accompany the changes we recently made. Other than that, everything else looks solid. 
+
 
 ## Vincent D'Angelo
 
