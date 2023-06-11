@@ -1,7 +1,6 @@
 import processing.sound.*;
 private Board gameBoard;
-private int SQUARE_SIZE, countdownFlag, countdownHelpScreen, countdownDifficultyScreen, countdownMute, timer, frameCountExplosion, afterChoosingDiff, winnerFramesStart,loserFramesStart, winnerFramesHere, loserFramesHere;
-private float winnerFrames, loserFrames;
+private int SQUARE_SIZE, countdownFlag, countdownHelpScreen, countdownDifficultyScreen, countdownMute, timer, frameCountExplosion, afterChoosingDiff;
 private String difficulty;
 private boolean isGameOver, isHelpScreen, isDifficultyScreen, foundNearest, isNearestDisplayed, muted;
 private SoundFile winnerSound, loserSound, clearTileSound, placeFlagSound, removeFlagSound;
@@ -11,21 +10,6 @@ private final int[] mediumBestTimes = {-1, -1, -1, };
 private final int[] hardBestTimes = {-1, -1, -1, };
 private int[] explosionArr, findNearestArr;
 Controller keyboardInput;
-
-void keyReleased() {
-  if (!isGameOver) {
-    keyboardInput.release(keyCode);
-    if (findNearestArr[0]!=-1) {
-      if (difficulty.equals("medium") || difficulty.equals("easy")) {
-        if ((!isHelpScreen) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
-      }
-      if (difficulty.equals("hard")) {
-        if ((!isHelpScreen) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
-      }
-      isNearestDisplayed = false;
-    }
-  }
-}
 
 void setup() {
   size(800, 850);
@@ -40,8 +24,7 @@ void setup() {
   placeFlagSound = new SoundFile(this, "minesweeperPlaceFlagSound.mp3");
   removeFlagSound = new SoundFile(this, "minesweeperRemoveFlagSound.mp3");
   
-  winnerFrames = winnerSound.duration() * 60;
-  loserFrames = loserSound.duration() * 60;
+
   
   drawBoard();
 }
@@ -879,6 +862,21 @@ void keyPressed() {
       winnerSound.cue(0.0);
       loserSound.cue(0.0);
       winnerSound.play();
+    }
+  }
+}
+
+void keyReleased() {
+  if (!isGameOver) {
+    keyboardInput.release(keyCode);
+    if (findNearestArr[0]!=-1) {
+      if (difficulty.equals("medium") || difficulty.equals("easy")) {
+        if ((!isHelpScreen) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+      }
+      if (difficulty.equals("hard")) {
+        if ((!isHelpScreen) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+      }
+      isNearestDisplayed = false;
     }
   }
 }
