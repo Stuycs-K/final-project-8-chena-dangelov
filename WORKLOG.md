@@ -82,6 +82,10 @@ Today I completed the implementation of sound into the game. I hope that these i
 
 Today, other than adding some explanatory comments throughout the code, I worked mostly on the prototype document. I read over the entire prototype document and made sure all the changes we had made have been incorporated. However, it still looks like some changes need to be made. The method outline is mostly done except for some relatively new methods in Minesweeper class and our new controller class. On top of that, our UML diagram still has to accompany the changes we recently made. Other than that, everything else looks solid. 
 
+### 6/11/23
+
+Today is one of the final days of work. It has been a long journey but it is finally coming to an end. My work today consisted making any necessary changes to the prototype which included updating our method outline and development phases to include anything that we might have missed. I looked over the entirety of our code today as well to ensure that we did not miss anything, and after doing so, I have to admit that everything looks pretty solid.
+
 
 ## Vincent D'Angelo
 
