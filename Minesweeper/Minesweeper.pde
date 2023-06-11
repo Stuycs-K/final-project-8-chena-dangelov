@@ -1,6 +1,7 @@
 import processing.sound.*;
 private Board gameBoard;
-private int SQUARE_SIZE, countdownFlag, countdownHelpScreen, countdownDifficultyScreen, countdownMute, timer, frameCountExplosion, afterChoosingDiff, winnerFrames, loserFrames, winnerFramesStart,loserFramesStart;
+private int SQUARE_SIZE, countdownFlag, countdownHelpScreen, countdownDifficultyScreen, countdownMute, timer, frameCountExplosion, afterChoosingDiff, winnerFramesStart,loserFramesStart, winnerFramesHere, loserFramesHere;
+private float winnerFrames, loserFrames;
 private String difficulty;
 private boolean isGameOver, isHelpScreen, isDifficultyScreen, foundNearest, isNearestDisplayed, muted;
 private SoundFile winnerSound, loserSound, clearTileSound, placeFlagSound, removeFlagSound;
@@ -38,6 +39,10 @@ void setup() {
   loserSound = new SoundFile(this, "minesweeperLoserSound.mp3");
   placeFlagSound = new SoundFile(this, "minesweeperPlaceFlagSound.mp3");
   removeFlagSound = new SoundFile(this, "minesweeperRemoveFlagSound.mp3");
+  
+  winnerFrames = winnerSound.duration() * 60;
+  loserFrames = loserSound.duration() * 60;
+  
   drawBoard();
 }
 
@@ -264,14 +269,28 @@ void draw() {
       muted = false;
       stroke(225);
       arc(width-10, 15, 8, 11, -HALF_PI, HALF_PI);
+      if(winnerFramesStart + (int)(winnerFrames) > frameCount){
+        winnerSound.cue((float)(frameCount - winnerFramesStart) / (float)(60));
+        winnerSound.play();
+      }
+      if(loserFramesStart + (int)(loserFrames) > frameCount){
+        loserSound.cue((float)(frameCount - loserFramesStart) / (float)(60));
+        loserSound.play();
+      }
     } else {
       muted = true;
       fill(225);
       textSize(17);
       textAlign(LEFT);
       text("x", width-10, 18);
-      while(winnerSound.isPlaying())winnerSound.stop();
-      while(loserSound.isPlaying())loserSound.stop();
+      if(winnerSound.isPlaying()){
+        winnerSound.pause();
+        winnerFramesHere = frameCount;
+      }
+      if(loserSound.isPlaying()){
+        loserSound.pause();
+        loserFramesHere = frameCount;
+      }
     }
     countdownMute += 10;
     fill(0);
@@ -744,11 +763,19 @@ void endScreen(boolean outcome) {
     text("time : "+timer, 150, 40);
     text("winner !", 625, 40);
 
-    if(!muted && !winnerSound.isPlaying())winnerSound.play();
+    if(!muted && !winnerSound.isPlaying()){
+      winnerSound.cue(0.0);
+      winnerFramesStart = frameCount;
+      winnerSound.play();
+    }
   } else {
     text("loser !", 625, 40);
 
-    if(!muted && !loserSound.isPlaying())loserSound.play();
+    if(!muted && !loserSound.isPlaying()){
+      loserSound.cue(0.0);
+      loserFramesStart = frameCount;
+      loserSound.play();
+    }
 
     int sizeOfText = 1;
     if (difficulty.equals("easy")) {
@@ -862,7 +889,11 @@ void keyPressed() {
         }
       }
       endScreen(true);
-      if(!muted && !winnerSound.isPlaying())winnerSound.play();
+      if(!muted && !winnerSound.isPlaying()){
+        winnerSound.cue(0.0);
+        winnerFramesStart = frameCount;
+        winnerSound.play();
+      }
     }
   }
 }
