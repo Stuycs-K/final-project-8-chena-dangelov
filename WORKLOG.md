@@ -156,3 +156,7 @@ Today I did some debugging. Firstly I dealt with some lingering bugs from my “
 ### 6/9/23
 
 Some more general things today. Firstly I wanted to increase the more info box to include information about what to do when the player was stuck. This took a surprising amount of time because of the new dimensions and the press 'h' for help tool, but I eventually got it working. In addition to that, I went through the draw() method and tried to include some explaining comments. Over the weekend I'm not too sure what else I'll do to the code. I'll definitely try to clean it up a bit. Today I also checked out Alberto's sounds, which are totally awesome.
+
+### 6/10/23
+
+Today I added what is probably going to be the last feature of our game: a mute button. It was generally easy but there were a couple of intricacies that took a little longer to get right. Firstly, the two longer audios (winnerSound and loserSound) had to be cut off if they were playing while the mute button was pressed. And adding onto that, if the player mutes while one of these sounds were playing, and then quickly unmutes, the sound had to continue as if the mute button was not clicked at all. These two features have been implemented. Looking forward to the last day, tomorrow, I just plan to make the code more appealing and to add more explanatory comments. But the main thing is going to be working with the prototype, which we have been updating throughout the course of the project, but need to add finishing touches to for sure. 
