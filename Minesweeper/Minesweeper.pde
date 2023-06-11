@@ -458,7 +458,7 @@ void draw() {
     }
 
     // timer
-    if (frameCount % 1 == 0 && !isGameOver) {
+    if (frameCount % 60 == 0 && !isGameOver) {
       textAlign(CENTER);
       fill(200);
       noStroke();
