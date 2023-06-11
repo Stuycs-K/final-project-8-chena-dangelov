@@ -1,8 +1,9 @@
 import processing.sound.*;
 private Board gameBoard;
-private int SQUARE_SIZE, countdown, countdownHelpScreen, countdownDifficultyScreen, timer, frameCountExplosion, afterChoosingDiff;
+private int SQUARE_SIZE, countdownFlag, countdownHelpScreen, countdownDifficultyScreen, countdownMute, timer, frameCountExplosion, afterChoosingDiff, winnerFramesStart,loserFramesStart, winnerFramesHere, loserFramesHere;
+private float winnerFrames, loserFrames;
 private String difficulty;
-private boolean isGameOver, isHelpScreen, isDifficultyScreen, foundNearest, isNearestDisplayed;
+private boolean isGameOver, isHelpScreen, isDifficultyScreen, foundNearest, isNearestDisplayed, muted;
 private SoundFile winnerSound, loserSound, clearTileSound, placeFlagSound, removeFlagSound;
 private final color[] colors = {#363AE8, #107109, #E0194E, #C640C0, #ACAF65, #67F9FF, #B7BEBF, #FA9223};
 private final int[] easyBestTimes = {-1, -1, -1, };
@@ -15,7 +16,12 @@ void keyReleased() {
   if (!isGameOver) {
     keyboardInput.release(keyCode);
     if (findNearestArr[0]!=-1) {
-      if ((!isHelpScreen  || !(findNearestArr[0] <= gameBoard.gameBoard.length/2 && findNearestArr[1] <= gameBoard.gameBoard.length/2)) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+      if (difficulty.equals("medium") || difficulty.equals("easy")) {
+        if ((!isHelpScreen) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+      }
+      if (difficulty.equals("hard")) {
+        if ((!isHelpScreen) && (!isDifficultyScreen))drawTile(findNearestArr[0] * SQUARE_SIZE, findNearestArr[1] * SQUARE_SIZE + 50);
+      }
       isNearestDisplayed = false;
     }
   }
@@ -33,22 +39,38 @@ void setup() {
   loserSound = new SoundFile(this, "minesweeperLoserSound.mp3");
   placeFlagSound = new SoundFile(this, "minesweeperPlaceFlagSound.mp3");
   removeFlagSound = new SoundFile(this, "minesweeperRemoveFlagSound.mp3");
+  
+  winnerFrames = winnerSound.duration() * 60;
+  loserFrames = loserSound.duration() * 60;
+  
   drawBoard();
 }
 
 void drawBoard() {
   background(200);
 
-  // hamburger button
+  // mute button
   noStroke();
-  fill(255);
+  fill(225);
+  rect(width-30, 10, 10, 10);
+  quad(width-20, 10, width-20, 20, width-12, 26, width-12, 4);
+  noFill();
+  stroke(225);
+  if (!muted) {
+    arc(width-10, 15, 8, 11, -HALF_PI, HALF_PI);
+  } else {
+    textSize(17);
+    text("x", width-10, 18);
+  }
+
+
+  // hamburger button
+  fill(235);
   rect(7, 22, 25, 3, 5);
   rect(7, 30, 25, 3, 5);
   rect(7, 38, 25, 3, 5);
-  stroke(0);
 
   // difficulty selector
-  noStroke();
   fill(220);
   rect(50, 20, 125, 24, 5);
   fill(0);
@@ -62,13 +84,13 @@ void drawBoard() {
   textSize(30);
   fill(0);
   if (difficulty.equals("easy")) {
-    text("Best Time : "+bestTime(easyBestTimes[0]), 600, 40);
+    text("Best Time : "+bestTime(easyBestTimes[0]), 570, 40);
   }
   if (difficulty.equals("medium")) {
-    text("Best Time : "+bestTime(mediumBestTimes[0]), 600, 40);
+    text("Best Time : "+bestTime(mediumBestTimes[0]), 570, 40);
   }
   if (difficulty.equals("hard")) {
-    text("Best Time : "+bestTime(hardBestTimes[0]), 600, 40);
+    text("Best Time : "+bestTime(hardBestTimes[0]), 570, 40);
   }
 
   // flagsLeft settings
@@ -76,19 +98,19 @@ void drawBoard() {
   textSize(30);
   fill(0);
   if (difficulty.equals("easy")) {
-    text("10", 490, 40);
+    text("10", 460, 40);
   }
   if (difficulty.equals("medium")) {
-    text("40", 490, 40);
+    text("40", 460, 40);
   }
   if (difficulty.equals("hard")) {
-    text("64", 490, 40);
+    text("64", 460, 40);
   }
   stroke(0);
-  rect(520, 45, 25, 5);
-  rect(530, 15, 5, 30);
+  rect(520-30, 45, 25, 5);
+  rect(530-30, 15, 5, 30);
   fill(#CE3636);
-  triangle(530, 15, 530, 30, 555, 22.5);
+  triangle(530-30, 15, 530-30, 30, 555-30, 22.5);
 
   // board drawing
   stroke(0);
@@ -214,6 +236,9 @@ void changeDifficulty(String d) {
 void draw() {
   // the following if statement is to prevent the situation where a player chooses a difficulty and then immediately clicks on the new board as a result of them holding the mouse for a tad too long
   if (afterChoosingDiff > 0)afterChoosingDiff--;
+  
+  //if(winnerSound.isPlaying() && muted)winnerSound.stop();
+  //if(loserSound.isPlaying() && muted)loserSound.stop();
 
   // explosion settings
   if (explosionArr!=null) {
@@ -231,7 +256,49 @@ void draw() {
   // countdowns for helpScreen and difficultyScreen and flags (variable : countdown) so that clicking to open the more info box and the difficulty screen is always only registered as one click
   if (countdownHelpScreen>0)countdownHelpScreen--;
   if (countdownDifficultyScreen>0)countdownDifficultyScreen--;
-  if (countdown > 0)countdown--;
+  if (countdownMute>0)countdownMute--;
+  if (countdownFlag > 0)countdownFlag--;
+
+
+  // mute
+  if (mousePressed && mouseButton == LEFT && mouseX >= width-30 && mouseX <= width-(5) && mouseY >= 10 && mouseY <= 26 && countdownMute == 0) {
+    fill(200);
+    noStroke();
+    rect(width-10, 5, 10, 20);
+    if (muted) {
+      muted = false;
+      stroke(225);
+      arc(width-10, 15, 8, 11, -HALF_PI, HALF_PI);
+      if(winnerFramesStart + (int)(winnerFrames) > frameCount){
+        winnerSound.cue((float)(frameCount - winnerFramesStart) / (float)(60));
+        winnerSound.play();
+      }
+      if(loserFramesStart + (int)(loserFrames) > frameCount){
+        loserSound.cue((float)(frameCount - loserFramesStart) / (float)(60));
+        loserSound.play();
+      }
+    } else {
+      muted = true;
+      fill(225);
+      textSize(17);
+      textAlign(LEFT);
+      text("x", width-10, 18);
+      if(winnerSound.isPlaying()){
+        winnerSound.pause();
+        winnerFramesHere = frameCount;
+      }
+      if(loserSound.isPlaying()){
+        loserSound.pause();
+        loserFramesHere = frameCount;
+      }
+    }
+    countdownMute += 10;
+    fill(0);
+    stroke(0);
+  }
+
+  
+
 
   // difficulty settings
   if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 20 && mouseY <= 44 && countdownDifficultyScreen == 0 && get(2, 2) != -16777216 /*black*/) {
@@ -356,7 +423,7 @@ void draw() {
         if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 550)) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {
           gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
           isGameOver = false;
-          clearTileSound.play();
+          if(!muted)clearTileSound.play();
           foundNearest = true;
         }
       }
@@ -390,8 +457,7 @@ void draw() {
       }
     }
 
-    // the variable countdown used as a timer for placing flags
-    if (countdown > 0)countdown--;
+    // timer
     if (frameCount % 60 == 0 && !isGameOver) {
       textAlign(CENTER);
       fill(200);
@@ -416,7 +482,7 @@ void draw() {
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50) {
           // clear tile sound playing
           if (!gameBoard.gameBoard[row][col].cleared() && !gameBoard.gameBoard[row][col].isMine() && !gameBoard.gameBoard[row][col].flagged()) {
-            clearTileSound.play();
+            if(!muted)clearTileSound.play();
           }
           // clear tile
           boolean gameOutcome = gameBoard.clearSpace(row, col);
@@ -475,29 +541,29 @@ void draw() {
       // right click == place flag
       else if (mouseButton == RIGHT) {
         // this condition prevents index out of bounds error and checks countdown
-        if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdown == 0) {
+        if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50 && countdownFlag == 0) {
           if (gameBoard.placeFlag(row, col)) {
             // plays sound
             if (gameBoard.gameBoard[row][col].flagged()) {
-              placeFlagSound.play();
+              if(!muted)placeFlagSound.play();
             } else {
-              removeFlagSound.play();
+              if(!muted)removeFlagSound.play();
             }
           }
           drawTile(x, y);
-          countdown+=15;
+          countdownFlag+=15;
           fill(200);
           noStroke();
-          rect(480, 5, 50, 40);
+          rect(480-30, 5, 50, 40);
           textSize(30);
           fill(0);
           textAlign(LEFT);
-          text(gameBoard.getFlagsLeft(), 490, 40);
+          text(gameBoard.getFlagsLeft(), 490-30, 40);
           stroke(0);
-          rect(520, 45, 25, 5);
-          rect(530, 15, 5, 30);
+          rect(520-30, 45, 25, 5);
+          rect(530-30, 15, 5, 30);
           fill(#CE3636);
-          triangle(530, 15, 530, 30, 555, 22.5);
+          triangle(530-30, 15, 530-30, 30, 555-30, 22.5);
         }
       }
     }
@@ -604,7 +670,9 @@ boolean findNearest( int row, int col) {
 }
 
 void drawTile(int row, int col) {
-  Tile t = gameBoard.gameBoard[row / SQUARE_SIZE][(col-50) / SQUARE_SIZE];
+  if(row / SQUARE_SIZE < gameBoard.gameBoard.length && (col-50) / SQUARE_SIZE < gameBoard.gameBoard.length){
+    Tile t = gameBoard.gameBoard[row / SQUARE_SIZE][(col-50) / SQUARE_SIZE];
+  
 
   // if the space has been cleared, a cleared tile is drawn
   if (t.cleared()) {
@@ -680,8 +748,7 @@ void drawTile(int row, int col) {
       }
       square(row, col, SQUARE_SIZE);
     }
-  }
-}
+  }}}
 
 void endScreen(boolean outcome) {
   isGameOver = true;
@@ -696,11 +763,19 @@ void endScreen(boolean outcome) {
     text("time : "+timer, 150, 40);
     text("winner !", 625, 40);
 
-    winnerSound.play();
+    if(!muted && !winnerSound.isPlaying()){
+      winnerSound.cue(0.0);
+      winnerFramesStart = frameCount;
+      winnerSound.play();
+    }
   } else {
     text("loser !", 625, 40);
 
-    loserSound.play();
+    if(!muted && !loserSound.isPlaying()){
+      loserSound.cue(0.0);
+      loserFramesStart = frameCount;
+      loserSound.play();
+    }
 
     int sizeOfText = 1;
     if (difficulty.equals("easy")) {
@@ -814,6 +889,11 @@ void keyPressed() {
         }
       }
       endScreen(true);
+      if(!muted && !winnerSound.isPlaying()){
+        winnerSound.cue(0.0);
+        winnerFramesStart = frameCount;
+        winnerSound.play();
+      }
     }
   }
 }
