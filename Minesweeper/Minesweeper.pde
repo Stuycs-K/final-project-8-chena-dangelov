@@ -13,17 +13,21 @@ Controller keyboardInput;
 
 void setup() {
   size(800, 850);
+  
+  // default to medium difficulty
   difficulty = "medium";
   SQUARE_SIZE = width/16;
+  
   isGameOver = true;
+  
   keyboardInput = new Controller();
   findNearestArr = new int[]{-1, -1};
+  
   clearTileSound = new SoundFile(this, "minesweeperClearTileSound.mp3");
   winnerSound = new SoundFile(this, "minesweeperWinnerSound.mp3");
   loserSound = new SoundFile(this, "minesweeperLoserSound.mp3");
   placeFlagSound = new SoundFile(this, "minesweeperPlaceFlagSound.mp3");
   removeFlagSound = new SoundFile(this, "minesweeperRemoveFlagSound.mp3");
-  
 
   
   drawBoard();
@@ -62,6 +66,7 @@ void drawBoard() {
   text(difficulty, 65, 38);
   fill(150);
   triangle(170, 25, 150, 25, 160, 40);
+  
 
   // best time settings
   textSize(30);
@@ -94,9 +99,11 @@ void drawBoard() {
   rect(530-30, 15, 5, 30);
   fill(#CE3636);
   triangle(530-30, 15, 530-30, 30, 555-30, 22.5);
+  
 
-  // board drawing
+  // actual board drawing
   stroke(0);
+  strokeWeight(2);
   for (int row = 0; row < width; row += SQUARE_SIZE) {
     for (int col = 50; col < height; col += SQUARE_SIZE) {
       if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
@@ -109,6 +116,7 @@ void drawBoard() {
   }
 }
 
+// to remove the more info box
 void removeHelpScreen() {
   if (gameBoard == null) {
     stroke(0);
@@ -140,6 +148,7 @@ void removeHelpScreen() {
   isHelpScreen = false;
 }
 
+// to remove the difficulty selector
 void removeDifficultyScreen() {
   textAlign(LEFT);
   noStroke();
@@ -182,11 +191,14 @@ void removeDifficultyScreen() {
   isDifficultyScreen = false;
 }
 
+// returns the best time
 String bestTime(int time) {
   if (time < 0)return "--";
+  if (time >= 1000)return ""+999;
   return ""+time;
 }
 
+// little animation upon clicking on a mine
 void explosion(int value) {
   int row = explosionArr[0];
   int col = explosionArr[1];
@@ -199,6 +211,7 @@ void explosion(int value) {
   stroke(0);
 }
 
+// when the difficulty selector is used
 void changeDifficulty(String d) {
   difficulty = d;
   if (difficulty.equals("easy")) {
@@ -435,14 +448,14 @@ void draw() {
     }
 
     // timer
-    if (frameCount % 60 == 0 && !isGameOver) {
+    if (frameCount % 1 == 0 && !isGameOver) {
       textAlign(CENTER);
       fill(200);
       noStroke();
-      rect(320, 5, 60, 40);
+      if(timer<1000)rect(320, 5, 60, 40);
       textSize(30);
       fill(0);
-      text(timer, 350, 40);
+      if(timer<1000)text(timer, 350, 40);
       timer++;
       stroke(0);
     }
@@ -739,7 +752,7 @@ void endScreen(boolean outcome) {
   winnerSound.cue(0.0);
   loserSound.cue(0.0);
   if (outcome) {
-    text("time : "+timer, 150, 40);
+    text("time : "+bestTime(timer), 150, 40);
     text("winner !", 625, 40);
     winnerSound.play();
     
