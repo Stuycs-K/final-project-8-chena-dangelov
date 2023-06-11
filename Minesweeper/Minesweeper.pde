@@ -269,28 +269,22 @@ void draw() {
       muted = false;
       stroke(225);
       arc(width-10, 15, 8, 11, -HALF_PI, HALF_PI);
-      if(winnerFramesStart + (int)(winnerFrames) > frameCount){
-        winnerSound.cue((float)(frameCount - winnerFramesStart) / (float)(60));
-        winnerSound.play();
-      }
-      if(loserFramesStart + (int)(loserFrames) > frameCount){
-        loserSound.cue((float)(frameCount - loserFramesStart) / (float)(60));
-        loserSound.play();
-      }
+      winnerSound.amp(1);
+      loserSound.amp(1);
+      clearTileSound.amp(1);
+      placeFlagSound.amp(1);
+      removeFlagSound.amp(1);
     } else {
       muted = true;
       fill(225);
       textSize(17);
       textAlign(LEFT);
       text("x", width-10, 18);
-      if(winnerSound.isPlaying()){
-        winnerSound.pause();
-        winnerFramesHere = frameCount;
-      }
-      if(loserSound.isPlaying()){
-        loserSound.pause();
-        loserFramesHere = frameCount;
-      }
+      winnerSound.amp(.0000000000000000000000001);
+      loserSound.amp(.0000000000000000000000001);
+      clearTileSound.amp(.0000000000000000000000001);
+      placeFlagSound.amp(.0000000000000000000000001);
+      removeFlagSound.amp(.0000000000000000000000001);
     }
     countdownMute += 10;
     fill(0);
@@ -423,7 +417,7 @@ void draw() {
         if ((!isHelpScreen  || !(mouseX <= 400 && mouseY >= 50 && mouseY <= 550)) && (!isDifficultyScreen || !(mouseX <= 175 && mouseX >= 50 && mouseY >= 50 && mouseY <= 116))) {
           gameBoard = new Board(mouseX / SQUARE_SIZE, (mouseY-50) / SQUARE_SIZE, width/SQUARE_SIZE);
           isGameOver = false;
-          if(!muted)clearTileSound.play();
+          clearTileSound.play();
           foundNearest = true;
         }
       }
@@ -482,7 +476,7 @@ void draw() {
         if (mouseX < 800 && mouseX >= 0 && mouseY < 850 && mouseY >= 50) {
           // clear tile sound playing
           if (!gameBoard.gameBoard[row][col].cleared() && !gameBoard.gameBoard[row][col].isMine() && !gameBoard.gameBoard[row][col].flagged()) {
-            if(!muted)clearTileSound.play();
+            clearTileSound.play();
           }
           // clear tile
           boolean gameOutcome = gameBoard.clearSpace(row, col);
@@ -545,9 +539,9 @@ void draw() {
           if (gameBoard.placeFlag(row, col)) {
             // plays sound
             if (gameBoard.gameBoard[row][col].flagged()) {
-              if(!muted)placeFlagSound.play();
+              placeFlagSound.play();
             } else {
-              if(!muted)removeFlagSound.play();
+              removeFlagSound.play();
             }
           }
           drawTile(x, y);
@@ -759,23 +753,16 @@ void endScreen(boolean outcome) {
   fill(#FFFFFF);
 
   // displays winner or loser depending on game outcome
+  winnerSound.cue(0.0);
+  loserSound.cue(0.0);
   if (outcome) {
     text("time : "+timer, 150, 40);
     text("winner !", 625, 40);
-
-    if(!muted && !winnerSound.isPlaying()){
-      winnerSound.cue(0.0);
-      winnerFramesStart = frameCount;
-      winnerSound.play();
-    }
+    winnerSound.play();
+    
   } else {
     text("loser !", 625, 40);
-
-    if(!muted && !loserSound.isPlaying()){
-      loserSound.cue(0.0);
-      loserFramesStart = frameCount;
-      loserSound.play();
-    }
+    loserSound.play();
 
     int sizeOfText = 1;
     if (difficulty.equals("easy")) {
@@ -889,11 +876,9 @@ void keyPressed() {
         }
       }
       endScreen(true);
-      if(!muted && !winnerSound.isPlaying()){
-        winnerSound.cue(0.0);
-        winnerFramesStart = frameCount;
-        winnerSound.play();
-      }
+      winnerSound.cue(0.0);
+      loserSound.cue(0.0);
+      winnerSound.play();
     }
   }
 }
