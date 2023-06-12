@@ -168,3 +168,7 @@ Some more general things today. Firstly I wanted to increase the more info box t
 ### 6/10/23
 
 Today I added what is probably going to be the last feature of our game: a mute button. It was generally easy but there were a couple of intricacies that took a little longer to get right. Firstly, the two longer audios (winnerSound and loserSound) had to be cut off if they were playing while the mute button was pressed. And adding onto that, if the player mutes while one of these sounds were playing, and then quickly unmutes, the sound had to continue as if the mute button was not clicked at all. These two features have been implemented. I also edited the Instructions tab in the Readme. Looking forward to the last day, tomorrow, I just plan to make the code more appealing and to add more explanatory comments. But the main thing is going to be working with the prototype, which we have been updating throughout the course of the project, but need to add finishing touches to for sure. 
+
+### 6/11/23
+
+Last day of work. Today was not a very code-heavy day, although I did make some changes. Firstly the program now mutes by toggling the volume, which I believe is much more efficient than starting and stopping the audios constantly. I also capped the timer at 999 seconds. The rest of the day was checking over the prototype, specifically with the UML, and also some minor work on the other parts as well. 
