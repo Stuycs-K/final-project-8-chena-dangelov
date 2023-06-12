@@ -34,31 +34,35 @@ void setup() {
 }
 
 void drawBoard() {
+  strokeWeight(1);
   background(200);
 
   // mute button
   noStroke();
-  fill(225);
+  fill(235);
   rect(width-30, 10, 10, 10);
   quad(width-20, 10, width-20, 20, width-12, 26, width-12, 4);
   noFill();
-  stroke(225);
+  stroke(235);
   if (!muted) {
     arc(width-10, 15, 8, 11, -HALF_PI, HALF_PI);
   } else {
     textSize(17);
+    textAlign(LEFT);
     text("x", width-10, 18);
+    textAlign(LEFT);
   }
 
 
   // hamburger button
-  fill(235);
+  fill(245);
   rect(7, 22, 25, 3, 5);
   rect(7, 30, 25, 3, 5);
   rect(7, 38, 25, 3, 5);
 
   // difficulty selector
   fill(220);
+  noStroke();
   rect(50, 20, 125, 24, 5);
   fill(0);
   textSize(20);
@@ -95,6 +99,7 @@ void drawBoard() {
     text("64", 460, 40);
   }
   stroke(0);
+  strokeWeight(2);
   rect(520-30, 45, 25, 5);
   rect(530-30, 15, 5, 30);
   fill(#CE3636);
@@ -102,14 +107,12 @@ void drawBoard() {
   
 
   // actual board drawing
-  stroke(0);
-  strokeWeight(2);
   for (int row = 0; row < width; row += SQUARE_SIZE) {
     for (int col = 50; col < height; col += SQUARE_SIZE) {
       if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
         fill(#26C627);
       } else {
-        fill(#23B419);
+        fill(#2FA025);
       }
       square(row, col, SQUARE_SIZE);
     }
@@ -125,9 +128,11 @@ void removeHelpScreen() {
         if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
           fill(#26C627);
         } else {
-          fill(#23B419);
+          fill(#2FA025);
         }
+        strokeWeight(2);
         square(row, col, SQUARE_SIZE);
+        //strokeWeight(1);
       }
     }
   } else {
@@ -137,9 +142,11 @@ void removeHelpScreen() {
           if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
             fill(#26C627);
           } else {
-            fill(#23B419);
+            fill(#2FA025);
           }
+          strokeWeight(2);
           square(row, col, SQUARE_SIZE);
+          //strokeWeight(1);
         }
         drawTile(row, col);
       }
@@ -168,9 +175,11 @@ void removeDifficultyScreen() {
         if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
           fill(#26C627);
         } else {
-          fill(#23B419);
+          fill(#2FA025);
         }
+        strokeWeight(2);
         square(row, col, SQUARE_SIZE);
+        //strokeWeight(1);
       }
     }
   } else {
@@ -180,9 +189,11 @@ void removeDifficultyScreen() {
           if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
             fill(#26C627);
           } else {
-            fill(#23B419);
+            fill(#2FA025);
           }
+          strokeWeight(2);
           square(row, col, SQUARE_SIZE);
+          //strokeWeight(1);
         }
         drawTile(row, col);
       }
@@ -260,8 +271,10 @@ void draw() {
     rect(width-10, 5, 10, 20);
     if (muted) {
       muted = false;
-      stroke(225);
+      stroke(235);
+      strokeWeight(1);
       arc(width-10, 15, 8, 11, -HALF_PI, HALF_PI);
+      strokeWeight(2);
       winnerSound.amp(1);
       loserSound.amp(1);
       clearTileSound.amp(1);
@@ -269,7 +282,7 @@ void draw() {
       removeFlagSound.amp(1);
     } else {
       muted = true;
-      fill(225);
+      fill(235);
       textSize(17);
       textAlign(LEFT);
       text("x", width-10, 18);
@@ -308,7 +321,6 @@ void draw() {
       noStroke();
       fill(0);
       textSize(20);
-      textAlign(LEFT);
       text("easy", 65, 62);
       text("medium", 65, 86);
       text("hard", 65, 110);
@@ -328,6 +340,7 @@ void draw() {
   
   // change in difficulty
   if (mousePressed && mouseButton == LEFT && mouseX >= 50 && mouseX <= 175 && mouseY >= 44 && mouseY <= 116 && isDifficultyScreen && countdownDifficultyScreen == 0) {
+    
     if (mouseY <= 62) {
       changeDifficulty("easy");
     } else if (mouseY <= 86) {
@@ -335,6 +348,7 @@ void draw() {
     } else {
       changeDifficulty("hard");
     }
+    
     isDifficultyScreen = false;
     countdownDifficultyScreen += 10;
     afterChoosingDiff+=7;
@@ -756,7 +770,7 @@ void drawTile(int row, int col) {
       if ((row/SQUARE_SIZE % 2 == 0 && (col-50)/SQUARE_SIZE % 2 == 0) || (row/SQUARE_SIZE % 2 != 0 && (col-50)/SQUARE_SIZE % 2 != 0)) {
         fill(#26C627);
       } else {
-        fill(#23B419);
+        fill(#2FA025);
       }
       square(row, col, SQUARE_SIZE);
     }
