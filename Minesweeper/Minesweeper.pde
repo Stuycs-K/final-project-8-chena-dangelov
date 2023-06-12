@@ -351,7 +351,7 @@ void draw() {
     
     isDifficultyScreen = false;
     countdownDifficultyScreen += 10;
-    afterChoosingDiff+=7;
+    afterChoosingDiff+=15;
   }
   
 
