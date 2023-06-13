@@ -175,7 +175,7 @@ Last day of work. Today was not a very code-heavy day, although I did make some 
 
 # DEV LOG
 
-## List all of the working features
+### List all of the working features
 
 Clicking on an empty board generates a random area of cleared Tiles at least 9 units big around the click’s coordinates. It is impossible to lose upon the first click. 
 
@@ -208,11 +208,11 @@ Note: When this tool is used in an area far from any cleared Tiles, it sometimes
 
 In short, a Minesweeper that can always be played and won in three different difficulties. 
 
-## List all of the broken features / bugs
+### List all of the broken features / bugs
 
 N/A
 
-## List any content resources you used that you found helpful
+### List any content resources you used that you found helpful
 
 Google’s Minesweeper
 
