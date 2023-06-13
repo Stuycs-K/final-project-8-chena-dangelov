@@ -176,44 +176,47 @@ Last day of work. Today was not a very code-heavy day, although I did make some 
 # DEV LOG
 
 ### List all of the working features
+<ul>
+<li>Clicking on an empty board generates a random area of cleared Tiles at least 9 units big around the click’s coordinates. It is impossible to lose upon the first click. </li>
 
-Clicking on an empty board generates a random area of cleared Tiles at least 9 units big around the click’s coordinates. It is impossible to lose upon the first click. 
+<li>Left clicking clears the Tile at the given position, and displays the number of mines surrounding it. If the Tile is a mine, the game is lost. If the Tile is flagged, nothing happens. </li>
 
-Left clicking clears the Tile at the given position, and displays the number of mines surrounding it. If the Tile is a mine, the game is lost. If the Tile is flagged, nothing happens. 
+<li>Right clicking places a flag, or removes an already placed flag. </li>
 
-Right clicking places a flag, or removes an already placed flag. 
+<li>Every time a Tile that touches no mines (and isn’t a mine itself) is cleared, all of the non-mine and non-flagged Tiles surrounding it are also cleared. </li>
 
-Every time a Tile that touches no mines (and isn’t a mine itself) is cleared, all of the non-mine and non-flagged Tiles surrounding it are also cleared. 
+<li>Best time. When a player wins a game, the time (in seconds) it took them to win is stored. The overall fastest time for a given difficulty is displayed in the top right of the screen. The top 3 fastest times for each difficulty is displayed in the more info box. 
+A player’s current time is displayed and updated while they play the game. </li>
 
-Best time. When a player wins a game, the time (in seconds) it took them to win is stored. The overall fastest time for a given difficulty is displayed in the top right of the screen. The top 3 fastest times for each difficulty is displayed in the more info box. 
-A player’s current time is displayed and updated while they play the game. 
+<li>Play again button. Upon losing or winning, the top of the screen becomes black, and a play again button is drawn. Upon clicking this button, the board will be reset. </li>
 
-Play again button. Upon losing or winning, the top of the screen becomes black, and a play again button is drawn. Upon clicking this button, the board will be reset. 
+<li>Difficulty selector: Upon selecting a difficulty from the difficulty dropdown menu, a player is able to choose from three difficulties (easy, medium, and hard). And based off of the difficulty selected, different aspects of the program are modified (size of board and number of mines on the board).</li>
 
-Difficulty selector: Upon selecting a difficulty from the difficulty dropdown menu, a player is able to choose from three difficulties (easy, medium, and hard). And based off of the difficulty selected, different aspects of the program are modified (size of board and number of mines on the board)
+<li>More info box (AKA help screen). This box is accessible via a hamburger button in the top left of the screen. It displays instructions for the game, the aforementioned list of personal bests, and tools to help the player win. </li>
 
-More info box (AKA help screen). This box is accessible via a hamburger button in the top left of the screen. It displays instructions for the game, the aforementioned list of personal bests, and tools to help the player win. 
+<li>Explosion. Upon clicking a mine, a small animation of rings emanating from that mine is displayed. </li>
 
-Explosion. Upon clicking a mine, a small animation of rings emanating from that mine is displayed. 
+<li>Sounds: When a player initiates specific actions, corresponding sounds are played. There are different sounds for each of the following actions : clearing a tile, flagging a tile, unflagging a tile, winning, and losing.</li>
 
-Sounds: When a player initiates specific actions, corresponding sounds are played. There are different sounds for each of the following actions : clearing a tile, flagging a tile, unflagging a tile, winning, and losing.
+<li>Mute button: One can mute/unmute the game by clicking the volume icon on the top right of the screen. Clicking this button immediately stops all audio.</li>
 
-Mute button: One can mute/unmute the game by clicking the volume icon on the top right of the screen. Clicking this button immediately stops all audio.
+<li>‘W’ for win: Wwhile a game is ongoing, clicking the ‘w’ key automatically clears all non-mine Tiles and wins the game. It will also remove any misplaced flags and replace them with a large X, but it won’t remove the ones that are accurate. </li>
 
-‘W’ for win: Wwhile a game is ongoing, clicking the ‘w’ key automatically clears all non-mine Tiles and wins the game. It will also remove any misplaced flags and replace them with a large X, but it won’t remove the ones that are accurate. 
-
-‘H’ for help: while a game is ongoing, hovering over a green Tile and holding the ‘h’ key reveals a nearby mine. This acts both as a tool in case the player needs help, and also as a way to prevent the situation where the clues given by the numbers on Tiles are insufficient; or in other words when the player cannot make any moves without guessing.
-
-Note: When this tool is used in an area far from any cleared Tiles, it sometimes will not display the actual nearest mine, but rather a mine in the general area. It’s more accurate when the player is more likely to actually need help, in crowded areas near many cleared spaces, not in open areas, where the player shouldn’t need the tool in the first place. The purpose of the tool is not to return the actual nearest mine, it is to give the player a nudge in the right direction.
-
-In short, a Minesweeper that can always be played and won in three different difficulties. 
+<li>‘H’ for help: while a game is ongoing, hovering over a green Tile and holding the ‘h’ key reveals a nearby mine. This acts both as a tool in case the player needs help, and also as a way to prevent the situation where the clues given by the numbers on Tiles are insufficient; or in other words when the player cannot make any moves without guessing.</li>
+<ul>
+<li>Note: When this tool is used in an area far from any cleared Tiles, it sometimes will not display the actual nearest mine, but rather a mine in the general area. It’s more accurate when the player is more likely to actually need help, in crowded areas near many cleared spaces, not in open areas, where the player shouldn’t need the tool in the first place. The purpose of the tool is not to return the actual nearest mine, it is to give the player a nudge in the right direction.</li>
+  </ul>
+  
+<li>In short, a Minesweeper that can always be played and won in three different difficulties. </li>
+</ul>
 
 ### List all of the broken features / bugs
 
 N/A
 
 ### List any content resources you used that you found helpful
+<ul>
+  <li>Google’s Minesweeper</li>
 
-Google’s Minesweeper
-
-Processing documentation : mousePressed, rect(), quad(), arc(), sound()
+  <li>Processing documentation : mousePressed, rect(), quad(), arc(), sound(), and more. </li>
+</ul>
